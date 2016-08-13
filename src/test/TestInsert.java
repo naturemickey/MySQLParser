@@ -17,7 +17,7 @@ import net.yeah.zhouyou.mickey.mysql.tree.ValueListNode;
 public class TestInsert {
 	public static void main(String[] args) throws Exception {
 
-		String sql = "InSeRt taba(abc_1,str_c, create_tiMe,n) VALUES(?,'abc',current_timestamp,nUlL)";
+		String sql = "InSeRt taba(abc_1,str_c, create_tiMe,n,ph1,ph2) VALUES(?,'abc',current_timestamp,nUlL,:1,:ph2)";
 		try (ByteArrayInputStream is = new ByteArrayInputStream(sql.getBytes());) {
 			ANTLRInputStream input = new ANTLRInputStream(is);
 			MySQLLexer lexer = new MySQLLexer(input);

@@ -79,7 +79,6 @@ ON=78
 NEWLINE=79
 WS=80
 USER_VAR=81
-'?'=1
 'select'=25
 'like'=26
 'all'=27

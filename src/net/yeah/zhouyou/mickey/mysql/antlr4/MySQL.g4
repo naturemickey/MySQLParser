@@ -38,7 +38,7 @@ updateStat
 	;
 
 deleteStat
-	: DELETE FROM tableNameAndAlias (WHERE whereCondition)? (LIMIT rowCount=INT)?
+	: DELETE FROM tableNameAndAlias (WHERE whereCondition)? (LIMIT rowCount=(INT|PLACEHOLDER))?
 	;
 
 tableNameAndAlias
@@ -46,11 +46,12 @@ tableNameAndAlias
 	;
 
 whereCondition
-	: expression expressionSuffix?
+	: expression
 	;
 
 expression
-	: '(' expression ')'
+	: exprSubExpr
+	| exprOpExpr
 	| exprRelational
 	| exprBetweenAnd
 	| exprIsOrIsNotNull
@@ -59,12 +60,14 @@ expression
 	| exprExists
 	;
 
+exprSubExpr       : '(' expression ')'
+exprOpExpr        : expression expressionOperator=(AND | XOR | OR | NOT) expression
 exprRelational    : element relationalOp=(EQ | LTH | GTH | NOT_EQ | LET | GET) element ;
 exprBetweenAnd    : element BETWEEN element AND element ;
 exprIsOrIsNotNull : element IS (not=NOT)? NULL ;
 exprInSelect      : element IN '(' selectStat ')' ;
 exprInValues      : element IN '(' valueList ')' ;
-exprExists        : EXISTS '(' selectStat ')';
+exprExists        : (not=NOT)? EXISTS '(' selectStat ')';
 
 element
 	: palceHolder = PLACEHOLDER
@@ -74,14 +77,10 @@ element
 	| boolVal     = (TRUE | FALSE)
 	;
 
-expressionSuffix
-	: expressionOperator=(AND | XOR | OR | NOT) expression
-	;
-
 
 // ******* Lexer *******
 
-PLACEHOLDER : '?' ;
+PLACEHOLDER : '?' | (':' [a-zA-Z0-9_]+) ;
 INSERT      : [Ii][Nn][Ss][Ee][Rr][Tt];
 INTO        : [Ii][Nn][Tt][Oo] ;
 VALUES      : [Vv][Aa][Ll][Uu][Ee][Ss]? ;
