@@ -12,6 +12,26 @@ public class TableNameAndAliasNode extends SQLSyntaxTreeNode {
 
 	@Override
 	public String toString() {
-		return name + ' ' + alias;
+		if (alias != null)
+			return name + ' ' + alias;
+		else
+			return name;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAlias() {
+		return alias;
+	}
+
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
+
 }

@@ -19,7 +19,7 @@ public class MySQLParser extends Parser {
 	public static final int
 		T__0=1, PLACEHOLDER=2, INSERT=3, INTO=4, VALUES=5, DELETE=6, FROM=7, WHERE=8, 
 		LIMIT=9, NULL=10, IS=11, NOT=12, IN=13, BETWEEN=14, AND=15, EXISTS=16, 
-		ID=17, INT=18, DECIMAL=19, STRING=20, TRUE=21, FALSE=22, CULUMN_REL=23, 
+		ID=17, INT=18, DECIMAL=19, STRING=20, TRUE=21, FALSE=22, COLUMN_REL=23, 
 		OR=24, XOR=25, SELECT=26, LIKE=27, ALL=28, ANY=29, DIVIDE=30, MOD=31, 
 		REGEXP=32, PLUS=33, MINUS=34, NEGATION=35, VERTBAR=36, BITAND=37, POWER_OP=38, 
 		BINARY=39, SHIFT_LEFT=40, SHIFT_RIGHT=41, ESCAPE=42, ASTERISK=43, RPAREN=44, 
@@ -57,7 +57,7 @@ public class MySQLParser extends Parser {
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, "PLACEHOLDER", "INSERT", "INTO", "VALUES", "DELETE", "FROM", 
 		"WHERE", "LIMIT", "NULL", "IS", "NOT", "IN", "BETWEEN", "AND", "EXISTS", 
-		"ID", "INT", "DECIMAL", "STRING", "TRUE", "FALSE", "CULUMN_REL", "OR", 
+		"ID", "INT", "DECIMAL", "STRING", "TRUE", "FALSE", "COLUMN_REL", "OR", 
 		"XOR", "SELECT", "LIKE", "ALL", "ANY", "DIVIDE", "MOD", "REGEXP", "PLUS", 
 		"MINUS", "NEGATION", "VERTBAR", "BITAND", "POWER_OP", "BINARY", "SHIFT_LEFT", 
 		"SHIFT_RIGHT", "ESCAPE", "ASTERISK", "RPAREN", "LPAREN", "RBRACK", "LBRACK", 
@@ -751,11 +751,12 @@ public class MySQLParser extends Parser {
 			case PLACEHOLDER:
 			case NOT:
 			case EXISTS:
+			case ID:
 			case DECIMAL:
 			case STRING:
 			case TRUE:
 			case FALSE:
-			case CULUMN_REL:
+			case COLUMN_REL:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(97);
@@ -1418,9 +1419,10 @@ public class MySQLParser extends Parser {
 		public Token strVal;
 		public Token boolVal;
 		public TerminalNode PLACEHOLDER() { return getToken(MySQLParser.PLACEHOLDER, 0); }
-		public TerminalNode CULUMN_REL() { return getToken(MySQLParser.CULUMN_REL, 0); }
+		public TerminalNode COLUMN_REL() { return getToken(MySQLParser.COLUMN_REL, 0); }
 		public TerminalNode DECIMAL() { return getToken(MySQLParser.DECIMAL, 0); }
 		public TerminalNode STRING() { return getToken(MySQLParser.STRING, 0); }
+		public TerminalNode ID() { return getToken(MySQLParser.ID, 0); }
 		public TerminalNode TRUE() { return getToken(MySQLParser.TRUE, 0); }
 		public TerminalNode FALSE() { return getToken(MySQLParser.FALSE, 0); }
 		public ElementContext(ParserRuleContext parent, int invokingState) {
@@ -1447,7 +1449,7 @@ public class MySQLParser extends Parser {
 		enterRule(_localctx, 42, RULE_element);
 		int _la;
 		try {
-			setState(162);
+			setState(163);
 			switch (_input.LA(1)) {
 			case PLACEHOLDER:
 				enterOuterAlt(_localctx, 1);
@@ -1456,11 +1458,11 @@ public class MySQLParser extends Parser {
 				((ElementContext)_localctx).placeHolder = match(PLACEHOLDER);
 				}
 				break;
-			case CULUMN_REL:
+			case COLUMN_REL:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(158);
-				((ElementContext)_localctx).columnRel = match(CULUMN_REL);
+				((ElementContext)_localctx).columnRel = match(COLUMN_REL);
 				}
 				break;
 			case DECIMAL:
@@ -1477,11 +1479,18 @@ public class MySQLParser extends Parser {
 				((ElementContext)_localctx).strVal = match(STRING);
 				}
 				break;
-			case TRUE:
-			case FALSE:
+			case ID:
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(161);
+				match(ID);
+				}
+				break;
+			case TRUE:
+			case FALSE:
+				enterOuterAlt(_localctx, 6);
+				{
+				setState(162);
 				((ElementContext)_localctx).boolVal = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !(_la==TRUE || _la==FALSE) ) {
@@ -1507,7 +1516,7 @@ public class MySQLParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3T\u00a7\4\2\t\2\4"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3T\u00a8\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\3\2\3\2\3\2\3\2\5\2"+
@@ -1518,42 +1527,42 @@ public class MySQLParser extends Parser {
 		"\17\3\17\3\17\5\17v\n\17\3\20\3\20\3\20\3\20\3\21\3\21\3\21\3\21\3\21"+
 		"\3\21\3\22\3\22\3\22\5\22\u0085\n\22\3\22\3\22\3\23\3\23\3\23\3\23\3\23"+
 		"\3\23\3\24\3\24\3\24\3\24\3\24\3\24\3\25\5\25\u0096\n\25\3\25\3\25\3\25"+
-		"\3\25\3\25\3\26\3\26\3\26\3\27\3\27\3\27\3\27\3\27\5\27\u00a5\n\27\3\27"+
-		"\2\2\30\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,\2\b\6\2\4\4\f\f"+
-		"\23\23\26\26\4\2\4\4\24\24\4\2\21\21\32\33\3\2\649\4\2\3\3\16\16\3\2\27"+
-		"\30\u00a6\2\62\3\2\2\2\4\64\3\2\2\2\6A\3\2\2\2\bE\3\2\2\2\nH\3\2\2\2\f"+
-		"L\3\2\2\2\16O\3\2\2\2\20Q\3\2\2\2\22S\3\2\2\2\24^\3\2\2\2\26d\3\2\2\2"+
-		"\30f\3\2\2\2\32j\3\2\2\2\34u\3\2\2\2\36w\3\2\2\2 {\3\2\2\2\"\u0081\3\2"+
-		"\2\2$\u0088\3\2\2\2&\u008e\3\2\2\2(\u0095\3\2\2\2*\u009c\3\2\2\2,\u00a4"+
-		"\3\2\2\2.\63\5\4\3\2/\63\5\20\t\2\60\63\5\22\n\2\61\63\5\16\b\2\62.\3"+
-		"\2\2\2\62/\3\2\2\2\62\60\3\2\2\2\62\61\3\2\2\2\63\3\3\2\2\2\64\66\7\5"+
-		"\2\2\65\67\7\6\2\2\66\65\3\2\2\2\66\67\3\2\2\2\678\3\2\2\289\7\23\2\2"+
-		"9:\7/\2\2:;\5\6\4\2;<\7.\2\2<=\7\7\2\2=>\7/\2\2>?\5\n\6\2?@\7.\2\2@\5"+
-		"\3\2\2\2AC\7\23\2\2BD\5\b\5\2CB\3\2\2\2CD\3\2\2\2D\7\3\2\2\2EF\7;\2\2"+
-		"FG\5\6\4\2G\t\3\2\2\2HJ\t\2\2\2IK\5\f\7\2JI\3\2\2\2JK\3\2\2\2K\13\3\2"+
-		"\2\2LM\7;\2\2MN\5\n\6\2N\r\3\2\2\2OP\3\2\2\2P\17\3\2\2\2QR\3\2\2\2R\21"+
-		"\3\2\2\2ST\7\b\2\2TU\7\t\2\2UX\5\24\13\2VW\7\n\2\2WY\5\26\f\2XV\3\2\2"+
-		"\2XY\3\2\2\2Y\\\3\2\2\2Z[\7\13\2\2[]\t\3\2\2\\Z\3\2\2\2\\]\3\2\2\2]\23"+
-		"\3\2\2\2^`\7\23\2\2_a\7\23\2\2`_\3\2\2\2`a\3\2\2\2a\25\3\2\2\2be\5\30"+
-		"\r\2ce\5\32\16\2db\3\2\2\2dc\3\2\2\2e\27\3\2\2\2fg\7/\2\2gh\5\26\f\2h"+
-		"i\7.\2\2i\31\3\2\2\2jm\5\34\17\2kl\t\4\2\2ln\5\26\f\2mk\3\2\2\2mn\3\2"+
-		"\2\2n\33\3\2\2\2ov\5\36\20\2pv\5 \21\2qv\5\"\22\2rv\5$\23\2sv\5&\24\2"+
-		"tv\5(\25\2uo\3\2\2\2up\3\2\2\2uq\3\2\2\2ur\3\2\2\2us\3\2\2\2ut\3\2\2\2"+
-		"v\35\3\2\2\2wx\5,\27\2xy\t\5\2\2yz\5,\27\2z\37\3\2\2\2{|\5,\27\2|}\7\20"+
-		"\2\2}~\5,\27\2~\177\7\21\2\2\177\u0080\5,\27\2\u0080!\3\2\2\2\u0081\u0082"+
-		"\5,\27\2\u0082\u0084\7\r\2\2\u0083\u0085\7\16\2\2\u0084\u0083\3\2\2\2"+
-		"\u0084\u0085\3\2\2\2\u0085\u0086\3\2\2\2\u0086\u0087\7\f\2\2\u0087#\3"+
-		"\2\2\2\u0088\u0089\5,\27\2\u0089\u008a\7\17\2\2\u008a\u008b\7/\2\2\u008b"+
-		"\u008c\5\16\b\2\u008c\u008d\7.\2\2\u008d%\3\2\2\2\u008e\u008f\5,\27\2"+
-		"\u008f\u0090\7\17\2\2\u0090\u0091\7/\2\2\u0091\u0092\5\n\6\2\u0092\u0093"+
-		"\7.\2\2\u0093\'\3\2\2\2\u0094\u0096\7\16\2\2\u0095\u0094\3\2\2\2\u0095"+
-		"\u0096\3\2\2\2\u0096\u0097\3\2\2\2\u0097\u0098\7\22\2\2\u0098\u0099\7"+
-		"/\2\2\u0099\u009a\5\16\b\2\u009a\u009b\7.\2\2\u009b)\3\2\2\2\u009c\u009d"+
-		"\t\6\2\2\u009d\u009e\5\34\17\2\u009e+\3\2\2\2\u009f\u00a5\7\4\2\2\u00a0"+
-		"\u00a5\7\31\2\2\u00a1\u00a5\7\25\2\2\u00a2\u00a5\7\26\2\2\u00a3\u00a5"+
-		"\t\7\2\2\u00a4\u009f\3\2\2\2\u00a4\u00a0\3\2\2\2\u00a4\u00a1\3\2\2\2\u00a4"+
-		"\u00a2\3\2\2\2\u00a4\u00a3\3\2\2\2\u00a5-\3\2\2\2\17\62\66CJX\\`dmu\u0084"+
-		"\u0095\u00a4";
+		"\3\25\3\25\3\26\3\26\3\26\3\27\3\27\3\27\3\27\3\27\3\27\5\27\u00a6\n\27"+
+		"\3\27\2\2\30\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,\2\b\6\2\4"+
+		"\4\f\f\23\23\26\26\4\2\4\4\24\24\4\2\21\21\32\33\3\2\649\4\2\3\3\16\16"+
+		"\3\2\27\30\u00a8\2\62\3\2\2\2\4\64\3\2\2\2\6A\3\2\2\2\bE\3\2\2\2\nH\3"+
+		"\2\2\2\fL\3\2\2\2\16O\3\2\2\2\20Q\3\2\2\2\22S\3\2\2\2\24^\3\2\2\2\26d"+
+		"\3\2\2\2\30f\3\2\2\2\32j\3\2\2\2\34u\3\2\2\2\36w\3\2\2\2 {\3\2\2\2\"\u0081"+
+		"\3\2\2\2$\u0088\3\2\2\2&\u008e\3\2\2\2(\u0095\3\2\2\2*\u009c\3\2\2\2,"+
+		"\u00a5\3\2\2\2.\63\5\4\3\2/\63\5\20\t\2\60\63\5\22\n\2\61\63\5\16\b\2"+
+		"\62.\3\2\2\2\62/\3\2\2\2\62\60\3\2\2\2\62\61\3\2\2\2\63\3\3\2\2\2\64\66"+
+		"\7\5\2\2\65\67\7\6\2\2\66\65\3\2\2\2\66\67\3\2\2\2\678\3\2\2\289\7\23"+
+		"\2\29:\7/\2\2:;\5\6\4\2;<\7.\2\2<=\7\7\2\2=>\7/\2\2>?\5\n\6\2?@\7.\2\2"+
+		"@\5\3\2\2\2AC\7\23\2\2BD\5\b\5\2CB\3\2\2\2CD\3\2\2\2D\7\3\2\2\2EF\7;\2"+
+		"\2FG\5\6\4\2G\t\3\2\2\2HJ\t\2\2\2IK\5\f\7\2JI\3\2\2\2JK\3\2\2\2K\13\3"+
+		"\2\2\2LM\7;\2\2MN\5\n\6\2N\r\3\2\2\2OP\3\2\2\2P\17\3\2\2\2QR\3\2\2\2R"+
+		"\21\3\2\2\2ST\7\b\2\2TU\7\t\2\2UX\5\24\13\2VW\7\n\2\2WY\5\26\f\2XV\3\2"+
+		"\2\2XY\3\2\2\2Y\\\3\2\2\2Z[\7\13\2\2[]\t\3\2\2\\Z\3\2\2\2\\]\3\2\2\2]"+
+		"\23\3\2\2\2^`\7\23\2\2_a\7\23\2\2`_\3\2\2\2`a\3\2\2\2a\25\3\2\2\2be\5"+
+		"\30\r\2ce\5\32\16\2db\3\2\2\2dc\3\2\2\2e\27\3\2\2\2fg\7/\2\2gh\5\26\f"+
+		"\2hi\7.\2\2i\31\3\2\2\2jm\5\34\17\2kl\t\4\2\2ln\5\26\f\2mk\3\2\2\2mn\3"+
+		"\2\2\2n\33\3\2\2\2ov\5\36\20\2pv\5 \21\2qv\5\"\22\2rv\5$\23\2sv\5&\24"+
+		"\2tv\5(\25\2uo\3\2\2\2up\3\2\2\2uq\3\2\2\2ur\3\2\2\2us\3\2\2\2ut\3\2\2"+
+		"\2v\35\3\2\2\2wx\5,\27\2xy\t\5\2\2yz\5,\27\2z\37\3\2\2\2{|\5,\27\2|}\7"+
+		"\20\2\2}~\5,\27\2~\177\7\21\2\2\177\u0080\5,\27\2\u0080!\3\2\2\2\u0081"+
+		"\u0082\5,\27\2\u0082\u0084\7\r\2\2\u0083\u0085\7\16\2\2\u0084\u0083\3"+
+		"\2\2\2\u0084\u0085\3\2\2\2\u0085\u0086\3\2\2\2\u0086\u0087\7\f\2\2\u0087"+
+		"#\3\2\2\2\u0088\u0089\5,\27\2\u0089\u008a\7\17\2\2\u008a\u008b\7/\2\2"+
+		"\u008b\u008c\5\16\b\2\u008c\u008d\7.\2\2\u008d%\3\2\2\2\u008e\u008f\5"+
+		",\27\2\u008f\u0090\7\17\2\2\u0090\u0091\7/\2\2\u0091\u0092\5\n\6\2\u0092"+
+		"\u0093\7.\2\2\u0093\'\3\2\2\2\u0094\u0096\7\16\2\2\u0095\u0094\3\2\2\2"+
+		"\u0095\u0096\3\2\2\2\u0096\u0097\3\2\2\2\u0097\u0098\7\22\2\2\u0098\u0099"+
+		"\7/\2\2\u0099\u009a\5\16\b\2\u009a\u009b\7.\2\2\u009b)\3\2\2\2\u009c\u009d"+
+		"\t\6\2\2\u009d\u009e\5\34\17\2\u009e+\3\2\2\2\u009f\u00a6\7\4\2\2\u00a0"+
+		"\u00a6\7\31\2\2\u00a1\u00a6\7\25\2\2\u00a2\u00a6\7\26\2\2\u00a3\u00a6"+
+		"\7\23\2\2\u00a4\u00a6\t\7\2\2\u00a5\u009f\3\2\2\2\u00a5\u00a0\3\2\2\2"+
+		"\u00a5\u00a1\3\2\2\2\u00a5\u00a2\3\2\2\2\u00a5\u00a3\3\2\2\2\u00a5\u00a4"+
+		"\3\2\2\2\u00a6-\3\2\2\2\17\62\66CJX\\`dmu\u0084\u0095\u00a5";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

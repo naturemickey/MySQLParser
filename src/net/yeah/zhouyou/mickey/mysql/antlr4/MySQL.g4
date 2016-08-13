@@ -72,9 +72,10 @@ exprNot           : (NOT | '!') expression ;
 
 element
 	: placeHolder = PLACEHOLDER
-	| columnRel   = CULUMN_REL
+	| columnRel   = COLUMN_REL
 	| numVal      = DECIMAL
 	| strVal      = STRING
+	| ID
 	| boolVal     = (TRUE | FALSE)
 	;
 
@@ -102,7 +103,7 @@ DECIMAL     : ('+' | '-')? ((INT)|('.' INT)|(INT '.' INT)) ([Ee]('+' | '-')? INT
 STRING      : (['] ((~[']) ([']['])?)* [']) | (["] ((~["]) (["]["])?)* ["]) ;
 TRUE        : [Tt][Rr][Uu][Ee] ;
 FALSE       : [Ff][Aa][Ll][Ss] ;
-CULUMN_REL  : (ID '.')? ID ;
+COLUMN_REL  : ID ('.' ID)? ;
 OR          : ([Oo][Rr]) | '||' ;
 XOR         : [Xx][Oo][Rr] ;
 
