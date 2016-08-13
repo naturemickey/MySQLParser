@@ -14,6 +14,7 @@ import net.yeah.zhouyou.mickey.mysql.tree.WhereConditionNotNode;
 import net.yeah.zhouyou.mickey.mysql.tree.WhereConditionOpNode;
 import net.yeah.zhouyou.mickey.mysql.tree.WhereConditionSubNode;
 
+
 public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 
 	@Override
