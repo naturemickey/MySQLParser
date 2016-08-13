@@ -118,6 +118,36 @@ public interface MySQLListener extends ParseTreeListener {
 	 */
 	void exitWhereCondition(MySQLParser.WhereConditionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MySQLParser#whereCondSub}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhereCondSub(MySQLParser.WhereCondSubContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#whereCondSub}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhereCondSub(MySQLParser.WhereCondSubContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#whereCondOp}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhereCondOp(MySQLParser.WhereCondOpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#whereCondOp}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhereCondOp(MySQLParser.WhereCondOpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#whereCondNot}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhereCondNot(MySQLParser.WhereCondNotContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#whereCondNot}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhereCondNot(MySQLParser.WhereCondNotContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MySQLParser#expression}.
 	 * @param ctx the parse tree
 	 */
@@ -197,14 +227,4 @@ public interface MySQLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitElement(MySQLParser.ElementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MySQLParser#expressionSuffix}.
-	 * @param ctx the parse tree
-	 */
-	void enterExpressionSuffix(MySQLParser.ExpressionSuffixContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MySQLParser#expressionSuffix}.
-	 * @param ctx the parse tree
-	 */
-	void exitExpressionSuffix(MySQLParser.ExpressionSuffixContext ctx);
 }

@@ -77,6 +77,24 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWhereCondition(MySQLParser.WhereConditionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MySQLParser#whereCondSub}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhereCondSub(MySQLParser.WhereCondSubContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#whereCondOp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhereCondOp(MySQLParser.WhereCondOpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#whereCondNot}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhereCondNot(MySQLParser.WhereCondNotContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MySQLParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -124,10 +142,4 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitElement(MySQLParser.ElementContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MySQLParser#expressionSuffix}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpressionSuffix(MySQLParser.ExpressionSuffixContext ctx);
 }

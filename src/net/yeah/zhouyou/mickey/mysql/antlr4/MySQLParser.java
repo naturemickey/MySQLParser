@@ -17,35 +17,37 @@ public class MySQLParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		PLACEHOLDER=1, INSERT=2, INTO=3, VALUES=4, DELETE=5, FROM=6, WHERE=7, 
-		LIMIT=8, NULL=9, IS=10, NOT=11, IN=12, BETWEEN=13, AND=14, EXISTS=15, 
-		ID=16, INT=17, DECIMAL=18, STRING=19, TRUE=20, FALSE=21, CULUMN_REL=22, 
-		OR=23, XOR=24, SELECT=25, LIKE=26, ALL=27, ANY=28, DIVIDE=29, MOD=30, 
-		REGEXP=31, PLUS=32, MINUS=33, NEGATION=34, VERTBAR=35, BITAND=36, POWER_OP=37, 
-		BINARY=38, SHIFT_LEFT=39, SHIFT_RIGHT=40, ESCAPE=41, ASTERISK=42, RPAREN=43, 
-		LPAREN=44, RBRACK=45, LBRACK=46, COLON=47, ALL_FIELDS=48, EQ=49, LTH=50, 
-		GTH=51, NOT_EQ=52, LET=53, GET=54, SEMI=55, COMMA=56, DOT=57, COLLATE=58, 
-		INNER=59, OUTER=60, JOIN=61, CROSS=62, USING=63, INDEX=64, KEY=65, ORDER=66, 
-		GROUP=67, BY=68, FOR=69, USE=70, IGNORE=71, PARTITION=72, STRAIGHT_JOIN=73, 
-		NATURAL=74, LEFT=75, RIGHT=76, OJ=77, ON=78, NEWLINE=79, WS=80, USER_VAR=81;
+		T__0=1, PLACEHOLDER=2, INSERT=3, INTO=4, VALUES=5, DELETE=6, FROM=7, WHERE=8, 
+		LIMIT=9, NULL=10, IS=11, NOT=12, IN=13, BETWEEN=14, AND=15, EXISTS=16, 
+		ID=17, INT=18, DECIMAL=19, STRING=20, TRUE=21, FALSE=22, CULUMN_REL=23, 
+		OR=24, XOR=25, SELECT=26, LIKE=27, ALL=28, ANY=29, DIVIDE=30, MOD=31, 
+		REGEXP=32, PLUS=33, MINUS=34, NEGATION=35, VERTBAR=36, BITAND=37, POWER_OP=38, 
+		BINARY=39, SHIFT_LEFT=40, SHIFT_RIGHT=41, ESCAPE=42, ASTERISK=43, RPAREN=44, 
+		LPAREN=45, RBRACK=46, LBRACK=47, COLON=48, ALL_FIELDS=49, EQ=50, LTH=51, 
+		GTH=52, NOT_EQ=53, LET=54, GET=55, SEMI=56, COMMA=57, DOT=58, COLLATE=59, 
+		INNER=60, OUTER=61, JOIN=62, CROSS=63, USING=64, INDEX=65, KEY=66, ORDER=67, 
+		GROUP=68, BY=69, FOR=70, USE=71, IGNORE=72, PARTITION=73, STRAIGHT_JOIN=74, 
+		NATURAL=75, LEFT=76, RIGHT=77, OJ=78, ON=79, NEWLINE=80, WS=81, USER_VAR=82;
 	public static final int
 		RULE_stat = 0, RULE_insertStat = 1, RULE_columnNames = 2, RULE_columnNamesSuffix = 3, 
 		RULE_valueList = 4, RULE_valueListSuffix = 5, RULE_selectStat = 6, RULE_updateStat = 7, 
 		RULE_deleteStat = 8, RULE_tableNameAndAlias = 9, RULE_whereCondition = 10, 
-		RULE_expression = 11, RULE_exprRelational = 12, RULE_exprBetweenAnd = 13, 
-		RULE_exprIsOrIsNotNull = 14, RULE_exprInSelect = 15, RULE_exprInValues = 16, 
-		RULE_exprExists = 17, RULE_element = 18, RULE_expressionSuffix = 19;
+		RULE_whereCondSub = 11, RULE_whereCondOp = 12, RULE_whereCondNot = 13, 
+		RULE_expression = 14, RULE_exprRelational = 15, RULE_exprBetweenAnd = 16, 
+		RULE_exprIsOrIsNotNull = 17, RULE_exprInSelect = 18, RULE_exprInValues = 19, 
+		RULE_exprExists = 20, RULE_element = 21;
 	public static final String[] ruleNames = {
 		"stat", "insertStat", "columnNames", "columnNamesSuffix", "valueList", 
 		"valueListSuffix", "selectStat", "updateStat", "deleteStat", "tableNameAndAlias", 
-		"whereCondition", "expression", "exprRelational", "exprBetweenAnd", "exprIsOrIsNotNull", 
-		"exprInSelect", "exprInValues", "exprExists", "element", "expressionSuffix"
+		"whereCondition", "whereCondSub", "whereCondOp", "whereCondNot", "expression", 
+		"exprRelational", "exprBetweenAnd", "exprIsOrIsNotNull", "exprInSelect", 
+		"exprInValues", "exprExists", "element"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'?'", null, null, null, null, null, null, null, null, null, null, 
+		null, "'!'", null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, null, null, null, null, null, null, null, null, null, 
-		null, "'select'", "'like'", "'all'", "'any'", null, null, "'regexp'", 
+		null, null, "'select'", "'like'", "'all'", "'any'", null, null, "'regexp'", 
 		"'+'", "'-'", "'~'", "'|'", "'&'", "'^'", "'binary'", "'<<'", "'>>'", 
 		"'escape'", "'*'", "')'", "'('", "']'", "'['", "':'", "'.*'", "'='", "'<'", 
 		"'>'", "'!='", "'<='", "'>='", "';'", "','", "'.'", "'collate'", "'inner'", 
@@ -54,16 +56,17 @@ public class MySQLParser extends Parser {
 		"'natural'", "'left'", "'right'", "'oj'", "'on'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, "PLACEHOLDER", "INSERT", "INTO", "VALUES", "DELETE", "FROM", "WHERE", 
-		"LIMIT", "NULL", "IS", "NOT", "IN", "BETWEEN", "AND", "EXISTS", "ID", 
-		"INT", "DECIMAL", "STRING", "TRUE", "FALSE", "CULUMN_REL", "OR", "XOR", 
-		"SELECT", "LIKE", "ALL", "ANY", "DIVIDE", "MOD", "REGEXP", "PLUS", "MINUS", 
-		"NEGATION", "VERTBAR", "BITAND", "POWER_OP", "BINARY", "SHIFT_LEFT", "SHIFT_RIGHT", 
-		"ESCAPE", "ASTERISK", "RPAREN", "LPAREN", "RBRACK", "LBRACK", "COLON", 
-		"ALL_FIELDS", "EQ", "LTH", "GTH", "NOT_EQ", "LET", "GET", "SEMI", "COMMA", 
-		"DOT", "COLLATE", "INNER", "OUTER", "JOIN", "CROSS", "USING", "INDEX", 
-		"KEY", "ORDER", "GROUP", "BY", "FOR", "USE", "IGNORE", "PARTITION", "STRAIGHT_JOIN", 
-		"NATURAL", "LEFT", "RIGHT", "OJ", "ON", "NEWLINE", "WS", "USER_VAR"
+		null, null, "PLACEHOLDER", "INSERT", "INTO", "VALUES", "DELETE", "FROM", 
+		"WHERE", "LIMIT", "NULL", "IS", "NOT", "IN", "BETWEEN", "AND", "EXISTS", 
+		"ID", "INT", "DECIMAL", "STRING", "TRUE", "FALSE", "CULUMN_REL", "OR", 
+		"XOR", "SELECT", "LIKE", "ALL", "ANY", "DIVIDE", "MOD", "REGEXP", "PLUS", 
+		"MINUS", "NEGATION", "VERTBAR", "BITAND", "POWER_OP", "BINARY", "SHIFT_LEFT", 
+		"SHIFT_RIGHT", "ESCAPE", "ASTERISK", "RPAREN", "LPAREN", "RBRACK", "LBRACK", 
+		"COLON", "ALL_FIELDS", "EQ", "LTH", "GTH", "NOT_EQ", "LET", "GET", "SEMI", 
+		"COMMA", "DOT", "COLLATE", "INNER", "OUTER", "JOIN", "CROSS", "USING", 
+		"INDEX", "KEY", "ORDER", "GROUP", "BY", "FOR", "USE", "IGNORE", "PARTITION", 
+		"STRAIGHT_JOIN", "NATURAL", "LEFT", "RIGHT", "OJ", "ON", "NEWLINE", "WS", 
+		"USER_VAR"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -150,34 +153,34 @@ public class MySQLParser extends Parser {
 		StatContext _localctx = new StatContext(_ctx, getState());
 		enterRule(_localctx, 0, RULE_stat);
 		try {
-			setState(44);
+			setState(48);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(40);
+				setState(44);
 				insertStat();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(41);
+				setState(45);
 				updateStat();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(42);
+				setState(46);
 				deleteStat();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(43);
+				setState(47);
 				selectStat();
 				}
 				break;
@@ -232,32 +235,32 @@ public class MySQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(46);
+			setState(50);
 			match(INSERT);
-			setState(48);
+			setState(52);
 			_la = _input.LA(1);
 			if (_la==INTO) {
 				{
-				setState(47);
+				setState(51);
 				match(INTO);
 				}
 			}
 
-			setState(50);
-			((InsertStatContext)_localctx).tableName = match(ID);
-			setState(51);
-			match(LPAREN);
-			setState(52);
-			columnNames();
-			setState(53);
-			match(RPAREN);
 			setState(54);
-			match(VALUES);
+			((InsertStatContext)_localctx).tableName = match(ID);
 			setState(55);
 			match(LPAREN);
 			setState(56);
-			valueList();
+			columnNames();
 			setState(57);
+			match(RPAREN);
+			setState(58);
+			match(VALUES);
+			setState(59);
+			match(LPAREN);
+			setState(60);
+			valueList();
+			setState(61);
 			match(RPAREN);
 			}
 		}
@@ -304,13 +307,13 @@ public class MySQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(59);
+			setState(63);
 			((ColumnNamesContext)_localctx).name = match(ID);
-			setState(61);
+			setState(65);
 			_la = _input.LA(1);
 			if (_la==COMMA) {
 				{
-				setState(60);
+				setState(64);
 				columnNamesSuffix();
 				}
 			}
@@ -357,9 +360,9 @@ public class MySQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(63);
+			setState(67);
 			match(COMMA);
-			setState(64);
+			setState(68);
 			columnNames();
 			}
 		}
@@ -409,7 +412,7 @@ public class MySQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(66);
+			setState(70);
 			((ValueListContext)_localctx).name = _input.LT(1);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << PLACEHOLDER) | (1L << NULL) | (1L << ID) | (1L << STRING))) != 0)) ) {
@@ -417,11 +420,11 @@ public class MySQLParser extends Parser {
 			} else {
 				consume();
 			}
-			setState(68);
+			setState(72);
 			_la = _input.LA(1);
 			if (_la==COMMA) {
 				{
-				setState(67);
+				setState(71);
 				valueListSuffix();
 				}
 			}
@@ -468,9 +471,9 @@ public class MySQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(70);
+			setState(74);
 			match(COMMA);
-			setState(71);
+			setState(75);
 			valueList();
 			}
 		}
@@ -576,6 +579,7 @@ public class MySQLParser extends Parser {
 		}
 		public TerminalNode LIMIT() { return getToken(MySQLParser.LIMIT, 0); }
 		public TerminalNode INT() { return getToken(MySQLParser.INT, 0); }
+		public TerminalNode PLACEHOLDER() { return getToken(MySQLParser.PLACEHOLDER, 0); }
 		public DeleteStatContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -602,31 +606,37 @@ public class MySQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(77);
+			setState(81);
 			match(DELETE);
-			setState(78);
-			match(FROM);
-			setState(79);
-			tableNameAndAlias();
 			setState(82);
+			match(FROM);
+			setState(83);
+			tableNameAndAlias();
+			setState(86);
 			_la = _input.LA(1);
 			if (_la==WHERE) {
 				{
-				setState(80);
+				setState(84);
 				match(WHERE);
-				setState(81);
+				setState(85);
 				whereCondition();
 				}
 			}
 
-			setState(86);
+			setState(90);
 			_la = _input.LA(1);
 			if (_la==LIMIT) {
 				{
-				setState(84);
+				setState(88);
 				match(LIMIT);
-				setState(85);
-				((DeleteStatContext)_localctx).rowCount = match(INT);
+				setState(89);
+				((DeleteStatContext)_localctx).rowCount = _input.LT(1);
+				_la = _input.LA(1);
+				if ( !(_la==PLACEHOLDER || _la==INT) ) {
+					((DeleteStatContext)_localctx).rowCount = (Token)_errHandler.recoverInline(this);
+				} else {
+					consume();
+				}
 				}
 			}
 
@@ -676,13 +686,13 @@ public class MySQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(88);
+			setState(92);
 			((TableNameAndAliasContext)_localctx).name = match(ID);
-			setState(90);
+			setState(94);
 			_la = _input.LA(1);
 			if (_la==ID) {
 				{
-				setState(89);
+				setState(93);
 				((TableNameAndAliasContext)_localctx).alias = match(ID);
 				}
 			}
@@ -701,11 +711,14 @@ public class MySQLParser extends Parser {
 	}
 
 	public static class WhereConditionContext extends ParserRuleContext {
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
+		public WhereCondSubContext whereCondSub() {
+			return getRuleContext(WhereCondSubContext.class,0);
 		}
-		public ExpressionSuffixContext expressionSuffix() {
-			return getRuleContext(ExpressionSuffixContext.class,0);
+		public WhereCondOpContext whereCondOp() {
+			return getRuleContext(WhereCondOpContext.class,0);
+		}
+		public WhereCondNotContext whereCondNot() {
+			return getRuleContext(WhereCondNotContext.class,0);
 		}
 		public WhereConditionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -729,18 +742,145 @@ public class MySQLParser extends Parser {
 	public final WhereConditionContext whereCondition() throws RecognitionException {
 		WhereConditionContext _localctx = new WhereConditionContext(_ctx, getState());
 		enterRule(_localctx, 20, RULE_whereCondition);
+		try {
+			setState(99);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(96);
+				whereCondSub();
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(97);
+				whereCondOp();
+				}
+				break;
+			case 3:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(98);
+				whereCondNot();
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class WhereCondSubContext extends ParserRuleContext {
+		public WhereConditionContext whereCondition() {
+			return getRuleContext(WhereConditionContext.class,0);
+		}
+		public WhereCondSubContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_whereCondSub; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MySQLListener ) ((MySQLListener)listener).enterWhereCondSub(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MySQLListener ) ((MySQLListener)listener).exitWhereCondSub(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MySQLVisitor ) return ((MySQLVisitor<? extends T>)visitor).visitWhereCondSub(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final WhereCondSubContext whereCondSub() throws RecognitionException {
+		WhereCondSubContext _localctx = new WhereCondSubContext(_ctx, getState());
+		enterRule(_localctx, 22, RULE_whereCondSub);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(101);
+			match(LPAREN);
+			setState(102);
+			whereCondition();
+			setState(103);
+			match(RPAREN);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class WhereCondOpContext extends ParserRuleContext {
+		public Token expressionOperator;
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
+		public WhereConditionContext whereCondition() {
+			return getRuleContext(WhereConditionContext.class,0);
+		}
+		public TerminalNode AND() { return getToken(MySQLParser.AND, 0); }
+		public TerminalNode XOR() { return getToken(MySQLParser.XOR, 0); }
+		public TerminalNode OR() { return getToken(MySQLParser.OR, 0); }
+		public WhereCondOpContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_whereCondOp; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MySQLListener ) ((MySQLListener)listener).enterWhereCondOp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MySQLListener ) ((MySQLListener)listener).exitWhereCondOp(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MySQLVisitor ) return ((MySQLVisitor<? extends T>)visitor).visitWhereCondOp(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final WhereCondOpContext whereCondOp() throws RecognitionException {
+		WhereCondOpContext _localctx = new WhereCondOpContext(_ctx, getState());
+		enterRule(_localctx, 24, RULE_whereCondOp);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(92);
+			setState(105);
 			expression();
-			setState(94);
+			setState(108);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << NOT) | (1L << AND) | (1L << OR) | (1L << XOR))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AND) | (1L << OR) | (1L << XOR))) != 0)) {
 				{
-				setState(93);
-				expressionSuffix();
+				setState(106);
+				((WhereCondOpContext)_localctx).expressionOperator = _input.LT(1);
+				_la = _input.LA(1);
+				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AND) | (1L << OR) | (1L << XOR))) != 0)) ) {
+					((WhereCondOpContext)_localctx).expressionOperator = (Token)_errHandler.recoverInline(this);
+				} else {
+					consume();
+				}
+				setState(107);
+				whereCondition();
 				}
 			}
 
@@ -757,10 +897,60 @@ public class MySQLParser extends Parser {
 		return _localctx;
 	}
 
-	public static class ExpressionContext extends ParserRuleContext {
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
+	public static class WhereCondNotContext extends ParserRuleContext {
+		public WhereConditionContext whereCondition() {
+			return getRuleContext(WhereConditionContext.class,0);
 		}
+		public TerminalNode NOT() { return getToken(MySQLParser.NOT, 0); }
+		public WhereCondNotContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_whereCondNot; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MySQLListener ) ((MySQLListener)listener).enterWhereCondNot(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MySQLListener ) ((MySQLListener)listener).exitWhereCondNot(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MySQLVisitor ) return ((MySQLVisitor<? extends T>)visitor).visitWhereCondNot(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final WhereCondNotContext whereCondNot() throws RecognitionException {
+		WhereCondNotContext _localctx = new WhereCondNotContext(_ctx, getState());
+		enterRule(_localctx, 26, RULE_whereCondNot);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(110);
+			_la = _input.LA(1);
+			if ( !(_la==T__0 || _la==NOT) ) {
+			_errHandler.recoverInline(this);
+			} else {
+				consume();
+			}
+			setState(111);
+			whereCondition();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ExpressionContext extends ParserRuleContext {
 		public ExprRelationalContext exprRelational() {
 			return getRuleContext(ExprRelationalContext.class,0);
 		}
@@ -800,61 +990,50 @@ public class MySQLParser extends Parser {
 
 	public final ExpressionContext expression() throws RecognitionException {
 		ExpressionContext _localctx = new ExpressionContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_expression);
+		enterRule(_localctx, 28, RULE_expression);
 		try {
-			setState(106);
+			setState(119);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(96);
-				match(LPAREN);
-				setState(97);
-				expression();
-				setState(98);
-				match(RPAREN);
+				setState(113);
+				exprRelational();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(100);
-				exprRelational();
+				setState(114);
+				exprBetweenAnd();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(101);
-				exprBetweenAnd();
+				setState(115);
+				exprIsOrIsNotNull();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(102);
-				exprIsOrIsNotNull();
+				setState(116);
+				exprInSelect();
 				}
 				break;
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(103);
-				exprInSelect();
+				setState(117);
+				exprInValues();
 				}
 				break;
 			case 6:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(104);
-				exprInValues();
-				}
-				break;
-			case 7:
-				enterOuterAlt(_localctx, 7);
-				{
-				setState(105);
+				setState(118);
 				exprExists();
 				}
 				break;
@@ -872,7 +1051,9 @@ public class MySQLParser extends Parser {
 	}
 
 	public static class ExprRelationalContext extends ParserRuleContext {
+		public ElementContext el1;
 		public Token relationalOp;
+		public ElementContext el2;
 		public List<ElementContext> element() {
 			return getRuleContexts(ElementContext.class);
 		}
@@ -906,14 +1087,14 @@ public class MySQLParser extends Parser {
 
 	public final ExprRelationalContext exprRelational() throws RecognitionException {
 		ExprRelationalContext _localctx = new ExprRelationalContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_exprRelational);
+		enterRule(_localctx, 30, RULE_exprRelational);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(108);
-			element();
-			setState(109);
+			setState(121);
+			((ExprRelationalContext)_localctx).el1 = element();
+			setState(122);
 			((ExprRelationalContext)_localctx).relationalOp = _input.LT(1);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQ) | (1L << LTH) | (1L << GTH) | (1L << NOT_EQ) | (1L << LET) | (1L << GET))) != 0)) ) {
@@ -921,8 +1102,8 @@ public class MySQLParser extends Parser {
 			} else {
 				consume();
 			}
-			setState(110);
-			element();
+			setState(123);
+			((ExprRelationalContext)_localctx).el2 = element();
 			}
 		}
 		catch (RecognitionException re) {
@@ -937,14 +1118,17 @@ public class MySQLParser extends Parser {
 	}
 
 	public static class ExprBetweenAndContext extends ParserRuleContext {
+		public ElementContext el1;
+		public ElementContext el2;
+		public ElementContext el3;
+		public TerminalNode BETWEEN() { return getToken(MySQLParser.BETWEEN, 0); }
+		public TerminalNode AND() { return getToken(MySQLParser.AND, 0); }
 		public List<ElementContext> element() {
 			return getRuleContexts(ElementContext.class);
 		}
 		public ElementContext element(int i) {
 			return getRuleContext(ElementContext.class,i);
 		}
-		public TerminalNode BETWEEN() { return getToken(MySQLParser.BETWEEN, 0); }
-		public TerminalNode AND() { return getToken(MySQLParser.AND, 0); }
 		public ExprBetweenAndContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -966,20 +1150,20 @@ public class MySQLParser extends Parser {
 
 	public final ExprBetweenAndContext exprBetweenAnd() throws RecognitionException {
 		ExprBetweenAndContext _localctx = new ExprBetweenAndContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_exprBetweenAnd);
+		enterRule(_localctx, 32, RULE_exprBetweenAnd);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(112);
-			element();
-			setState(113);
+			setState(125);
+			((ExprBetweenAndContext)_localctx).el1 = element();
+			setState(126);
 			match(BETWEEN);
-			setState(114);
-			element();
-			setState(115);
+			setState(127);
+			((ExprBetweenAndContext)_localctx).el2 = element();
+			setState(128);
 			match(AND);
-			setState(116);
-			element();
+			setState(129);
+			((ExprBetweenAndContext)_localctx).el3 = element();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1022,25 +1206,25 @@ public class MySQLParser extends Parser {
 
 	public final ExprIsOrIsNotNullContext exprIsOrIsNotNull() throws RecognitionException {
 		ExprIsOrIsNotNullContext _localctx = new ExprIsOrIsNotNullContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_exprIsOrIsNotNull);
+		enterRule(_localctx, 34, RULE_exprIsOrIsNotNull);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(118);
+			setState(131);
 			element();
-			setState(119);
+			setState(132);
 			match(IS);
-			setState(121);
+			setState(134);
 			_la = _input.LA(1);
 			if (_la==NOT) {
 				{
-				setState(120);
+				setState(133);
 				((ExprIsOrIsNotNullContext)_localctx).not = match(NOT);
 				}
 			}
 
-			setState(123);
+			setState(136);
 			match(NULL);
 			}
 		}
@@ -1084,19 +1268,19 @@ public class MySQLParser extends Parser {
 
 	public final ExprInSelectContext exprInSelect() throws RecognitionException {
 		ExprInSelectContext _localctx = new ExprInSelectContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_exprInSelect);
+		enterRule(_localctx, 36, RULE_exprInSelect);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(125);
+			setState(138);
 			element();
-			setState(126);
+			setState(139);
 			match(IN);
-			setState(127);
+			setState(140);
 			match(LPAREN);
-			setState(128);
+			setState(141);
 			selectStat();
-			setState(129);
+			setState(142);
 			match(RPAREN);
 			}
 		}
@@ -1140,19 +1324,19 @@ public class MySQLParser extends Parser {
 
 	public final ExprInValuesContext exprInValues() throws RecognitionException {
 		ExprInValuesContext _localctx = new ExprInValuesContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_exprInValues);
+		enterRule(_localctx, 38, RULE_exprInValues);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(131);
+			setState(144);
 			element();
-			setState(132);
+			setState(145);
 			match(IN);
-			setState(133);
+			setState(146);
 			match(LPAREN);
-			setState(134);
+			setState(147);
 			valueList();
-			setState(135);
+			setState(148);
 			match(RPAREN);
 			}
 		}
@@ -1168,10 +1352,12 @@ public class MySQLParser extends Parser {
 	}
 
 	public static class ExprExistsContext extends ParserRuleContext {
+		public Token not;
 		public TerminalNode EXISTS() { return getToken(MySQLParser.EXISTS, 0); }
 		public SelectStatContext selectStat() {
 			return getRuleContext(SelectStatContext.class,0);
 		}
+		public TerminalNode NOT() { return getToken(MySQLParser.NOT, 0); }
 		public ExprExistsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1193,17 +1379,27 @@ public class MySQLParser extends Parser {
 
 	public final ExprExistsContext exprExists() throws RecognitionException {
 		ExprExistsContext _localctx = new ExprExistsContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_exprExists);
+		enterRule(_localctx, 40, RULE_exprExists);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(137);
+			setState(151);
+			_la = _input.LA(1);
+			if (_la==NOT) {
+				{
+				setState(150);
+				((ExprExistsContext)_localctx).not = match(NOT);
+				}
+			}
+
+			setState(153);
 			match(EXISTS);
-			setState(138);
+			setState(154);
 			match(LPAREN);
-			setState(139);
+			setState(155);
 			selectStat();
-			setState(140);
+			setState(156);
 			match(RPAREN);
 			}
 		}
@@ -1251,36 +1447,36 @@ public class MySQLParser extends Parser {
 
 	public final ElementContext element() throws RecognitionException {
 		ElementContext _localctx = new ElementContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_element);
+		enterRule(_localctx, 42, RULE_element);
 		int _la;
 		try {
-			setState(147);
+			setState(163);
 			switch (_input.LA(1)) {
 			case PLACEHOLDER:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(142);
+				setState(158);
 				((ElementContext)_localctx).palceHolder = match(PLACEHOLDER);
 				}
 				break;
 			case CULUMN_REL:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(143);
+				setState(159);
 				((ElementContext)_localctx).columnRel = match(CULUMN_REL);
 				}
 				break;
 			case DECIMAL:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(144);
+				setState(160);
 				((ElementContext)_localctx).numVal = match(DECIMAL);
 				}
 				break;
 			case STRING:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(145);
+				setState(161);
 				((ElementContext)_localctx).strVal = match(STRING);
 				}
 				break;
@@ -1288,7 +1484,7 @@ public class MySQLParser extends Parser {
 			case FALSE:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(146);
+				setState(162);
 				((ElementContext)_localctx).boolVal = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !(_la==TRUE || _la==FALSE) ) {
@@ -1313,106 +1509,54 @@ public class MySQLParser extends Parser {
 		return _localctx;
 	}
 
-	public static class ExpressionSuffixContext extends ParserRuleContext {
-		public Token expressionOperator;
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
-		}
-		public TerminalNode AND() { return getToken(MySQLParser.AND, 0); }
-		public TerminalNode XOR() { return getToken(MySQLParser.XOR, 0); }
-		public TerminalNode OR() { return getToken(MySQLParser.OR, 0); }
-		public TerminalNode NOT() { return getToken(MySQLParser.NOT, 0); }
-		public ExpressionSuffixContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_expressionSuffix; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MySQLListener ) ((MySQLListener)listener).enterExpressionSuffix(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MySQLListener ) ((MySQLListener)listener).exitExpressionSuffix(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MySQLVisitor ) return ((MySQLVisitor<? extends T>)visitor).visitExpressionSuffix(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final ExpressionSuffixContext expressionSuffix() throws RecognitionException {
-		ExpressionSuffixContext _localctx = new ExpressionSuffixContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_expressionSuffix);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(149);
-			((ExpressionSuffixContext)_localctx).expressionOperator = _input.LT(1);
-			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << NOT) | (1L << AND) | (1L << OR) | (1L << XOR))) != 0)) ) {
-				((ExpressionSuffixContext)_localctx).expressionOperator = (Token)_errHandler.recoverInline(this);
-			} else {
-				consume();
-			}
-			setState(150);
-			expression();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3S\u009b\4\2\t\2\4"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3T\u00a8\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
-		"\4\23\t\23\4\24\t\24\4\25\t\25\3\2\3\2\3\2\3\2\5\2/\n\2\3\3\3\3\5\3\63"+
-		"\n\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\4\3\4\5\4@\n\4\3\5\3\5\3\5"+
-		"\3\6\3\6\5\6G\n\6\3\7\3\7\3\7\3\b\3\b\3\t\3\t\3\n\3\n\3\n\3\n\3\n\5\n"+
-		"U\n\n\3\n\3\n\5\nY\n\n\3\13\3\13\5\13]\n\13\3\f\3\f\5\fa\n\f\3\r\3\r\3"+
-		"\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\5\rm\n\r\3\16\3\16\3\16\3\16\3\17\3\17"+
-		"\3\17\3\17\3\17\3\17\3\20\3\20\3\20\5\20|\n\20\3\20\3\20\3\21\3\21\3\21"+
-		"\3\21\3\21\3\21\3\22\3\22\3\22\3\22\3\22\3\22\3\23\3\23\3\23\3\23\3\23"+
-		"\3\24\3\24\3\24\3\24\3\24\5\24\u0096\n\24\3\25\3\25\3\25\3\25\2\2\26\2"+
-		"\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(\2\6\6\2\3\3\13\13\22\22\25"+
-		"\25\3\2\638\3\2\26\27\5\2\r\r\20\20\31\32\u009b\2.\3\2\2\2\4\60\3\2\2"+
-		"\2\6=\3\2\2\2\bA\3\2\2\2\nD\3\2\2\2\fH\3\2\2\2\16K\3\2\2\2\20M\3\2\2\2"+
-		"\22O\3\2\2\2\24Z\3\2\2\2\26^\3\2\2\2\30l\3\2\2\2\32n\3\2\2\2\34r\3\2\2"+
-		"\2\36x\3\2\2\2 \177\3\2\2\2\"\u0085\3\2\2\2$\u008b\3\2\2\2&\u0095\3\2"+
-		"\2\2(\u0097\3\2\2\2*/\5\4\3\2+/\5\20\t\2,/\5\22\n\2-/\5\16\b\2.*\3\2\2"+
-		"\2.+\3\2\2\2.,\3\2\2\2.-\3\2\2\2/\3\3\2\2\2\60\62\7\4\2\2\61\63\7\5\2"+
-		"\2\62\61\3\2\2\2\62\63\3\2\2\2\63\64\3\2\2\2\64\65\7\22\2\2\65\66\7.\2"+
-		"\2\66\67\5\6\4\2\678\7-\2\289\7\6\2\29:\7.\2\2:;\5\n\6\2;<\7-\2\2<\5\3"+
-		"\2\2\2=?\7\22\2\2>@\5\b\5\2?>\3\2\2\2?@\3\2\2\2@\7\3\2\2\2AB\7:\2\2BC"+
-		"\5\6\4\2C\t\3\2\2\2DF\t\2\2\2EG\5\f\7\2FE\3\2\2\2FG\3\2\2\2G\13\3\2\2"+
-		"\2HI\7:\2\2IJ\5\n\6\2J\r\3\2\2\2KL\3\2\2\2L\17\3\2\2\2MN\3\2\2\2N\21\3"+
-		"\2\2\2OP\7\7\2\2PQ\7\b\2\2QT\5\24\13\2RS\7\t\2\2SU\5\26\f\2TR\3\2\2\2"+
-		"TU\3\2\2\2UX\3\2\2\2VW\7\n\2\2WY\7\23\2\2XV\3\2\2\2XY\3\2\2\2Y\23\3\2"+
-		"\2\2Z\\\7\22\2\2[]\7\22\2\2\\[\3\2\2\2\\]\3\2\2\2]\25\3\2\2\2^`\5\30\r"+
-		"\2_a\5(\25\2`_\3\2\2\2`a\3\2\2\2a\27\3\2\2\2bc\7.\2\2cd\5\30\r\2de\7-"+
-		"\2\2em\3\2\2\2fm\5\32\16\2gm\5\34\17\2hm\5\36\20\2im\5 \21\2jm\5\"\22"+
-		"\2km\5$\23\2lb\3\2\2\2lf\3\2\2\2lg\3\2\2\2lh\3\2\2\2li\3\2\2\2lj\3\2\2"+
-		"\2lk\3\2\2\2m\31\3\2\2\2no\5&\24\2op\t\3\2\2pq\5&\24\2q\33\3\2\2\2rs\5"+
-		"&\24\2st\7\17\2\2tu\5&\24\2uv\7\20\2\2vw\5&\24\2w\35\3\2\2\2xy\5&\24\2"+
-		"y{\7\f\2\2z|\7\r\2\2{z\3\2\2\2{|\3\2\2\2|}\3\2\2\2}~\7\13\2\2~\37\3\2"+
-		"\2\2\177\u0080\5&\24\2\u0080\u0081\7\16\2\2\u0081\u0082\7.\2\2\u0082\u0083"+
-		"\5\16\b\2\u0083\u0084\7-\2\2\u0084!\3\2\2\2\u0085\u0086\5&\24\2\u0086"+
-		"\u0087\7\16\2\2\u0087\u0088\7.\2\2\u0088\u0089\5\n\6\2\u0089\u008a\7-"+
-		"\2\2\u008a#\3\2\2\2\u008b\u008c\7\21\2\2\u008c\u008d\7.\2\2\u008d\u008e"+
-		"\5\16\b\2\u008e\u008f\7-\2\2\u008f%\3\2\2\2\u0090\u0096\7\3\2\2\u0091"+
-		"\u0096\7\30\2\2\u0092\u0096\7\24\2\2\u0093\u0096\7\25\2\2\u0094\u0096"+
-		"\t\4\2\2\u0095\u0090\3\2\2\2\u0095\u0091\3\2\2\2\u0095\u0092\3\2\2\2\u0095"+
-		"\u0093\3\2\2\2\u0095\u0094\3\2\2\2\u0096\'\3\2\2\2\u0097\u0098\t\5\2\2"+
-		"\u0098\u0099\5\30\r\2\u0099)\3\2\2\2\r.\62?FTX\\`l{\u0095";
+		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\3\2\3\2\3\2\3\2\5\2"+
+		"\63\n\2\3\3\3\3\5\3\67\n\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\4\3\4"+
+		"\5\4D\n\4\3\5\3\5\3\5\3\6\3\6\5\6K\n\6\3\7\3\7\3\7\3\b\3\b\3\t\3\t\3\n"+
+		"\3\n\3\n\3\n\3\n\5\nY\n\n\3\n\3\n\5\n]\n\n\3\13\3\13\5\13a\n\13\3\f\3"+
+		"\f\3\f\5\ff\n\f\3\r\3\r\3\r\3\r\3\16\3\16\3\16\5\16o\n\16\3\17\3\17\3"+
+		"\17\3\20\3\20\3\20\3\20\3\20\3\20\5\20z\n\20\3\21\3\21\3\21\3\21\3\22"+
+		"\3\22\3\22\3\22\3\22\3\22\3\23\3\23\3\23\5\23\u0089\n\23\3\23\3\23\3\24"+
+		"\3\24\3\24\3\24\3\24\3\24\3\25\3\25\3\25\3\25\3\25\3\25\3\26\5\26\u009a"+
+		"\n\26\3\26\3\26\3\26\3\26\3\26\3\27\3\27\3\27\3\27\3\27\5\27\u00a6\n\27"+
+		"\3\27\2\2\30\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,\2\b\6\2\4"+
+		"\4\f\f\23\23\26\26\4\2\4\4\24\24\4\2\21\21\32\33\4\2\3\3\16\16\3\2\64"+
+		"9\3\2\27\30\u00a8\2\62\3\2\2\2\4\64\3\2\2\2\6A\3\2\2\2\bE\3\2\2\2\nH\3"+
+		"\2\2\2\fL\3\2\2\2\16O\3\2\2\2\20Q\3\2\2\2\22S\3\2\2\2\24^\3\2\2\2\26e"+
+		"\3\2\2\2\30g\3\2\2\2\32k\3\2\2\2\34p\3\2\2\2\36y\3\2\2\2 {\3\2\2\2\"\177"+
+		"\3\2\2\2$\u0085\3\2\2\2&\u008c\3\2\2\2(\u0092\3\2\2\2*\u0099\3\2\2\2,"+
+		"\u00a5\3\2\2\2.\63\5\4\3\2/\63\5\20\t\2\60\63\5\22\n\2\61\63\5\16\b\2"+
+		"\62.\3\2\2\2\62/\3\2\2\2\62\60\3\2\2\2\62\61\3\2\2\2\63\3\3\2\2\2\64\66"+
+		"\7\5\2\2\65\67\7\6\2\2\66\65\3\2\2\2\66\67\3\2\2\2\678\3\2\2\289\7\23"+
+		"\2\29:\7/\2\2:;\5\6\4\2;<\7.\2\2<=\7\7\2\2=>\7/\2\2>?\5\n\6\2?@\7.\2\2"+
+		"@\5\3\2\2\2AC\7\23\2\2BD\5\b\5\2CB\3\2\2\2CD\3\2\2\2D\7\3\2\2\2EF\7;\2"+
+		"\2FG\5\6\4\2G\t\3\2\2\2HJ\t\2\2\2IK\5\f\7\2JI\3\2\2\2JK\3\2\2\2K\13\3"+
+		"\2\2\2LM\7;\2\2MN\5\n\6\2N\r\3\2\2\2OP\3\2\2\2P\17\3\2\2\2QR\3\2\2\2R"+
+		"\21\3\2\2\2ST\7\b\2\2TU\7\t\2\2UX\5\24\13\2VW\7\n\2\2WY\5\26\f\2XV\3\2"+
+		"\2\2XY\3\2\2\2Y\\\3\2\2\2Z[\7\13\2\2[]\t\3\2\2\\Z\3\2\2\2\\]\3\2\2\2]"+
+		"\23\3\2\2\2^`\7\23\2\2_a\7\23\2\2`_\3\2\2\2`a\3\2\2\2a\25\3\2\2\2bf\5"+
+		"\30\r\2cf\5\32\16\2df\5\34\17\2eb\3\2\2\2ec\3\2\2\2ed\3\2\2\2f\27\3\2"+
+		"\2\2gh\7/\2\2hi\5\26\f\2ij\7.\2\2j\31\3\2\2\2kn\5\36\20\2lm\t\4\2\2mo"+
+		"\5\26\f\2nl\3\2\2\2no\3\2\2\2o\33\3\2\2\2pq\t\5\2\2qr\5\26\f\2r\35\3\2"+
+		"\2\2sz\5 \21\2tz\5\"\22\2uz\5$\23\2vz\5&\24\2wz\5(\25\2xz\5*\26\2ys\3"+
+		"\2\2\2yt\3\2\2\2yu\3\2\2\2yv\3\2\2\2yw\3\2\2\2yx\3\2\2\2z\37\3\2\2\2{"+
+		"|\5,\27\2|}\t\6\2\2}~\5,\27\2~!\3\2\2\2\177\u0080\5,\27\2\u0080\u0081"+
+		"\7\20\2\2\u0081\u0082\5,\27\2\u0082\u0083\7\21\2\2\u0083\u0084\5,\27\2"+
+		"\u0084#\3\2\2\2\u0085\u0086\5,\27\2\u0086\u0088\7\r\2\2\u0087\u0089\7"+
+		"\16\2\2\u0088\u0087\3\2\2\2\u0088\u0089\3\2\2\2\u0089\u008a\3\2\2\2\u008a"+
+		"\u008b\7\f\2\2\u008b%\3\2\2\2\u008c\u008d\5,\27\2\u008d\u008e\7\17\2\2"+
+		"\u008e\u008f\7/\2\2\u008f\u0090\5\16\b\2\u0090\u0091\7.\2\2\u0091\'\3"+
+		"\2\2\2\u0092\u0093\5,\27\2\u0093\u0094\7\17\2\2\u0094\u0095\7/\2\2\u0095"+
+		"\u0096\5\n\6\2\u0096\u0097\7.\2\2\u0097)\3\2\2\2\u0098\u009a\7\16\2\2"+
+		"\u0099\u0098\3\2\2\2\u0099\u009a\3\2\2\2\u009a\u009b\3\2\2\2\u009b\u009c"+
+		"\7\22\2\2\u009c\u009d\7/\2\2\u009d\u009e\5\16\b\2\u009e\u009f\7.\2\2\u009f"+
+		"+\3\2\2\2\u00a0\u00a6\7\4\2\2\u00a1\u00a6\7\31\2\2\u00a2\u00a6\7\25\2"+
+		"\2\u00a3\u00a6\7\26\2\2\u00a4\u00a6\t\7\2\2\u00a5\u00a0\3\2\2\2\u00a5"+
+		"\u00a1\3\2\2\2\u00a5\u00a2\3\2\2\2\u00a5\u00a3\3\2\2\2\u00a5\u00a4\3\2"+
+		"\2\2\u00a6-\3\2\2\2\17\62\66CJX\\`eny\u0088\u0099\u00a5";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

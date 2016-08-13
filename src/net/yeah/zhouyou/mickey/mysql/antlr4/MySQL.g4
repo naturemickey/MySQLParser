@@ -38,7 +38,7 @@ updateStat
 	;
 
 deleteStat
-	: DELETE FROM tableNameAndAlias (WHERE whereCondition)? (LIMIT rowCount=INT)?
+	: DELETE FROM tableNameAndAlias (WHERE whereCondition)? (LIMIT rowCount=(INT|PLACEHOLDER))?
 	;
 
 tableNameAndAlias
@@ -46,12 +46,17 @@ tableNameAndAlias
 	;
 
 whereCondition
-	: expression expressionSuffix?
+	: whereCondSub
+	| whereCondOp
+	| whereCondNot
 	;
 
+whereCondSub : '(' whereCondition ')' ;
+whereCondOp  : expression (expressionOperator=(AND | XOR | OR) whereCondition)? ;
+whereCondNot : (NOT | '!') whereCondition ;
+
 expression
-	: '(' expression ')'
-	| exprRelational
+	: exprRelational
 	| exprBetweenAnd
 	| exprIsOrIsNotNull
 	| exprInSelect
@@ -59,12 +64,12 @@ expression
 	| exprExists
 	;
 
-exprRelational    : element relationalOp=(EQ | LTH | GTH | NOT_EQ | LET | GET) element ;
-exprBetweenAnd    : element BETWEEN element AND element ;
+exprRelational    : el1=element relationalOp=(EQ | LTH | GTH | NOT_EQ | LET | GET) el2=element ;
+exprBetweenAnd    : el1=element BETWEEN el2=element AND el3=element ;
 exprIsOrIsNotNull : element IS (not=NOT)? NULL ;
 exprInSelect      : element IN '(' selectStat ')' ;
 exprInValues      : element IN '(' valueList ')' ;
-exprExists        : EXISTS '(' selectStat ')';
+exprExists        : (not=NOT)? EXISTS '(' selectStat ')';
 
 element
 	: palceHolder = PLACEHOLDER
@@ -74,14 +79,10 @@ element
 	| boolVal     = (TRUE | FALSE)
 	;
 
-expressionSuffix
-	: expressionOperator=(AND | XOR | OR | NOT) expression
-	;
-
 
 // ******* Lexer *******
 
-PLACEHOLDER : '?' ;
+PLACEHOLDER : '?' | (':' [a-zA-Z0-9_]+) ;
 INSERT      : [Ii][Nn][Ss][Ee][Rr][Tt];
 INTO        : [Ii][Nn][Tt][Oo] ;
 VALUES      : [Vv][Aa][Ll][Uu][Ee][Ss]? ;
@@ -99,7 +100,7 @@ EXISTS      : [Ee][Xx][Ii][Ss][Tt][Ss] ;
 ID          : ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) [a-zA-Z0-9_]*;
 INT         : '0' .. '9'+ ;
 DECIMAL     : ('+' | '-')? ((INT)|('.' INT)|(INT '.' INT)) ([Ee]('+' | '-')? INT)? ;
-STRING      : ['] ((~[`]) ([']['])?)* ['] ;
+STRING      : (['] ((~[']) ([']['])?)* [']) | (["] ((~["]) (["]["])?)* ["]) ;
 TRUE        : [Tt][Rr][Uu][Ee] ;
 FALSE       : [Ff][Aa][Ll][Ss] ;
 CULUMN_REL  : (ID '.')? ID ;
