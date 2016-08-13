@@ -4,7 +4,10 @@ import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLBaseVisitor;
 import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLParser;
 import net.yeah.zhouyou.mickey.mysql.tree.ColumnNamesNode;
 import net.yeah.zhouyou.mickey.mysql.tree.DeleteNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ElementNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ExpressionBetweenAndNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ExpressionRelationalNode;
 import net.yeah.zhouyou.mickey.mysql.tree.InsertNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SQLSyntaxTreeNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TableNameAndAliasNode;
@@ -12,7 +15,6 @@ import net.yeah.zhouyou.mickey.mysql.tree.ValueListNode;
 import net.yeah.zhouyou.mickey.mysql.tree.WhereConditionNode;
 import net.yeah.zhouyou.mickey.mysql.tree.WhereConditionOpNode;
 import net.yeah.zhouyou.mickey.mysql.tree.WhereConditionSubNode;
-
 
 public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 
@@ -76,6 +78,22 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 		String expressionOperator = ctx.expressionOperator != null ? ctx.expressionOperator.getText() : null;
 		WhereConditionNode whereCondition = ctx.expressionOperator != null ? (WhereConditionNode) this.visitWhereCondition(ctx.whereCondition()) : null;
 		return new WhereConditionOpNode(expression, expressionOperator, whereCondition);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitExprRelational(MySQLParser.ExprRelationalContext ctx) {
+		ElementNode left = (ElementNode) this.visitElement(ctx.left);
+		ElementNode right = (ElementNode) this.visitElement(ctx.right);
+		String relationalOp = ctx.relationalOp.getText();
+		return new ExpressionRelationalNode(left, right, relationalOp);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitExprBetweenAnd(MySQLParser.ExprBetweenAndContext ctx) {
+		ElementNode element = (ElementNode) this.visitElement(ctx.el);
+		ElementNode left = (ElementNode) this.visitElement(ctx.left);
+		ElementNode right = (ElementNode) this.visitElement(ctx.right);
+		return new ExpressionBetweenAndNode(element, left, right);
 	}
 
 }

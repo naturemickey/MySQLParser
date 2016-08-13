@@ -62,8 +62,8 @@ expression
 	| exprExists
 	;
 
-exprRelational    : el1=element relationalOp=(EQ | LTH | GTH | NOT_EQ | LET | GET) el2=element ;
-exprBetweenAnd    : el1=element BETWEEN el2=element AND el3=element ;
+exprRelational    : left=element relationalOp=(EQ | LTH | GTH | NOT_EQ | LET | GET) right=element ;
+exprBetweenAnd    : el=element BETWEEN left=element AND right=element ;
 exprIsOrIsNotNull : element IS (not=NOT)? NULL ;
 exprInSelect      : element IN '(' selectStat ')' ;
 exprInValues      : element IN '(' valueList ')' ;
@@ -71,7 +71,7 @@ exprExists        : (not=NOT)? EXISTS '(' selectStat ')';
 exprNot           : (NOT | '!') expression ;
 
 element
-	: palceHolder = PLACEHOLDER
+	: placeHolder = PLACEHOLDER
 	| columnRel   = CULUMN_REL
 	| numVal      = DECIMAL
 	| strVal      = STRING

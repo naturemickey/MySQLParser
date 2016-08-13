@@ -995,9 +995,9 @@ public class MySQLParser extends Parser {
 	}
 
 	public static class ExprRelationalContext extends ParserRuleContext {
-		public ElementContext el1;
+		public ElementContext left;
 		public Token relationalOp;
-		public ElementContext el2;
+		public ElementContext right;
 		public List<ElementContext> element() {
 			return getRuleContexts(ElementContext.class);
 		}
@@ -1037,7 +1037,7 @@ public class MySQLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(117);
-			((ExprRelationalContext)_localctx).el1 = element();
+			((ExprRelationalContext)_localctx).left = element();
 			setState(118);
 			((ExprRelationalContext)_localctx).relationalOp = _input.LT(1);
 			_la = _input.LA(1);
@@ -1047,7 +1047,7 @@ public class MySQLParser extends Parser {
 				consume();
 			}
 			setState(119);
-			((ExprRelationalContext)_localctx).el2 = element();
+			((ExprRelationalContext)_localctx).right = element();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1062,9 +1062,9 @@ public class MySQLParser extends Parser {
 	}
 
 	public static class ExprBetweenAndContext extends ParserRuleContext {
-		public ElementContext el1;
-		public ElementContext el2;
-		public ElementContext el3;
+		public ElementContext el;
+		public ElementContext left;
+		public ElementContext right;
 		public TerminalNode BETWEEN() { return getToken(MySQLParser.BETWEEN, 0); }
 		public TerminalNode AND() { return getToken(MySQLParser.AND, 0); }
 		public List<ElementContext> element() {
@@ -1099,15 +1099,15 @@ public class MySQLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(121);
-			((ExprBetweenAndContext)_localctx).el1 = element();
+			((ExprBetweenAndContext)_localctx).el = element();
 			setState(122);
 			match(BETWEEN);
 			setState(123);
-			((ExprBetweenAndContext)_localctx).el2 = element();
+			((ExprBetweenAndContext)_localctx).left = element();
 			setState(124);
 			match(AND);
 			setState(125);
-			((ExprBetweenAndContext)_localctx).el3 = element();
+			((ExprBetweenAndContext)_localctx).right = element();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1412,7 +1412,7 @@ public class MySQLParser extends Parser {
 	}
 
 	public static class ElementContext extends ParserRuleContext {
-		public Token palceHolder;
+		public Token placeHolder;
 		public Token columnRel;
 		public Token numVal;
 		public Token strVal;
@@ -1453,7 +1453,7 @@ public class MySQLParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(157);
-				((ElementContext)_localctx).palceHolder = match(PLACEHOLDER);
+				((ElementContext)_localctx).placeHolder = match(PLACEHOLDER);
 				}
 				break;
 			case CULUMN_REL:
