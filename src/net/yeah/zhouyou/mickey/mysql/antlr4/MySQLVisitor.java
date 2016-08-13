@@ -76,4 +76,58 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitWhereCondition(MySQLParser.WhereConditionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpression(MySQLParser.ExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#exprRelational}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprRelational(MySQLParser.ExprRelationalContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#exprBetweenAnd}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprBetweenAnd(MySQLParser.ExprBetweenAndContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#exprIsOrIsNotNull}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprIsOrIsNotNull(MySQLParser.ExprIsOrIsNotNullContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#exprInSelect}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprInSelect(MySQLParser.ExprInSelectContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#exprInValues}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprInValues(MySQLParser.ExprInValuesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#exprExists}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprExists(MySQLParser.ExprExistsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#element}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElement(MySQLParser.ElementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#expressionSuffix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpressionSuffix(MySQLParser.ExpressionSuffixContext ctx);
 }

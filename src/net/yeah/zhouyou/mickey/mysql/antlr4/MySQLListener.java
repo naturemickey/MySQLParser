@@ -117,4 +117,94 @@ public interface MySQLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitWhereCondition(MySQLParser.WhereConditionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpression(MySQLParser.ExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpression(MySQLParser.ExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#exprRelational}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprRelational(MySQLParser.ExprRelationalContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#exprRelational}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprRelational(MySQLParser.ExprRelationalContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#exprBetweenAnd}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprBetweenAnd(MySQLParser.ExprBetweenAndContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#exprBetweenAnd}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprBetweenAnd(MySQLParser.ExprBetweenAndContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#exprIsOrIsNotNull}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprIsOrIsNotNull(MySQLParser.ExprIsOrIsNotNullContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#exprIsOrIsNotNull}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprIsOrIsNotNull(MySQLParser.ExprIsOrIsNotNullContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#exprInSelect}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprInSelect(MySQLParser.ExprInSelectContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#exprInSelect}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprInSelect(MySQLParser.ExprInSelectContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#exprInValues}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprInValues(MySQLParser.ExprInValuesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#exprInValues}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprInValues(MySQLParser.ExprInValuesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#exprExists}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprExists(MySQLParser.ExprExistsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#exprExists}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprExists(MySQLParser.ExprExistsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#element}.
+	 * @param ctx the parse tree
+	 */
+	void enterElement(MySQLParser.ElementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#element}.
+	 * @param ctx the parse tree
+	 */
+	void exitElement(MySQLParser.ElementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#expressionSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpressionSuffix(MySQLParser.ExpressionSuffixContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#expressionSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpressionSuffix(MySQLParser.ExpressionSuffixContext ctx);
 }
