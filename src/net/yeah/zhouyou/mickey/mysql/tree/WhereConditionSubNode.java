@@ -10,6 +10,6 @@ public class WhereConditionSubNode extends WhereConditionNode {
 
 	@Override
 	public String toString() {
-		return "NOT " + whereCondition;
+		return "(" + whereCondition +")";
 	}
 }
