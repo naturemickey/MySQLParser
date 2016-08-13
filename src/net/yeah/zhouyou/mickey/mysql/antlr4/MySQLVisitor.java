@@ -89,12 +89,6 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWhereCondOp(MySQLParser.WhereCondOpContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MySQLParser#whereCondNot}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWhereCondNot(MySQLParser.WhereCondNotContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MySQLParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -136,6 +130,12 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExprExists(MySQLParser.ExprExistsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#exprNot}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprNot(MySQLParser.ExprNotContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MySQLParser#element}.
 	 * @param ctx the parse tree

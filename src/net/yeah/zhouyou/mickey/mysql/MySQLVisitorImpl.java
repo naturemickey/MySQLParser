@@ -10,7 +10,6 @@ import net.yeah.zhouyou.mickey.mysql.tree.SQLSyntaxTreeNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TableNameAndAliasNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ValueListNode;
 import net.yeah.zhouyou.mickey.mysql.tree.WhereConditionNode;
-import net.yeah.zhouyou.mickey.mysql.tree.WhereConditionNotNode;
 import net.yeah.zhouyou.mickey.mysql.tree.WhereConditionOpNode;
 import net.yeah.zhouyou.mickey.mysql.tree.WhereConditionSubNode;
 
@@ -79,8 +78,4 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 		return new WhereConditionOpNode(expression, expressionOperator, whereCondition);
 	}
 
-	@Override
-	public SQLSyntaxTreeNode visitWhereCondNot(MySQLParser.WhereCondNotContext ctx) {
-		return new WhereConditionNotNode((WhereConditionNode) this.visitWhereCondition(ctx.whereCondition()));
-	}
 }

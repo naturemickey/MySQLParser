@@ -138,16 +138,6 @@ public interface MySQLListener extends ParseTreeListener {
 	 */
 	void exitWhereCondOp(MySQLParser.WhereCondOpContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MySQLParser#whereCondNot}.
-	 * @param ctx the parse tree
-	 */
-	void enterWhereCondNot(MySQLParser.WhereCondNotContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MySQLParser#whereCondNot}.
-	 * @param ctx the parse tree
-	 */
-	void exitWhereCondNot(MySQLParser.WhereCondNotContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MySQLParser#expression}.
 	 * @param ctx the parse tree
 	 */
@@ -217,6 +207,16 @@ public interface MySQLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExprExists(MySQLParser.ExprExistsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#exprNot}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprNot(MySQLParser.ExprNotContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#exprNot}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprNot(MySQLParser.ExprNotContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MySQLParser#element}.
 	 * @param ctx the parse tree

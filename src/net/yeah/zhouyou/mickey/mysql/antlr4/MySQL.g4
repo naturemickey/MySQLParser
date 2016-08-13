@@ -48,12 +48,10 @@ tableNameAndAlias
 whereCondition
 	: whereCondSub
 	| whereCondOp
-	| whereCondNot
 	;
 
 whereCondSub : '(' whereCondition ')' ;
 whereCondOp  : expression (expressionOperator=(AND | XOR | OR) whereCondition)? ;
-whereCondNot : (NOT | '!') whereCondition ;
 
 expression
 	: exprRelational
@@ -70,6 +68,7 @@ exprIsOrIsNotNull : element IS (not=NOT)? NULL ;
 exprInSelect      : element IN '(' selectStat ')' ;
 exprInValues      : element IN '(' valueList ')' ;
 exprExists        : (not=NOT)? EXISTS '(' selectStat ')';
+exprNot           : (NOT | '!') expression ;
 
 element
 	: palceHolder = PLACEHOLDER
