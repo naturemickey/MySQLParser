@@ -61,17 +61,14 @@ public class MySQLParserUtils {
 			node = processInsert(node, version);
 		} else if (node instanceof DeleteNode) {
 			node = processDelete(node, version);
-		} else {
-			return node;
 		}
 
 		for (Field f : node.getClass().getDeclaredFields()) {
 			f.setAccessible(true);
 			try {
 				Object o = f.get(node);
-				if (o instanceof SelectNode || o instanceof UpdateNode || o instanceof InsertNode || o instanceof DeleteNode) {
+				if (o instanceof SQLSyntaxTreeNode)
 					addColumn((SQLSyntaxTreeNode) o, version);
-				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
 			}

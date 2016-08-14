@@ -64,11 +64,11 @@ tableJoinSuffix
 	: tableJoinMod JOIN tableNameAndAlias joinCondition tableJoinSuffix?
 	;
 tableJoinMod
-	: (INNER | CROSS | (LEFT OUTER?) | (RIGHT OUTER?))
+	: INNER | CROSS | LEFT OUTER? | RIGHT OUTER?
 	;
 joinCondition
 	: ON whereCondition
-	| USING columnNames
+	| USING '(' columnNames ')'
 	;
 
 gbobExprs      : element sc=(ASC | DESC)? gbobExprSuffix? ;
@@ -128,7 +128,7 @@ exprExists        : (not=NOT)? EXISTS '(' selectStat ')';
 exprNot           : (NOT | '!') expression ;
 
 element
-	: txt=('*' | PLACEHOLDER | COLUMN_REL | DECIMAL | STRING | ID | TRUE | FALSE)
+	: txt=('*' | PLACEHOLDER | COLUMN_REL | DECIMAL | STRING | ID | TRUE | FALSE | INT | DECIMAL)
 	| funCall
 	| '(' selectStat ')'
 	;

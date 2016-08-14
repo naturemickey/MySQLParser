@@ -1,5 +1,7 @@
 package net.yeah.zhouyou.mickey.mysql;
 
+import java.util.stream.Collectors;
+
 import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLBaseVisitor;
 import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLParser;
 import net.yeah.zhouyou.mickey.mysql.tree.ColumnNamesNode;
@@ -332,7 +334,7 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 
 	@Override
 	public SQLSyntaxTreeNode visitTableJoinSuffix(MySQLParser.TableJoinSuffixContext ctx) {
-		String tableJoinMod = ctx.tableJoinMod().getText();
+		String tableJoinMod = ctx.tableJoinMod().children.stream().map(a -> a.getText()).collect(Collectors.joining(" "));
 		TableNameAndAliasNode table = (TableNameAndAliasNode) this.visitTableNameAndAlias(ctx.tableNameAndAlias());
 		JoinConditionNode condition = (JoinConditionNode) this.visitJoinCondition(ctx.joinCondition());
 		TableJoinSuffixNode suffix = ctx.tableJoinSuffix() == null ? null : (TableJoinSuffixNode) this.visitTableJoinSuffix(ctx.tableJoinSuffix());
