@@ -15,21 +15,11 @@ insertStat
 	: INSERT INTO? tableName=ID '(' columnNames ')' VALUES '(' valueList ')'
 	;
 
-columnNames
-	: name=ID columnNamesSuffix?
-	;
+columnNames       : name=ID columnNamesSuffix? ;
+columnNamesSuffix : ',' columnNames ;
 
-columnNamesSuffix
-	: ',' columnNames
-	;
-
-valueList
-	: name=(PLACEHOLDER | ID | STRING | NULL) valueListSuffix?
-	;
-
-valueListSuffix
-	: ',' valueList
-	;
+valueList       : name=(PLACEHOLDER | ID | STRING | NULL) valueListSuffix? ;
+valueListSuffix : ',' valueList ;
 
 selectStat
 	: SELECT (distinct=DISTINCT)? selectExprs 
@@ -54,14 +44,12 @@ tableSuffix
 	;
 
 tableRel
-	: tableFactor
-	| tableJoin
-	;
-
-tableFactor
+	// --- table factor ---
 	: tableNameAndAlias
 	| tableSubQuery
 	| tableRecu
+	// --- join table ---
+	| tableJoin
 	;
 
 tableSubQuery : '(' selectStat ')' AS? alias=ID ;

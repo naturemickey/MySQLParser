@@ -1,6 +1,6 @@
 package net.yeah.zhouyou.mickey.mysql.tree;
 
-public class TableNameAndAliasNode extends SQLSyntaxTreeNode {
+public class TableNameAndAliasNode extends TableRelNode {
 
 	private String name;
 	private String alias;

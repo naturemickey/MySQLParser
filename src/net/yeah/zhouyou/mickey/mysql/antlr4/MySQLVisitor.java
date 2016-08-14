@@ -83,12 +83,6 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTableRel(MySQLParser.TableRelContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MySQLParser#tableFactor}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTableFactor(MySQLParser.TableFactorContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MySQLParser#tableSubQuery}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

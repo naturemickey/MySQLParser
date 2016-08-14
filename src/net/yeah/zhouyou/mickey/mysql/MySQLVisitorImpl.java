@@ -24,6 +24,9 @@ import net.yeah.zhouyou.mickey.mysql.tree.SetExprNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SetExprsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TableNameAndAliasNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TableNameAndAliasesNode;
+import net.yeah.zhouyou.mickey.mysql.tree.TableRecuNode;
+import net.yeah.zhouyou.mickey.mysql.tree.TableRelNode;
+import net.yeah.zhouyou.mickey.mysql.tree.TableSubQueryNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TablesNode;
 import net.yeah.zhouyou.mickey.mysql.tree.UpdateMultipleTableNode;
 import net.yeah.zhouyou.mickey.mysql.tree.UpdateSignleTableNode;
@@ -290,32 +293,27 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 
 	@Override
 	public SQLSyntaxTreeNode visitTables(MySQLParser.TablesContext ctx) {
-		return visitChildren(ctx);
+		TableRelNode tableRel = (TableRelNode) this.visitTableRel(ctx.tableRel());
+		TablesNode suffix = ctx.tableSuffix() != null ? (TablesNode) this.visitTableSuffix(ctx.tableSuffix()) : null;
+		return new TablesNode(tableRel, suffix);
 	}
 
 	@Override
 	public SQLSyntaxTreeNode visitTableSuffix(MySQLParser.TableSuffixContext ctx) {
-		return visitChildren(ctx);
-	}
-
-	@Override
-	public SQLSyntaxTreeNode visitTableRel(MySQLParser.TableRelContext ctx) {
-		return visitChildren(ctx);
-	}
-
-	@Override
-	public SQLSyntaxTreeNode visitTableFactor(MySQLParser.TableFactorContext ctx) {
-		return visitChildren(ctx);
+		return this.visitTables(ctx.tables());
 	}
 
 	@Override
 	public SQLSyntaxTreeNode visitTableSubQuery(MySQLParser.TableSubQueryContext ctx) {
-		return visitChildren(ctx);
+		SelectNode select = (SelectNode) this.visitSelectStat(ctx.selectStat());
+		String alias = ctx.alias.getText();
+		return new TableSubQueryNode(select, alias);
 	}
 
 	@Override
 	public SQLSyntaxTreeNode visitTableRecu(MySQLParser.TableRecuContext ctx) {
-		return visitChildren(ctx);
+		TableRelNode tableRel = (TableRelNode) this.visitTableRel(ctx.tableRel());
+		return new TableRecuNode(tableRel);
 	}
 
 }
