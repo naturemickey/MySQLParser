@@ -1,5 +1,8 @@
 package net.yeah.zhouyou.mickey.mysql.tree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TableNameAndAliasesNode extends SQLSyntaxTreeNode {
 
 	private TableNameAndAliasNode tableNameAndAlias;
@@ -17,6 +20,15 @@ public class TableNameAndAliasesNode extends SQLSyntaxTreeNode {
 		} else {
 			return this.tableNameAndAlias.toString() + ", " + suffix;
 		}
+	}
+
+	public List<TableNameAndAliasNode> all() {
+		List<TableNameAndAliasNode> res = new ArrayList<>();
+		res.add(this.tableNameAndAlias);
+		if (this.suffix != null) {
+			res.addAll(this.suffix.all());
+		}
+		return res;
 	}
 
 }

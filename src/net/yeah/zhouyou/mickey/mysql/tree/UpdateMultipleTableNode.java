@@ -22,4 +22,29 @@ public class UpdateMultipleTableNode extends SQLSyntaxTreeNode {
 
 		return sb.toString();
 	}
+
+	public TableNameAndAliasesNode getTableNameAndAliases() {
+		return tableNameAndAliases;
+	}
+
+	public void setTableNameAndAliases(TableNameAndAliasesNode tableNameAndAliases) {
+		this.tableNameAndAliases = tableNameAndAliases;
+	}
+
+	public SetExprsNode getSetExprs() {
+		return setExprs;
+	}
+
+	public void setSetExprs(SetExprsNode setExprs) {
+		this.setExprs = setExprs;
+	}
+
+	public WhereConditionNode getWhereCondition() {
+		return whereCondition;
+	}
+
+	public void setWhereCondition(WhereConditionNode whereCondition) {
+		this.whereCondition = whereCondition;
+	}
+
 }
