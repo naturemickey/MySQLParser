@@ -1,6 +1,6 @@
 package net.yeah.zhouyou.mickey.mysql.tree;
 
-public class UpdateMultipleTableNode extends SQLSyntaxTreeNode {
+public class UpdateMultipleTableNode extends UpdateNode {
 
 	private TableNameAndAliasesNode tableNameAndAliases;
 	private SetExprsNode setExprs;

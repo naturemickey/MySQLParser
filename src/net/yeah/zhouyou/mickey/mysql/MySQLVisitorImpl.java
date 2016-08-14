@@ -105,7 +105,11 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 
 	@Override
 	public SQLSyntaxTreeNode visitWhereCondSub(MySQLParser.WhereCondSubContext ctx) {
-		return new WhereConditionSubNode((WhereConditionNode) this.visitWhereCondition(ctx.whereCondition()));
+		WhereConditionNode wc1 = (WhereConditionNode) this.visitWhereCondition(ctx.wc1);
+		String expressionOperator = ctx.expressionOperator != null ? ctx.expressionOperator.getText() : null;
+		WhereConditionNode wc2 = ctx.expressionOperator != null ? (WhereConditionNode) this.visitWhereCondition(ctx.wc2) : null;
+
+		return new WhereConditionSubNode(wc1, expressionOperator, wc2);
 	}
 
 	@Override
@@ -228,7 +232,7 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 	@Override
 	public SQLSyntaxTreeNode visitParamList(MySQLParser.ParamListContext ctx) {
 		ElementNode param = (ElementNode) this.visitElement(ctx.param);
-		ParamListNode suffix = (ParamListNode) this.visitParamSuffix(ctx.paramSuffix());
+		ParamListNode suffix = ctx.paramSuffix() == null ? null :(ParamListNode) this.visitParamSuffix(ctx.paramSuffix());
 		return new ParamListNode(param, suffix);
 	}
 

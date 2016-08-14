@@ -107,7 +107,7 @@ whereCondition
 	| whereCondOp
 	;
 
-whereCondSub : '(' whereCondition ')' ;
+whereCondSub : '(' wc1=whereCondition ')' (expressionOperator=(AND | XOR | OR) wc2=whereCondition)?;
 whereCondOp  : expression (expressionOperator=(AND | XOR | OR) whereCondition)? ;
 
 expression
