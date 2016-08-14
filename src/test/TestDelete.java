@@ -22,7 +22,8 @@ public class TestDelete {
 	public static void main(String[] args) throws Exception {
 
 		for (String sql : new String[] { "delete from tt_order_status where id = ?", "delete from tt_order_status t where t.id = ?",
-				"delete from tt_order_status t" }) {
+				"delete from tt_order_status t",
+				"delete from tt_order_status lImIt 9"}) {
 			fun(sql);
 		}
 
@@ -45,7 +46,7 @@ public class TestDelete {
 			WhereConditionNode wc = delete.getWhereCondition();
 
 			ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementNode(alias == null ? "data_env_version" : alias + '.' + "data_env_version"),
-					new ElementNode("'v1'"), "=");
+					new ElementNode("'v1'"), "<=");
 			WhereConditionNode newWc = null;
 			if (wc == null) {
 				newWc = new WhereConditionOpNode(ern, null, null);

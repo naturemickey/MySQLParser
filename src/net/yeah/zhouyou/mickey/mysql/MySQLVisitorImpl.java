@@ -16,7 +16,12 @@ import net.yeah.zhouyou.mickey.mysql.tree.ExpressionRelationalNode;
 import net.yeah.zhouyou.mickey.mysql.tree.InsertNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SQLSyntaxTreeNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SelectNode;
+import net.yeah.zhouyou.mickey.mysql.tree.SetExprNode;
+import net.yeah.zhouyou.mickey.mysql.tree.SetExprsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TableNameAndAliasNode;
+import net.yeah.zhouyou.mickey.mysql.tree.TableNameAndAliasesNode;
+import net.yeah.zhouyou.mickey.mysql.tree.UpdateMultipleTableNode;
+import net.yeah.zhouyou.mickey.mysql.tree.UpdateSignleTableNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ValueListNode;
 import net.yeah.zhouyou.mickey.mysql.tree.WhereConditionNode;
 import net.yeah.zhouyou.mickey.mysql.tree.WhereConditionOpNode;
@@ -71,6 +76,20 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 	@Override
 	public SQLSyntaxTreeNode visitTableNameAndAlias(MySQLParser.TableNameAndAliasContext ctx) {
 		return new TableNameAndAliasNode(ctx.name.getText(), ctx.alias == null ? null : ctx.alias.getText());
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitTableNameAndAliases(MySQLParser.TableNameAndAliasesContext ctx) {
+		TableNameAndAliasNode tableNameAndAlias = (TableNameAndAliasNode) this.visitTableNameAndAlias(ctx.tableNameAndAlias());
+		TableNameAndAliasesNode suffix = ctx.tableNameAndAliasSuffix() != null
+				? (TableNameAndAliasesNode) this.visitTableNameAndAliasSuffix(ctx.tableNameAndAliasSuffix()) : null;
+
+		return new TableNameAndAliasesNode(tableNameAndAlias, suffix);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitTableNameAndAliasSuffix(MySQLParser.TableNameAndAliasSuffixContext ctx) {
+		return this.visitTableNameAndAliases(ctx.tableNameAndAliases());
 	}
 
 	@Override
@@ -138,6 +157,42 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 	@Override
 	public SQLSyntaxTreeNode visitElement(MySQLParser.ElementContext ctx) {
 		return new ElementNode(ctx.getChild(0).getText());
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitSetExprs(MySQLParser.SetExprsContext ctx) {
+		SetExprNode setExpr = (SetExprNode) this.visitSetExpr(ctx.setExpr());
+		SetExprsNode suffix = ctx.setExprSuffix() != null ? (SetExprsNode) this.visitSetExprSuffix(ctx.setExprSuffix()) : null;
+		return new SetExprsNode(setExpr, suffix);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitSetExprSuffix(MySQLParser.SetExprSuffixContext ctx) {
+		return this.visitSetExprs(ctx.setExprs());
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitSetExpr(MySQLParser.SetExprContext ctx) {
+		ElementNode left = (ElementNode) this.visitElement(ctx.left);
+		ElementNode right = ctx.right != null ? (ElementNode) this.visitElement(ctx.right) : null;
+		return new SetExprNode(left, right);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitUpdateSingleTable(MySQLParser.UpdateSingleTableContext ctx) {
+		TableNameAndAliasNode tableNameAndAlias = (TableNameAndAliasNode) this.visitTableNameAndAlias(ctx.tableNameAndAlias());
+		SetExprsNode setExprs = (SetExprsNode) this.visitSetExprs(ctx.setExprs());
+		WhereConditionNode whereCondition = ctx.whereCondition() != null ? (WhereConditionNode) this.visitWhereCondition(ctx.whereCondition()) : null;
+		String rowCount = ctx.rowCount != null ? ctx.rowCount.getText() : null;
+		return new UpdateSignleTableNode(tableNameAndAlias, setExprs, whereCondition, rowCount);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitUpdateMultipleTable(MySQLParser.UpdateMultipleTableContext ctx) {
+		TableNameAndAliasesNode tableNameAndAliases = (TableNameAndAliasesNode) this.visitTableNameAndAliases(ctx.tableNameAndAliases());
+		SetExprsNode setExprs = (SetExprsNode) this.visitSetExprs(ctx.setExprs());
+		WhereConditionNode whereCondition = ctx.whereCondition() != null ? (WhereConditionNode) this.visitWhereCondition(ctx.whereCondition()) : null;
+		return new UpdateMultipleTableNode(tableNameAndAliases, setExprs, whereCondition);
 	}
 
 }

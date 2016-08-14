@@ -19,8 +19,8 @@ public class MySQLParser extends Parser {
 	public static final int
 		T__0=1, PLACEHOLDER=2, INSERT=3, INTO=4, VALUES=5, DELETE=6, FROM=7, WHERE=8, 
 		LIMIT=9, NULL=10, IS=11, NOT=12, IN=13, BETWEEN=14, AND=15, EXISTS=16, 
-		ID=17, INT=18, DECIMAL=19, STRING=20, TRUE=21, FALSE=22, COLUMN_REL=23, 
-		OR=24, XOR=25, DEFAULT=26, UPDATE=27, SET=28, SELECT=29, LIKE=30, ALL=31, 
+		TRUE=17, FALSE=18, OR=19, XOR=20, DEFAULT=21, UPDATE=22, SET=23, INT=24, 
+		DECIMAL=25, STRING=26, ID=27, COLUMN_REL=28, SELECT=29, LIKE=30, ALL=31, 
 		ANY=32, DIVIDE=33, MOD=34, REGEXP=35, PLUS=36, MINUS=37, NEGATION=38, 
 		VERTBAR=39, BITAND=40, POWER_OP=41, BINARY=42, SHIFT_LEFT=43, SHIFT_RIGHT=44, 
 		ESCAPE=45, ASTERISK=46, RPAREN=47, LPAREN=48, RBRACK=49, LBRACK=50, COLON=51, 
@@ -61,8 +61,8 @@ public class MySQLParser extends Parser {
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, "PLACEHOLDER", "INSERT", "INTO", "VALUES", "DELETE", "FROM", 
 		"WHERE", "LIMIT", "NULL", "IS", "NOT", "IN", "BETWEEN", "AND", "EXISTS", 
-		"ID", "INT", "DECIMAL", "STRING", "TRUE", "FALSE", "COLUMN_REL", "OR", 
-		"XOR", "DEFAULT", "UPDATE", "SET", "SELECT", "LIKE", "ALL", "ANY", "DIVIDE", 
+		"TRUE", "FALSE", "OR", "XOR", "DEFAULT", "UPDATE", "SET", "INT", "DECIMAL", 
+		"STRING", "ID", "COLUMN_REL", "SELECT", "LIKE", "ALL", "ANY", "DIVIDE", 
 		"MOD", "REGEXP", "PLUS", "MINUS", "NEGATION", "VERTBAR", "BITAND", "POWER_OP", 
 		"BINARY", "SHIFT_LEFT", "SHIFT_RIGHT", "ESCAPE", "ASTERISK", "RPAREN", 
 		"LPAREN", "RBRACK", "LBRACK", "COLON", "ALL_FIELDS", "EQ", "LTH", "GTH", 
@@ -419,7 +419,7 @@ public class MySQLParser extends Parser {
 			setState(84);
 			((ValueListContext)_localctx).name = _input.LT(1);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << PLACEHOLDER) | (1L << NULL) | (1L << ID) | (1L << STRING))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << PLACEHOLDER) | (1L << NULL) | (1L << STRING) | (1L << ID))) != 0)) ) {
 				((ValueListContext)_localctx).name = (Token)_errHandler.recoverInline(this);
 			} else {
 				consume();
@@ -858,7 +858,9 @@ public class MySQLParser extends Parser {
 	}
 
 	public static class SetExprContext extends ParserRuleContext {
-		public Token dflt;
+		public ElementContext left;
+		public ElementContext right;
+		public Token rightDefault;
 		public List<ElementContext> element() {
 			return getRuleContexts(ElementContext.class);
 		}
@@ -892,27 +894,27 @@ public class MySQLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(124);
-			element();
+			((SetExprContext)_localctx).left = element();
 			setState(125);
 			match(EQ);
 			setState(128);
 			switch (_input.LA(1)) {
 			case PLACEHOLDER:
-			case ID:
-			case DECIMAL:
-			case STRING:
 			case TRUE:
 			case FALSE:
+			case DECIMAL:
+			case STRING:
+			case ID:
 			case COLUMN_REL:
 				{
 				setState(126);
-				element();
+				((SetExprContext)_localctx).right = element();
 				}
 				break;
 			case DEFAULT:
 				{
 				setState(127);
-				((SetExprContext)_localctx).dflt = match(DEFAULT);
+				((SetExprContext)_localctx).rightDefault = match(DEFAULT);
 				}
 				break;
 			default:
@@ -1220,11 +1222,11 @@ public class MySQLParser extends Parser {
 			case PLACEHOLDER:
 			case NOT:
 			case EXISTS:
-			case ID:
-			case DECIMAL:
-			case STRING:
 			case TRUE:
 			case FALSE:
+			case DECIMAL:
+			case STRING:
+			case ID:
 			case COLUMN_REL:
 				enterOuterAlt(_localctx, 2);
 				{
@@ -1917,7 +1919,7 @@ public class MySQLParser extends Parser {
 			{
 			setState(213);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << PLACEHOLDER) | (1L << ID) | (1L << DECIMAL) | (1L << STRING) | (1L << TRUE) | (1L << FALSE) | (1L << COLUMN_REL))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << PLACEHOLDER) | (1L << TRUE) | (1L << FALSE) | (1L << DECIMAL) | (1L << STRING) | (1L << ID) | (1L << COLUMN_REL))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			} else {
 				consume();
@@ -1953,32 +1955,32 @@ public class MySQLParser extends Parser {
 		"\n\31\3\31\3\31\3\32\3\32\3\32\3\32\3\32\3\32\3\33\3\33\3\33\3\33\3\33"+
 		"\3\33\3\34\5\34\u00ce\n\34\3\34\3\34\3\34\3\34\3\34\3\35\3\35\3\35\3\36"+
 		"\3\36\3\36\2\2\37\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62"+
-		"\64\668:\2\b\6\2\4\4\f\f\23\23\26\26\4\2\4\4\24\24\4\2\21\21\32\33\3\2"+
-		"\67<\4\2\3\3\16\16\5\2\4\4\23\23\25\31\u00d5\2@\3\2\2\2\4B\3\2\2\2\6O"+
-		"\3\2\2\2\bS\3\2\2\2\nV\3\2\2\2\fZ\3\2\2\2\16]\3\2\2\2\20a\3\2\2\2\22c"+
-		"\3\2\2\2\24o\3\2\2\2\26w\3\2\2\2\30{\3\2\2\2\32~\3\2\2\2\34\u0084\3\2"+
-		"\2\2\36\u008f\3\2\2\2 \u0093\3\2\2\2\"\u0097\3\2\2\2$\u009c\3\2\2\2&\u009e"+
-		"\3\2\2\2(\u00a2\3\2\2\2*\u00ad\3\2\2\2,\u00af\3\2\2\2.\u00b3\3\2\2\2\60"+
+		"\64\668:\2\b\5\2\4\4\f\f\34\35\4\2\4\4\32\32\4\2\21\21\25\26\3\2\67<\4"+
+		"\2\3\3\16\16\5\2\4\4\23\24\33\36\u00d5\2@\3\2\2\2\4B\3\2\2\2\6O\3\2\2"+
+		"\2\bS\3\2\2\2\nV\3\2\2\2\fZ\3\2\2\2\16]\3\2\2\2\20a\3\2\2\2\22c\3\2\2"+
+		"\2\24o\3\2\2\2\26w\3\2\2\2\30{\3\2\2\2\32~\3\2\2\2\34\u0084\3\2\2\2\36"+
+		"\u008f\3\2\2\2 \u0093\3\2\2\2\"\u0097\3\2\2\2$\u009c\3\2\2\2&\u009e\3"+
+		"\2\2\2(\u00a2\3\2\2\2*\u00ad\3\2\2\2,\u00af\3\2\2\2.\u00b3\3\2\2\2\60"+
 		"\u00b9\3\2\2\2\62\u00c0\3\2\2\2\64\u00c6\3\2\2\2\66\u00cd\3\2\2\28\u00d4"+
 		"\3\2\2\2:\u00d7\3\2\2\2<A\5\4\3\2=A\5\20\t\2>A\5\34\17\2?A\5\16\b\2@<"+
 		"\3\2\2\2@=\3\2\2\2@>\3\2\2\2@?\3\2\2\2A\3\3\2\2\2BD\7\5\2\2CE\7\6\2\2"+
-		"DC\3\2\2\2DE\3\2\2\2EF\3\2\2\2FG\7\23\2\2GH\7\62\2\2HI\5\6\4\2IJ\7\61"+
-		"\2\2JK\7\7\2\2KL\7\62\2\2LM\5\n\6\2MN\7\61\2\2N\5\3\2\2\2OQ\7\23\2\2P"+
+		"DC\3\2\2\2DE\3\2\2\2EF\3\2\2\2FG\7\35\2\2GH\7\62\2\2HI\5\6\4\2IJ\7\61"+
+		"\2\2JK\7\7\2\2KL\7\62\2\2LM\5\n\6\2MN\7\61\2\2N\5\3\2\2\2OQ\7\35\2\2P"+
 		"R\5\b\5\2QP\3\2\2\2QR\3\2\2\2R\7\3\2\2\2ST\7>\2\2TU\5\6\4\2U\t\3\2\2\2"+
 		"VX\t\2\2\2WY\5\f\7\2XW\3\2\2\2XY\3\2\2\2Y\13\3\2\2\2Z[\7>\2\2[\\\5\n\6"+
 		"\2\\\r\3\2\2\2]^\3\2\2\2^\17\3\2\2\2_b\5\22\n\2`b\5\24\13\2a_\3\2\2\2"+
-		"a`\3\2\2\2b\21\3\2\2\2cd\7\35\2\2de\5\36\20\2ef\7\36\2\2fi\5\26\f\2gh"+
+		"a`\3\2\2\2b\21\3\2\2\2cd\7\30\2\2de\5\36\20\2ef\7\31\2\2fi\5\26\f\2gh"+
 		"\7\n\2\2hj\5$\23\2ig\3\2\2\2ij\3\2\2\2jm\3\2\2\2kl\7\13\2\2ln\t\3\2\2"+
-		"mk\3\2\2\2mn\3\2\2\2n\23\3\2\2\2op\7\35\2\2pq\5 \21\2qr\7\36\2\2ru\5\26"+
+		"mk\3\2\2\2mn\3\2\2\2n\23\3\2\2\2op\7\30\2\2pq\5 \21\2qr\7\31\2\2ru\5\26"+
 		"\f\2st\7\n\2\2tv\5$\23\2us\3\2\2\2uv\3\2\2\2v\25\3\2\2\2wy\5\32\16\2x"+
 		"z\5\30\r\2yx\3\2\2\2yz\3\2\2\2z\27\3\2\2\2{|\7>\2\2|}\5\26\f\2}\31\3\2"+
 		"\2\2~\177\5:\36\2\177\u0082\7\67\2\2\u0080\u0083\5:\36\2\u0081\u0083\7"+
-		"\34\2\2\u0082\u0080\3\2\2\2\u0082\u0081\3\2\2\2\u0083\33\3\2\2\2\u0084"+
+		"\27\2\2\u0082\u0080\3\2\2\2\u0082\u0081\3\2\2\2\u0083\33\3\2\2\2\u0084"+
 		"\u0085\7\b\2\2\u0085\u0086\7\t\2\2\u0086\u0089\5\36\20\2\u0087\u0088\7"+
 		"\n\2\2\u0088\u008a\5$\23\2\u0089\u0087\3\2\2\2\u0089\u008a\3\2\2\2\u008a"+
 		"\u008d\3\2\2\2\u008b\u008c\7\13\2\2\u008c\u008e\t\3\2\2\u008d\u008b\3"+
-		"\2\2\2\u008d\u008e\3\2\2\2\u008e\35\3\2\2\2\u008f\u0091\7\23\2\2\u0090"+
-		"\u0092\7\23\2\2\u0091\u0090\3\2\2\2\u0091\u0092\3\2\2\2\u0092\37\3\2\2"+
+		"\2\2\2\u008d\u008e\3\2\2\2\u008e\35\3\2\2\2\u008f\u0091\7\35\2\2\u0090"+
+		"\u0092\7\35\2\2\u0091\u0090\3\2\2\2\u0091\u0092\3\2\2\2\u0092\37\3\2\2"+
 		"\2\u0093\u0095\5\36\20\2\u0094\u0096\5\"\22\2\u0095\u0094\3\2\2\2\u0095"+
 		"\u0096\3\2\2\2\u0096!\3\2\2\2\u0097\u0098\7>\2\2\u0098\u0099\5 \21\2\u0099"+
 		"#\3\2\2\2\u009a\u009d\5&\24\2\u009b\u009d\5(\25\2\u009c\u009a\3\2\2\2"+

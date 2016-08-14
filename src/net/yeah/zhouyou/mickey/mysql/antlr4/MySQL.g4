@@ -50,7 +50,7 @@ setExprSuffix
 	;
 
 setExpr
-	: element '=' (element | dflt=DEFAULT)
+	: left=element '=' (right=element | rightDefault=DEFAULT)
 	;
 
 deleteStat
@@ -122,18 +122,20 @@ IN          : [Ii][Nn] ;
 BETWEEN     : [Bb][Ee][Tt][Ww][Ee][Ee][Nn] ;
 AND         : [Aa][Nn][Dd] | '&&' ;
 EXISTS      : [Ee][Xx][Ii][Ss][Tt][Ss] ;
-ID          : ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) [a-zA-Z0-9_]*;
-INT         : '0' .. '9'+ ;
-DECIMAL     : ('+' | '-')? ((INT)|('.' INT)|(INT '.' INT)) ([Ee]('+' | '-')? INT)? ;
-STRING      : (['] ((~[']) ([']['])?)* [']) | (["] ((~["]) (["]["])?)* ["]) ;
 TRUE        : [Tt][Rr][Uu][Ee] ;
 FALSE       : [Ff][Aa][Ll][Ss] ;
-COLUMN_REL  : ID '.' ID ;
 OR          : ([Oo][Rr]) | '||' ;
 XOR         : [Xx][Oo][Rr] ;
 DEFAULT     : [Dd][Ee][Ff][Aa][Uu][Ll][Tt] ;
 UPDATE      : [Uu][Pp][Dd][Aa][Tt][Ee] ;
 SET         : [Ss][Ee][Tt] ;
+
+INT         : '0' .. '9'+ ;
+DECIMAL     : ('+' | '-')? ((INT)|('.' INT)|(INT '.' INT)) ([Ee]('+' | '-')? INT)? ;
+STRING      : (['] ((~[']) ([']['])?)* [']) | (["] ((~["]) (["]["])?)* ["]) ;
+
+ID          : ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) [a-zA-Z0-9_]*;
+COLUMN_REL  : ID '.' ID ;
 
 SELECT      : 'select' ;
 LIKE        : 'like' ;
