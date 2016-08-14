@@ -56,4 +56,84 @@ public class SelectNode extends SQLSyntaxTreeNode {
 		return sb.toString();
 	}
 
+	public boolean isDistinct() {
+		return distinct;
+	}
+
+	public void setDistinct(boolean distinct) {
+		this.distinct = distinct;
+	}
+
+	public SelectExprsNode getSelectExprs() {
+		return selectExprs;
+	}
+
+	public void setSelectExprs(SelectExprsNode selectExprs) {
+		this.selectExprs = selectExprs;
+	}
+
+	public TablesNode getTables() {
+		return tables;
+	}
+
+	public void setTables(TablesNode tables) {
+		this.tables = tables;
+	}
+
+	public WhereConditionNode getWhere() {
+		return where;
+	}
+
+	public void setWhere(WhereConditionNode where) {
+		this.where = where;
+	}
+
+	public GbobExprsNode getGroupByExprs() {
+		return groupByExprs;
+	}
+
+	public void setGroupByExprs(GbobExprsNode groupByExprs) {
+		this.groupByExprs = groupByExprs;
+	}
+
+	public WhereConditionNode getHaving() {
+		return having;
+	}
+
+	public void setHaving(WhereConditionNode having) {
+		this.having = having;
+	}
+
+	public GbobExprsNode getOrderByExprs() {
+		return orderByExprs;
+	}
+
+	public void setOrderByExprs(GbobExprsNode orderByExprs) {
+		this.orderByExprs = orderByExprs;
+	}
+
+	public String getOffset() {
+		return offset;
+	}
+
+	public void setOffset(String offset) {
+		this.offset = offset;
+	}
+
+	public String getRowCount() {
+		return rowCount;
+	}
+
+	public void setRowCount(String rowCount) {
+		this.rowCount = rowCount;
+	}
+
+	public boolean isForUpdate() {
+		return forUpdate;
+	}
+
+	public void setForUpdate(boolean forUpdate) {
+		this.forUpdate = forUpdate;
+	}
+
 }

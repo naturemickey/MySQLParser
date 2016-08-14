@@ -1,5 +1,8 @@
 package net.yeah.zhouyou.mickey.mysql.tree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TableNameAndAliasNode extends TableRelNode {
 
 	private String name;
@@ -32,6 +35,13 @@ public class TableNameAndAliasNode extends TableRelNode {
 
 	public void setAlias(String alias) {
 		this.alias = alias;
+	}
+
+	@Override
+	public List<TableNameAndAliasNode> getRealTables() {
+		List<TableNameAndAliasNode> res = new ArrayList<>();
+		res.add(this);
+		return res;
 	}
 
 }

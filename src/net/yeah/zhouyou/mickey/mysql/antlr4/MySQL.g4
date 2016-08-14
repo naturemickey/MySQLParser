@@ -44,19 +44,21 @@ tableSuffix
 	;
 
 tableRel
-	// --- table factor ---
+	: tableFactor
+	| tableJoin
+	;
+
+tableFactor
 	: tableNameAndAlias
 	| tableSubQuery
 	| tableRecu
-	// --- join table ---
-	| tableJoin
 	;
 
 tableSubQuery : '(' selectStat ')' AS? alias=ID ;
 tableRecu     : '(' tableRel ')' ;
 
 tableJoin
-	:
+	: 
 	;
 
 gbobExprs      : element sc=(ASC | DESC)? gbobExprSuffix? ;

@@ -1,5 +1,8 @@
 package net.yeah.zhouyou.mickey.mysql.tree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TableSubQueryNode extends TableRelNode {
 
 	private SelectNode select;
@@ -15,5 +18,10 @@ public class TableSubQueryNode extends TableRelNode {
 		StringBuilder sb = new StringBuilder();
 		sb.append('(').append(select).append(')').append(alias);
 		return sb.toString();
+	}
+
+	@Override
+	public List<TableNameAndAliasNode> getRealTables() {
+		return new ArrayList<>();
 	}
 }

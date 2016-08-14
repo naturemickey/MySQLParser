@@ -1,5 +1,7 @@
 package net.yeah.zhouyou.mickey.mysql.tree;
 
+import java.util.List;
+
 public class TablesNode extends SQLSyntaxTreeNode {
 
 	private TableRelNode tableRel;
@@ -15,5 +17,12 @@ public class TablesNode extends SQLSyntaxTreeNode {
 		if (suffix == null)
 			return tableRel.toString();
 		return tableRel + ", " + suffix;
+	}
+
+	public List<TableNameAndAliasNode> getRealTables() {
+		List<TableNameAndAliasNode> tables = tableRel.getRealTables();
+		if (suffix != null)
+			tables.addAll(suffix.getRealTables());
+		return tables;
 	}
 }
