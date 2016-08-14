@@ -78,6 +78,36 @@ public interface MySQLListener extends ParseTreeListener {
 	 */
 	void exitSelectStat(MySQLParser.SelectStatContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MySQLParser#selectExprs}.
+	 * @param ctx the parse tree
+	 */
+	void enterSelectExprs(MySQLParser.SelectExprsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#selectExprs}.
+	 * @param ctx the parse tree
+	 */
+	void exitSelectExprs(MySQLParser.SelectExprsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#tables}.
+	 * @param ctx the parse tree
+	 */
+	void enterTables(MySQLParser.TablesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#tables}.
+	 * @param ctx the parse tree
+	 */
+	void exitTables(MySQLParser.TablesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#gbobExprs}.
+	 * @param ctx the parse tree
+	 */
+	void enterGbobExprs(MySQLParser.GbobExprsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#gbobExprs}.
+	 * @param ctx the parse tree
+	 */
+	void exitGbobExprs(MySQLParser.GbobExprsContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MySQLParser#updateStat}.
 	 * @param ctx the parse tree
 	 */
@@ -297,4 +327,34 @@ public interface MySQLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitElement(MySQLParser.ElementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#funCall}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunCall(MySQLParser.FunCallContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#funCall}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunCall(MySQLParser.FunCallContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#paramList}.
+	 * @param ctx the parse tree
+	 */
+	void enterParamList(MySQLParser.ParamListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#paramList}.
+	 * @param ctx the parse tree
+	 */
+	void exitParamList(MySQLParser.ParamListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#paramSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void enterParamSuffix(MySQLParser.ParamSuffixContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#paramSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void exitParamSuffix(MySQLParser.ParamSuffixContext ctx);
 }

@@ -13,7 +13,9 @@ import net.yeah.zhouyou.mickey.mysql.tree.ExpressionIsOrIsNotNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionNotNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionRelationalNode;
+import net.yeah.zhouyou.mickey.mysql.tree.FunCallNode;
 import net.yeah.zhouyou.mickey.mysql.tree.InsertNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ParamListNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SQLSyntaxTreeNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SelectNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SetExprNode;
@@ -131,15 +133,17 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 	@Override
 	public SQLSyntaxTreeNode visitExprInSelect(MySQLParser.ExprInSelectContext ctx) {
 		ElementNode element = (ElementNode) this.visitElement(ctx.element());
+		boolean not = ctx.not != null;
 		SelectNode select = (SelectNode) this.visitSelectStat(ctx.selectStat());
-		return new ExpressionInSelectNode(element, select);
+		return new ExpressionInSelectNode(element, not, select);
 	}
 
 	@Override
 	public SQLSyntaxTreeNode visitExprInValues(MySQLParser.ExprInValuesContext ctx) {
 		ElementNode element = (ElementNode) this.visitElement(ctx.element());
+		boolean not = ctx.not != null;
 		ValueListNode values = (ValueListNode) this.visitValueList(ctx.valueList());
-		return new ExpressionInValuesNode(element, values);
+		return new ExpressionInValuesNode(element, not, values);
 	}
 
 	@Override
@@ -156,7 +160,17 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 
 	@Override
 	public SQLSyntaxTreeNode visitElement(MySQLParser.ElementContext ctx) {
-		return new ElementNode(ctx.getChild(0).getText());
+		String txt = null;
+		FunCallNode funCall = null;
+		SelectNode select = null;
+		if (ctx.txt != null) {
+			txt = ctx.txt.getText();
+		} else if (ctx.funCall() != null) {
+			funCall = (FunCallNode) this.visitFunCall(ctx.funCall());
+		} else {
+			select = (SelectNode) this.visitSelectStat(ctx.selectStat());
+		}
+		return new ElementNode(txt, funCall, select);
 	}
 
 	@Override
@@ -193,6 +207,25 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 		SetExprsNode setExprs = (SetExprsNode) this.visitSetExprs(ctx.setExprs());
 		WhereConditionNode whereCondition = ctx.whereCondition() != null ? (WhereConditionNode) this.visitWhereCondition(ctx.whereCondition()) : null;
 		return new UpdateMultipleTableNode(tableNameAndAliases, setExprs, whereCondition);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitFunCall(MySQLParser.FunCallContext ctx) {
+		String name = ctx.funName.getText();
+		ParamListNode paramList = (ParamListNode) this.visitParamList(ctx.paramList());
+		return new FunCallNode(name, paramList);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitParamList(MySQLParser.ParamListContext ctx) {
+		ElementNode param = (ElementNode) this.visitElement(ctx.param);
+		ParamListNode suffix = (ParamListNode) this.visitParamSuffix(ctx.paramSuffix());
+		return new ParamListNode(param, suffix);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitParamSuffix(MySQLParser.ParamSuffixContext ctx) {
+		return visitParamList(ctx.paramList());
 	}
 
 }

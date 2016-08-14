@@ -30,6 +30,25 @@ valueListSuffix
 	;
 
 selectStat
+	: SELECT (distinct=DISTINCT)? selectExprs 
+	    FROM tables
+	  (WHERE whereCondition)?
+	  (GROUP BY gbobExprs)?
+	 (HAVING whereCondition)?
+	  (ORDER BY gbobExprs)?
+	  (LIMIT ((offset=INT ',')? rowCount=INT) | (rowCount=INT OFFSET offset=INT))?
+	    (FOR lock=UPDATE)?
+	;
+
+selectExprs
+	:
+	;
+
+tables
+	:
+	;
+
+gbobExprs
 	:
 	;
 
@@ -41,17 +60,9 @@ updateStat
 updateSingleTable   : UPDATE tableNameAndAlias   SET setExprs (WHERE whereCondition)? (LIMIT rowCount=(INT|PLACEHOLDER))? ;
 updateMultipleTable	: UPDATE tableNameAndAliases SET setExprs (WHERE whereCondition)? ;
 
-setExprs
-	: setExpr setExprSuffix?
-	;
-
-setExprSuffix
-	: ',' setExprs
-	;
-
-setExpr
-	: left=element '=' (right=element | rightDefault=DEFAULT)
-	;
+setExprs      : setExpr setExprSuffix? ;
+setExprSuffix : ',' setExprs ;
+setExpr       : left=element '=' (right=element | rightDefault=DEFAULT) ;
 
 deleteStat
 	: DELETE FROM tableNameAndAlias (WHERE whereCondition)? (LIMIT rowCount=(INT|PLACEHOLDER))?
@@ -89,24 +100,24 @@ expression
 exprRelational    : left=element relationalOp=(EQ | LTH | GTH | NOT_EQ | LET | GET) right=element ;
 exprBetweenAnd    : el=element BETWEEN left=element AND right=element ;
 exprIsOrIsNotNull : element IS (not=NOT)? NULL ;
-exprInSelect      : element IN '(' selectStat ')' ;
-exprInValues      : element IN '(' valueList ')' ;
+exprInSelect      : element (not=NOT)? IN '(' selectStat ')' ;
+exprInValues      : element (not=NOT)? IN '(' valueList ')' ;
 exprExists        : (not=NOT)? EXISTS '(' selectStat ')';
 exprNot           : (NOT | '!') expression ;
 
 element
-	: PLACEHOLDER
-	| COLUMN_REL
-	| DECIMAL
-	| STRING
-	| ID
-	| TRUE
-	| FALSE
+	: txt=('*' | PLACEHOLDER | COLUMN_REL | DECIMAL | STRING | ID | TRUE | FALSE)
+	| funCall
+	| '(' selectStat ')'
 	;
 
+funCall     : funName=ID '(' paramList ')' ;
+paramList   : param=element paramSuffix? ;
+paramSuffix : ',' paramList ;
 
 // ******* Lexer *******
 
+SELECT      : [Ss][Ee][Ll][Ee][Cc][Tt] ;
 PLACEHOLDER : '?' | (':' [a-zA-Z0-9_]+) ;
 INSERT      : [Ii][Nn][Ss][Ee][Rr][Tt];
 INTO        : [Ii][Nn][Tt][Oo] ;
@@ -129,16 +140,29 @@ XOR         : [Xx][Oo][Rr] ;
 DEFAULT     : [Dd][Ee][Ff][Aa][Uu][Ll][Tt] ;
 UPDATE      : [Uu][Pp][Dd][Aa][Tt][Ee] ;
 SET         : [Ss][Ee][Tt] ;
+ORDER       : [Oo][Rr][Dd][Ee][Rr] ;
+GROUP       : [Gg][Rr][Oo][Uu][Pp] ;
+BY          : [Bb][Yy] ;
+FOR         : [Ff][Oo][Rr] ;
+LIKE        : [Ll][Ii][Kk][Ee] ;
+HAVING      : [Hh][Aa][Vv][Ii][Nn][Gg] ;
+AS          : [Aa][Ss] ;
+INNER       : [Ii][Nn][Nn][Ee][Rr] ;
+OUTER       : [Oo][Uu][Tt][Ee][Rr] ;
+JOIN        : [Jj][Oo][Ii][Nn] ;
+LEFT        : [Ll][Ee][Ff][Tt] ;
+RIGHT       : [Rr][Ii][Gg][Hh][Tt] ;
+ON          : [Oo][Nn] ;
+DISTINCT    : [Dd][Ii][Ss][Tt][Ii][Nn][Cc][Tt] ;
+OFFSET      : [Oo][Ff][Ff][Ss][Ee][Tt] ;
 
 INT         : '0' .. '9'+ ;
 DECIMAL     : ('+' | '-')? ((INT)|('.' INT)|(INT '.' INT)) ([Ee]('+' | '-')? INT)? ;
 STRING      : (['] ((~[']) ([']['])?)* [']) | (["] ((~["]) (["]["])?)* ["]) ;
 
 ID          : ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) [a-zA-Z0-9_]*;
-COLUMN_REL  : ID '.' ID ;
+COLUMN_REL  : ID '.' (ID | '*') ;
 
-SELECT      : 'select' ;
-LIKE        : 'like' ;
 ALL         : 'all' ;
 ANY         : 'any' ;
 DIVIDE      : 'div' | '/' ;
@@ -171,26 +195,16 @@ SEMI        : ';' ;
 COMMA       : ',';
 DOT         : '.' ;
 COLLATE     : 'collate' ;
-INNER       : 'inner' ;
-OUTER       : 'outer' ;
-JOIN        : 'join' ;
 CROSS       : 'cross' ;
 USING       : 'using' ;
 INDEX       : 'index' ;
 KEY         : 'key' ;
-ORDER       : 'order' ;
-GROUP       : 'group' ;
-BY          : 'by' ;
-FOR         : 'for' ;
 USE         : 'use' ;
 IGNORE      : 'ignore' ;
 PARTITION   : 'partition' ;
 STRAIGHT_JOIN : 'straight_join' ;
 NATURAL     : 'natural' ;
-LEFT        : 'left' ;
-RIGHT       : 'right' ;
 OJ          : 'oj' ;
-ON          : 'on' ;
 NEWLINE     : '\r'? '\n' -> skip ;
 WS          : ( ' ' | '\t' | '\n' | '\r' )+ -> skip ;
 USER_VAR    : '@' ( USER_VAR_SUBFIX1 | USER_VAR_SUBFIX2 | USER_VAR_SUBFIX3 | USER_VAR_SUBFIX4 ) ;
