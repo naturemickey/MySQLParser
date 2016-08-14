@@ -34,7 +34,23 @@ selectStat
 	;
 
 updateStat
-	:
+	: updateSingleTable
+	| updateMultipleTable
+	;
+
+updateSingleTable   : UPDATE tableNameAndAlias   SET setExprs (WHERE whereCondition)? (LIMIT rowCount=(INT|PLACEHOLDER))? ;
+updateMultipleTable	: UPDATE tableNameAndAliases SET setExprs (WHERE whereCondition)? ;
+
+setExprs
+	: setExpr setExprSuffix?
+	;
+
+setExprSuffix
+	: ',' setExprs
+	;
+
+setExpr
+	: element '=' (element | dflt=DEFAULT)
 	;
 
 deleteStat
@@ -43,6 +59,14 @@ deleteStat
 
 tableNameAndAlias
 	: name=ID (alias=ID)?
+	;
+
+tableNameAndAliases
+	: tableNameAndAlias tableNameAndAliasSuffix?
+	;
+
+tableNameAndAliasSuffix
+	: ',' tableNameAndAliases
 	;
 
 whereCondition
@@ -71,12 +95,13 @@ exprExists        : (not=NOT)? EXISTS '(' selectStat ')';
 exprNot           : (NOT | '!') expression ;
 
 element
-	: placeHolder = PLACEHOLDER
-	| columnRel   = COLUMN_REL
-	| numVal      = DECIMAL
-	| strVal      = STRING
+	: PLACEHOLDER
+	| COLUMN_REL
+	| DECIMAL
+	| STRING
 	| ID
-	| boolVal     = (TRUE | FALSE)
+	| TRUE
+	| FALSE
 	;
 
 
@@ -103,9 +128,12 @@ DECIMAL     : ('+' | '-')? ((INT)|('.' INT)|(INT '.' INT)) ([Ee]('+' | '-')? INT
 STRING      : (['] ((~[']) ([']['])?)* [']) | (["] ((~["]) (["]["])?)* ["]) ;
 TRUE        : [Tt][Rr][Uu][Ee] ;
 FALSE       : [Ff][Aa][Ll][Ss] ;
-COLUMN_REL  : ID ('.' ID)? ;
+COLUMN_REL  : ID '.' ID ;
 OR          : ([Oo][Rr]) | '||' ;
 XOR         : [Xx][Oo][Rr] ;
+DEFAULT     : [Dd][Ee][Ff][Aa][Uu][Ll][Tt] ;
+UPDATE      : [Uu][Pp][Dd][Aa][Tt][Ee] ;
+SET         : [Ss][Ee][Tt] ;
 
 SELECT      : 'select' ;
 LIKE        : 'like' ;

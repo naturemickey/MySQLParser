@@ -1,6 +1,7 @@
 package test;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -20,7 +21,14 @@ import net.yeah.zhouyou.mickey.mysql.tree.WhereConditionSubNode;
 public class TestDelete {
 	public static void main(String[] args) throws Exception {
 
-		String sql = "delete from tt_order_status where id = ?";
+		for (String sql : new String[] { "delete from tt_order_status where id = ?", "delete from tt_order_status t where t.id = ?",
+				"delete from tt_order_status t" }) {
+			fun(sql);
+		}
+
+	}
+
+	private static void fun(String sql) throws IOException {
 		try (ByteArrayInputStream is = new ByteArrayInputStream(sql.getBytes());) {
 			ANTLRInputStream input = new ANTLRInputStream(is);
 			MySQLLexer lexer = new MySQLLexer(input);
@@ -37,7 +45,7 @@ public class TestDelete {
 			WhereConditionNode wc = delete.getWhereCondition();
 
 			ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementNode(alias == null ? "data_env_version" : alias + '.' + "data_env_version"),
-					new ElementNode("v1"), "=");
+					new ElementNode("'v1'"), "=");
 			WhereConditionNode newWc = null;
 			if (wc == null) {
 				newWc = new WhereConditionOpNode(ern, null, null);
@@ -45,9 +53,8 @@ public class TestDelete {
 				newWc = new WhereConditionOpNode(ern, "and", new WhereConditionSubNode(wc));
 			}
 			delete.setWhereCondition(newWc);
-			
+
 			System.out.println(delete);
 		}
-
 	}
 }

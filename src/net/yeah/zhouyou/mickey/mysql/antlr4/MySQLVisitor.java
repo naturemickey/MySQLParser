@@ -59,6 +59,36 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitUpdateStat(MySQLParser.UpdateStatContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MySQLParser#updateSingleTable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUpdateSingleTable(MySQLParser.UpdateSingleTableContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#updateMultipleTable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUpdateMultipleTable(MySQLParser.UpdateMultipleTableContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#setExprs}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetExprs(MySQLParser.SetExprsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#setExprSuffix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetExprSuffix(MySQLParser.SetExprSuffixContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#setExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetExpr(MySQLParser.SetExprContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MySQLParser#deleteStat}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -70,6 +100,18 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTableNameAndAlias(MySQLParser.TableNameAndAliasContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#tableNameAndAliases}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTableNameAndAliases(MySQLParser.TableNameAndAliasesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#tableNameAndAliasSuffix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTableNameAndAliasSuffix(MySQLParser.TableNameAndAliasSuffixContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MySQLParser#whereCondition}.
 	 * @param ctx the parse tree

@@ -88,6 +88,56 @@ public interface MySQLListener extends ParseTreeListener {
 	 */
 	void exitUpdateStat(MySQLParser.UpdateStatContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MySQLParser#updateSingleTable}.
+	 * @param ctx the parse tree
+	 */
+	void enterUpdateSingleTable(MySQLParser.UpdateSingleTableContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#updateSingleTable}.
+	 * @param ctx the parse tree
+	 */
+	void exitUpdateSingleTable(MySQLParser.UpdateSingleTableContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#updateMultipleTable}.
+	 * @param ctx the parse tree
+	 */
+	void enterUpdateMultipleTable(MySQLParser.UpdateMultipleTableContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#updateMultipleTable}.
+	 * @param ctx the parse tree
+	 */
+	void exitUpdateMultipleTable(MySQLParser.UpdateMultipleTableContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#setExprs}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetExprs(MySQLParser.SetExprsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#setExprs}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetExprs(MySQLParser.SetExprsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#setExprSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetExprSuffix(MySQLParser.SetExprSuffixContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#setExprSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetExprSuffix(MySQLParser.SetExprSuffixContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#setExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetExpr(MySQLParser.SetExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#setExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetExpr(MySQLParser.SetExprContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MySQLParser#deleteStat}.
 	 * @param ctx the parse tree
 	 */
@@ -107,6 +157,26 @@ public interface MySQLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTableNameAndAlias(MySQLParser.TableNameAndAliasContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#tableNameAndAliases}.
+	 * @param ctx the parse tree
+	 */
+	void enterTableNameAndAliases(MySQLParser.TableNameAndAliasesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#tableNameAndAliases}.
+	 * @param ctx the parse tree
+	 */
+	void exitTableNameAndAliases(MySQLParser.TableNameAndAliasesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#tableNameAndAliasSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void enterTableNameAndAliasSuffix(MySQLParser.TableNameAndAliasSuffixContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#tableNameAndAliasSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void exitTableNameAndAliasSuffix(MySQLParser.TableNameAndAliasSuffixContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MySQLParser#whereCondition}.
 	 * @param ctx the parse tree
