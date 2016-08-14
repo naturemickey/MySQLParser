@@ -5,6 +5,10 @@ public class ElementNode extends SQLSyntaxTreeNode {
 	private FunCallNode funCall;
 	private SelectNode select;
 
+	public ElementNode(String txt) {
+		this.txt = txt;
+	}
+
 	public ElementNode(String txt, FunCallNode funCall, SelectNode select) {
 		this.txt = txt;
 		this.funCall = funCall;

@@ -14,14 +14,17 @@ import net.yeah.zhouyou.mickey.mysql.tree.ExpressionNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionNotNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionRelationalNode;
 import net.yeah.zhouyou.mickey.mysql.tree.FunCallNode;
+import net.yeah.zhouyou.mickey.mysql.tree.GbobExprsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.InsertNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ParamListNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SQLSyntaxTreeNode;
+import net.yeah.zhouyou.mickey.mysql.tree.SelectExprsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SelectNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SetExprNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SetExprsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TableNameAndAliasNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TableNameAndAliasesNode;
+import net.yeah.zhouyou.mickey.mysql.tree.TablesNode;
 import net.yeah.zhouyou.mickey.mysql.tree.UpdateMultipleTableNode;
 import net.yeah.zhouyou.mickey.mysql.tree.UpdateSignleTableNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ValueListNode;
@@ -226,6 +229,93 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 	@Override
 	public SQLSyntaxTreeNode visitParamSuffix(MySQLParser.ParamSuffixContext ctx) {
 		return visitParamList(ctx.paramList());
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitSelectStat(MySQLParser.SelectStatContext ctx) {
+		boolean distinct = ctx.distinct != null;
+		SelectExprsNode selectExprs = (SelectExprsNode) this.visitSelectExprs(ctx.selectExprs());
+		TablesNode tables = null;
+		WhereConditionNode where = null;
+		GbobExprsNode groupByExprs = null;
+		WhereConditionNode having = null;
+		GbobExprsNode orderByExprs = null;
+		String offset = null;
+		String rowCount = null;
+		boolean forUpdate = ctx.lock != null;
+		if (ctx.tables() != null)
+			tables = (TablesNode) this.visitTables(ctx.tables());
+		if (ctx.where != null)
+			where = (WhereConditionNode) this.visitWhereCondition(ctx.where);
+		if (ctx.groupByExprs != null)
+			groupByExprs = (GbobExprsNode) this.visitGbobExprs(ctx.groupByExprs);
+		if (ctx.having != null)
+			having = (WhereConditionNode) this.visitWhereCondition(ctx.having);
+		if (ctx.orderByExprs != null)
+			orderByExprs = (GbobExprsNode) this.visitGbobExprs(ctx.orderByExprs);
+		if (ctx.rowCount != null) {
+			rowCount = ctx.rowCount.getText();
+			if (ctx.offset != null)
+				offset = ctx.offset.getText();
+		}
+
+		return new SelectNode(distinct, selectExprs, tables, where, groupByExprs, having, orderByExprs, offset, rowCount, forUpdate);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitSelectExprs(MySQLParser.SelectExprsContext ctx) {
+		ElementNode element = (ElementNode) this.visitElement(ctx.element());
+		String alias = ctx.alias.getText();
+		SelectExprsNode suffix = ctx.selectExprsSuffix() != null ? (SelectExprsNode) this.visitSelectExprsSuffix(ctx.selectExprsSuffix()) : null;
+		return new SelectExprsNode(element, alias, suffix);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitSelectExprsSuffix(MySQLParser.SelectExprsSuffixContext ctx) {
+		return this.visitSelectExprs(ctx.selectExprs());
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitGbobExprs(MySQLParser.GbobExprsContext ctx) {
+		ElementNode element = (ElementNode) this.visitElement(ctx.element());
+		String sc = ctx.sc.getText();
+		GbobExprsNode suffix = (ctx.gbobExprSuffix() != null) ? (GbobExprsNode) this.visitGbobExprSuffix(ctx.gbobExprSuffix()) : null;
+		return new GbobExprsNode(element, sc, suffix);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitGbobExprSuffix(MySQLParser.GbobExprSuffixContext ctx) {
+		return this.visitGbobExprs(ctx.gbobExprs());
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitTables(MySQLParser.TablesContext ctx) {
+		return visitChildren(ctx);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitTableSuffix(MySQLParser.TableSuffixContext ctx) {
+		return visitChildren(ctx);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitTableRel(MySQLParser.TableRelContext ctx) {
+		return visitChildren(ctx);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitTableFactor(MySQLParser.TableFactorContext ctx) {
+		return visitChildren(ctx);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitTableSubQuery(MySQLParser.TableSubQueryContext ctx) {
+		return visitChildren(ctx);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitTableRecu(MySQLParser.TableRecuContext ctx) {
+		return visitChildren(ctx);
 	}
 
 }

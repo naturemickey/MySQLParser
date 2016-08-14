@@ -112,6 +112,18 @@ public class MySQLBaseListener implements MySQLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSelectExprsSuffix(MySQLParser.SelectExprsSuffixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSelectExprsSuffix(MySQLParser.SelectExprsSuffixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTables(MySQLParser.TablesContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -124,6 +136,78 @@ public class MySQLBaseListener implements MySQLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterTableSuffix(MySQLParser.TableSuffixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTableSuffix(MySQLParser.TableSuffixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTableRel(MySQLParser.TableRelContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTableRel(MySQLParser.TableRelContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTableFactor(MySQLParser.TableFactorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTableFactor(MySQLParser.TableFactorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTableSubQuery(MySQLParser.TableSubQueryContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTableSubQuery(MySQLParser.TableSubQueryContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTableRecu(MySQLParser.TableRecuContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTableRecu(MySQLParser.TableRecuContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTableJoin(MySQLParser.TableJoinContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTableJoin(MySQLParser.TableJoinContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterGbobExprs(MySQLParser.GbobExprsContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -131,6 +215,18 @@ public class MySQLBaseListener implements MySQLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitGbobExprs(MySQLParser.GbobExprsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterGbobExprSuffix(MySQLParser.GbobExprSuffixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGbobExprSuffix(MySQLParser.GbobExprSuffixContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

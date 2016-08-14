@@ -59,17 +59,65 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSelectExprs(MySQLParser.SelectExprsContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MySQLParser#selectExprsSuffix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSelectExprsSuffix(MySQLParser.SelectExprsSuffixContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MySQLParser#tables}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitTables(MySQLParser.TablesContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MySQLParser#tableSuffix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTableSuffix(MySQLParser.TableSuffixContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#tableRel}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTableRel(MySQLParser.TableRelContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#tableFactor}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTableFactor(MySQLParser.TableFactorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#tableSubQuery}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTableSubQuery(MySQLParser.TableSubQueryContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#tableRecu}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTableRecu(MySQLParser.TableRecuContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#tableJoin}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTableJoin(MySQLParser.TableJoinContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MySQLParser#gbobExprs}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitGbobExprs(MySQLParser.GbobExprsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#gbobExprSuffix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGbobExprSuffix(MySQLParser.GbobExprSuffixContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MySQLParser#updateStat}.
 	 * @param ctx the parse tree

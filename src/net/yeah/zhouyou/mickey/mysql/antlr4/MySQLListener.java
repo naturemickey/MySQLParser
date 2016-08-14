@@ -88,6 +88,16 @@ public interface MySQLListener extends ParseTreeListener {
 	 */
 	void exitSelectExprs(MySQLParser.SelectExprsContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MySQLParser#selectExprsSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void enterSelectExprsSuffix(MySQLParser.SelectExprsSuffixContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#selectExprsSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void exitSelectExprsSuffix(MySQLParser.SelectExprsSuffixContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MySQLParser#tables}.
 	 * @param ctx the parse tree
 	 */
@@ -98,6 +108,66 @@ public interface MySQLListener extends ParseTreeListener {
 	 */
 	void exitTables(MySQLParser.TablesContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MySQLParser#tableSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void enterTableSuffix(MySQLParser.TableSuffixContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#tableSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void exitTableSuffix(MySQLParser.TableSuffixContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#tableRel}.
+	 * @param ctx the parse tree
+	 */
+	void enterTableRel(MySQLParser.TableRelContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#tableRel}.
+	 * @param ctx the parse tree
+	 */
+	void exitTableRel(MySQLParser.TableRelContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#tableFactor}.
+	 * @param ctx the parse tree
+	 */
+	void enterTableFactor(MySQLParser.TableFactorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#tableFactor}.
+	 * @param ctx the parse tree
+	 */
+	void exitTableFactor(MySQLParser.TableFactorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#tableSubQuery}.
+	 * @param ctx the parse tree
+	 */
+	void enterTableSubQuery(MySQLParser.TableSubQueryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#tableSubQuery}.
+	 * @param ctx the parse tree
+	 */
+	void exitTableSubQuery(MySQLParser.TableSubQueryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#tableRecu}.
+	 * @param ctx the parse tree
+	 */
+	void enterTableRecu(MySQLParser.TableRecuContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#tableRecu}.
+	 * @param ctx the parse tree
+	 */
+	void exitTableRecu(MySQLParser.TableRecuContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#tableJoin}.
+	 * @param ctx the parse tree
+	 */
+	void enterTableJoin(MySQLParser.TableJoinContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#tableJoin}.
+	 * @param ctx the parse tree
+	 */
+	void exitTableJoin(MySQLParser.TableJoinContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MySQLParser#gbobExprs}.
 	 * @param ctx the parse tree
 	 */
@@ -107,6 +177,16 @@ public interface MySQLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitGbobExprs(MySQLParser.GbobExprsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#gbobExprSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void enterGbobExprSuffix(MySQLParser.GbobExprSuffixContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#gbobExprSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void exitGbobExprSuffix(MySQLParser.GbobExprSuffixContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MySQLParser#updateStat}.
 	 * @param ctx the parse tree

@@ -2,6 +2,8 @@ grammar MySQL;
 
 @header{package net.yeah.zhouyou.mickey.mysql.antlr4;}
 
+// ****** Parser ******
+
 stat
 	: insertStat
 	| updateStat
@@ -31,26 +33,46 @@ valueListSuffix
 
 selectStat
 	: SELECT (distinct=DISTINCT)? selectExprs 
-	    FROM tables
-	  (WHERE whereCondition)?
-	  (GROUP BY gbobExprs)?
-	 (HAVING whereCondition)?
-	  (ORDER BY gbobExprs)?
+	   (FROM tables)?
+	  (WHERE where=whereCondition)?
+	  (GROUP BY groupByExprs=gbobExprs)?
+	 (HAVING having=whereCondition)?
+	  (ORDER BY orderByExprs=gbobExprs)?
 	  (LIMIT ((offset=INT ',')? rowCount=INT) | (rowCount=INT OFFSET offset=INT))?
 	    (FOR lock=UPDATE)?
 	;
 
-selectExprs
-	:
-	;
+selectExprs       : element (AS? alias=ID)? selectExprsSuffix? ;
+selectExprsSuffix : ',' selectExprs ;
 
 tables
+	: tableRel tableSuffix?
+	;
+
+tableSuffix
+	: ',' tables
+	;
+
+tableRel
+	: tableFactor
+	| tableJoin
+	;
+
+tableFactor
+	: tableNameAndAlias
+	| tableSubQuery
+	| tableRecu
+	;
+
+tableSubQuery : '(' selectStat ')' AS? alias=ID ;
+tableRecu     : '(' tableRel ')' ;
+
+tableJoin
 	:
 	;
 
-gbobExprs
-	:
-	;
+gbobExprs      : element sc=(ASC | DESC)? gbobExprSuffix? ;
+gbobExprSuffix : ',' gbobExprs ;
 
 updateStat
 	: updateSingleTable
@@ -69,7 +91,7 @@ deleteStat
 	;
 
 tableNameAndAlias
-	: name=ID (alias=ID)?
+	: name=ID (AS? alias=ID)?
 	;
 
 tableNameAndAliases
@@ -117,8 +139,8 @@ paramSuffix : ',' paramList ;
 
 // ******* Lexer *******
 
-SELECT      : [Ss][Ee][Ll][Ee][Cc][Tt] ;
 PLACEHOLDER : '?' | (':' [a-zA-Z0-9_]+) ;
+SELECT      : [Ss][Ee][Ll][Ee][Cc][Tt] ;
 INSERT      : [Ii][Nn][Ss][Ee][Rr][Tt];
 INTO        : [Ii][Nn][Tt][Oo] ;
 VALUES      : [Vv][Aa][Ll][Uu][Ee][Ss]? ;
@@ -155,6 +177,8 @@ RIGHT       : [Rr][Ii][Gg][Hh][Tt] ;
 ON          : [Oo][Nn] ;
 DISTINCT    : [Dd][Ii][Ss][Tt][Ii][Nn][Cc][Tt] ;
 OFFSET      : [Oo][Ff][Ff][Ss][Ee][Tt] ;
+ASC         : [Aa][Ss][Cc] ;
+DESC        : [Dd][Ee][Ss][Cc] ;
 
 INT         : '0' .. '9'+ ;
 DECIMAL     : ('+' | '-')? ((INT)|('.' INT)|(INT '.' INT)) ([Ee]('+' | '-')? INT)? ;
