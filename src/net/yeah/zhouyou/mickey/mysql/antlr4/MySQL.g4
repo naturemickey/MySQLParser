@@ -133,7 +133,7 @@ element
 	| '(' selectStat ')'
 	;
 
-funCall     : funName=ID '(' paramList ')' ;
+funCall     : funName=ID '(' paramList? ')' ;
 paramList   : param=element paramSuffix? ;
 paramSuffix : ',' paramList ;
 

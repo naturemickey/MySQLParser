@@ -53,6 +53,8 @@ public class MySQLParserUtils {
 	}
 
 	private static SQLSyntaxTreeNode addColumn(SQLSyntaxTreeNode node, String version) {
+		if (!(node instanceof SQLSyntaxTreeNode))
+			return node;
 		if (node instanceof SelectNode) {
 			node = processSelect(node, version);
 		} else if (node instanceof UpdateNode) {
