@@ -16,12 +16,15 @@ import net.yeah.zhouyou.mickey.mysql.tree.ExpressionRelationalNode;
 import net.yeah.zhouyou.mickey.mysql.tree.FunCallNode;
 import net.yeah.zhouyou.mickey.mysql.tree.GbobExprsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.InsertNode;
+import net.yeah.zhouyou.mickey.mysql.tree.JoinConditionNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ParamListNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SQLSyntaxTreeNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SelectExprsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SelectNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SetExprNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SetExprsNode;
+import net.yeah.zhouyou.mickey.mysql.tree.TableJoinNode;
+import net.yeah.zhouyou.mickey.mysql.tree.TableJoinSuffixNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TableNameAndAliasNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TableNameAndAliasesNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TableRecuNode;
@@ -314,6 +317,30 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 	public SQLSyntaxTreeNode visitTableRecu(MySQLParser.TableRecuContext ctx) {
 		TableRelNode tableRel = (TableRelNode) this.visitTableRel(ctx.tableRel());
 		return new TableRecuNode(tableRel);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitTableJoin(MySQLParser.TableJoinContext ctx) {
+		TableNameAndAliasNode table = (TableNameAndAliasNode) this.visitTableNameAndAlias(ctx.tableNameAndAlias());
+		TableJoinSuffixNode suffix = (TableJoinSuffixNode) this.visitTableJoinSuffix(ctx.tableJoinSuffix());
+		return new TableJoinNode(table, suffix);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitTableJoinSuffix(MySQLParser.TableJoinSuffixContext ctx) {
+		String tableJoinMod = ctx.tableJoinMod().getText();
+		TableNameAndAliasNode table = (TableNameAndAliasNode) this.visitTableNameAndAlias(ctx.tableNameAndAlias());
+		JoinConditionNode condition = (JoinConditionNode) this.visitJoinCondition(ctx.joinCondition());
+		TableJoinSuffixNode suffix = ctx.tableJoinSuffix() == null ? null : (TableJoinSuffixNode) this.visitTableJoinSuffix(ctx.tableJoinSuffix());
+
+		return new TableJoinSuffixNode(tableJoinMod, table, condition, suffix);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitJoinCondition(MySQLParser.JoinConditionContext ctx) {
+		WhereConditionNode on = ctx.whereCondition() != null ? (WhereConditionNode) this.visitWhereCondition(ctx.whereCondition()) : null;
+		ColumnNamesNode columnNames = ctx.columnNames() != null ? (ColumnNamesNode) this.visitColumnNames(ctx.columnNames()) : null;
+		return new JoinConditionNode(on, columnNames);
 	}
 
 }

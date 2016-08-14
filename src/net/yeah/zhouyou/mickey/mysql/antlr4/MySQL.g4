@@ -58,7 +58,17 @@ tableSubQuery : '(' selectStat ')' AS? alias=ID ;
 tableRecu     : '(' tableRel ')' ;
 
 tableJoin
-	: 
+	: tableNameAndAlias tableJoinSuffix
+	;
+tableJoinSuffix
+	: tableJoinMod JOIN tableNameAndAlias joinCondition tableJoinSuffix?
+	;
+tableJoinMod
+	: (INNER | CROSS | (LEFT OUTER?) | (RIGHT OUTER?))
+	;
+joinCondition
+	: ON whereCondition
+	| USING columnNames
 	;
 
 gbobExprs      : element sc=(ASC | DESC)? gbobExprSuffix? ;
@@ -169,6 +179,8 @@ DISTINCT    : [Dd][Ii][Ss][Tt][Ii][Nn][Cc][Tt] ;
 OFFSET      : [Oo][Ff][Ff][Ss][Ee][Tt] ;
 ASC         : [Aa][Ss][Cc] ;
 DESC        : [Dd][Ee][Ss][Cc] ;
+CROSS       : [Cc][Rr][Oo][Ss][Ss] ;
+USING       : [Uu][Ss][Ii][Nn][Gg] ;
 
 INT         : '0' .. '9'+ ;
 DECIMAL     : ('+' | '-')? ((INT)|('.' INT)|(INT '.' INT)) ([Ee]('+' | '-')? INT)? ;
@@ -209,8 +221,6 @@ SEMI        : ';' ;
 COMMA       : ',';
 DOT         : '.' ;
 COLLATE     : 'collate' ;
-CROSS       : 'cross' ;
-USING       : 'using' ;
 INDEX       : 'index' ;
 KEY         : 'key' ;
 USE         : 'use' ;

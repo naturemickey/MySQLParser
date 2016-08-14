@@ -107,6 +107,24 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTableJoin(MySQLParser.TableJoinContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MySQLParser#tableJoinSuffix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTableJoinSuffix(MySQLParser.TableJoinSuffixContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#tableJoinMod}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTableJoinMod(MySQLParser.TableJoinModContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#joinCondition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJoinCondition(MySQLParser.JoinConditionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MySQLParser#gbobExprs}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
