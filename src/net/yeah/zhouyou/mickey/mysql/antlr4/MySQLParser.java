@@ -1956,6 +1956,7 @@ public class MySQLParser extends Parser {
 			setState(290);
 			switch (_input.LA(1)) {
 			case PLACEHOLDER:
+			case NULL:
 			case TRUE:
 			case FALSE:
 			case DATE:
@@ -3087,6 +3088,7 @@ public class MySQLParser extends Parser {
 		public TerminalNode TRUE() { return getToken(MySQLParser.TRUE, 0); }
 		public TerminalNode FALSE() { return getToken(MySQLParser.FALSE, 0); }
 		public TerminalNode INT() { return getToken(MySQLParser.INT, 0); }
+		public TerminalNode NULL() { return getToken(MySQLParser.NULL, 0); }
 		public ElementTextContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -3115,7 +3117,7 @@ public class MySQLParser extends Parser {
 			{
 			setState(393);
 			_la = _input.LA(1);
-			if ( !(((((_la - 2)) & ~0x3f) == 0 && ((1L << (_la - 2)) & ((1L << (PLACEHOLDER - 2)) | (1L << (TRUE - 2)) | (1L << (FALSE - 2)) | (1L << (INT - 2)) | (1L << (DECIMAL - 2)) | (1L << (STRING - 2)) | (1L << (ID - 2)) | (1L << (COLUMN_REL - 2)) | (1L << (ASTERISK - 2)))) != 0)) ) {
+			if ( !(((((_la - 2)) & ~0x3f) == 0 && ((1L << (_la - 2)) & ((1L << (PLACEHOLDER - 2)) | (1L << (NULL - 2)) | (1L << (TRUE - 2)) | (1L << (FALSE - 2)) | (1L << (INT - 2)) | (1L << (DECIMAL - 2)) | (1L << (STRING - 2)) | (1L << (ID - 2)) | (1L << (COLUMN_REL - 2)) | (1L << (ASTERISK - 2)))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			} else {
 				consume();
@@ -3264,7 +3266,7 @@ public class MySQLParser extends Parser {
 			match(LPAREN);
 			setState(405);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << PLACEHOLDER) | (1L << TRUE) | (1L << FALSE) | (1L << DATE) | (1L << INT) | (1L << DECIMAL) | (1L << STRING) | (1L << ID) | (1L << COLUMN_REL))) != 0) || _la==ASTERISK || _la==LPAREN) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << PLACEHOLDER) | (1L << NULL) | (1L << TRUE) | (1L << FALSE) | (1L << DATE) | (1L << INT) | (1L << DECIMAL) | (1L << STRING) | (1L << ID) | (1L << COLUMN_REL))) != 0) || _la==ASTERISK || _la==LPAREN) {
 				{
 				setState(404);
 				paramList();
@@ -3423,8 +3425,8 @@ public class MySQLParser extends Parser {
 		"\3\61\3\61\5\61\u019e\n\61\3\62\3\62\3\62\3\62\2\2\63\2\4\6\b\n\f\16\20"+
 		"\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJLNPRTVXZ\\^`b\2\t"+
 		"\5\2\4\4\r\r\61\62\3\2*+\4\2\4\4//\4\2\22\22\26\27\3\2JO\4\2\3\3\17\17"+
-		"\6\2\4\4\24\25/\63CC\u01ae\2h\3\2\2\2\4j\3\2\2\2\6w\3\2\2\2\b{\3\2\2\2"+
-		"\n~\3\2\2\2\f\u0082\3\2\2\2\16\u0085\3\2\2\2\20\u00af\3\2\2\2\22\u00b9"+
+		"\7\2\4\4\r\r\24\25/\63CC\u01ae\2h\3\2\2\2\4j\3\2\2\2\6w\3\2\2\2\b{\3\2"+
+		"\2\2\n~\3\2\2\2\f\u0082\3\2\2\2\16\u0085\3\2\2\2\20\u00af\3\2\2\2\22\u00b9"+
 		"\3\2\2\2\24\u00bc\3\2\2\2\26\u00c0\3\2\2\2\30\u00c5\3\2\2\2\32\u00ca\3"+
 		"\2\2\2\34\u00cc\3\2\2\2\36\u00d4\3\2\2\2 \u00d8\3\2\2\2\"\u00db\3\2\2"+
 		"\2$\u00ec\3\2\2\2&\u00f5\3\2\2\2(\u00f7\3\2\2\2*\u00fe\3\2\2\2,\u0103"+
