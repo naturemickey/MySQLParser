@@ -35,13 +35,8 @@ selectStat
 selectExprs       : element (AS? alias=ID)? selectExprsSuffix? ;
 selectExprsSuffix : ',' selectExprs ;
 
-tables
-	: tableRel tableSuffix?
-	;
-
-tableSuffix
-	: ',' tables
-	;
+tables      : tableRel tableSuffix? ;
+tableSuffix : ',' tables ;
 
 tableRel
 	: tableFactor
@@ -57,19 +52,10 @@ tableFactor
 tableSubQuery : '(' selectStat ')' AS? alias=ID ;
 tableRecu     : '(' tableRel ')' ;
 
-tableJoin
-	: tableNameAndAlias tableJoinSuffix
-	;
-tableJoinSuffix
-	: tableJoinMod JOIN tableNameAndAlias joinCondition tableJoinSuffix?
-	;
-tableJoinMod
-	: INNER | CROSS | LEFT OUTER? | RIGHT OUTER?
-	;
-joinCondition
-	: ON whereCondition
-	| USING '(' columnNames ')'
-	;
+tableJoin       : tableNameAndAlias tableJoinSuffix ;
+tableJoinSuffix : tableJoinMod JOIN tableNameAndAlias joinCondition tableJoinSuffix? ;
+tableJoinMod    : INNER | CROSS | LEFT OUTER? | RIGHT OUTER? ;
+joinCondition   : ON whereCondition | USING '(' columnNames ')' ;
 
 gbobExprs      : element sc=(ASC | DESC)? gbobExprSuffix? ;
 gbobExprSuffix : ',' gbobExprs ;

@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -33,6 +35,60 @@ import net.yeah.zhouyou.mickey.mysql.tree.WhereConditionSubNode;
 public class MySQLParserUtils {
 
 	private static final String CULUMN_NAME = "data_env_version";
+	private static final Map<Key, String> addVersionCache = new ConcurrentHashMap<>();
+
+	public static String addVersionToSql(String sql, String version) {
+		return addVersionCache.computeIfAbsent(new Key(sql, version), key ->{
+			return addVersionToSqlNoCache(key.sql, key.version);
+		});
+	}
+	
+	public static String addVersionToSqlNoCache(String sql, String version) {
+		SQLSyntaxTreeNode node = parse(sql);
+		addColumn(node, version);
+		return node.toString();
+	}
+
+	private static class Key {
+		String sql;
+		String version;
+
+		public Key(String sql, String version) {
+			this.sql = sql;
+			this.version = version;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((sql == null) ? 0 : sql.hashCode());
+			result = prime * result + ((version == null) ? 0 : version.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Key other = (Key) obj;
+			if (sql == null) {
+				if (other.sql != null)
+					return false;
+			} else if (!sql.equals(other.sql))
+				return false;
+			if (version == null) {
+				if (other.version != null)
+					return false;
+			} else if (!version.equals(other.version))
+				return false;
+			return true;
+		}
+	}
 
 	public static SQLSyntaxTreeNode parse(String sql) {
 		try (ByteArrayInputStream is = new ByteArrayInputStream(sql.getBytes());) {
@@ -46,12 +102,6 @@ public class MySQLParserUtils {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	public static String addVersionToSql(String sql, String version) {
-		SQLSyntaxTreeNode node = parse(sql);
-		addColumn(node, version);
-		return node.toString();
 	}
 
 	private static SQLSyntaxTreeNode addColumn(SQLSyntaxTreeNode node, String version) {
