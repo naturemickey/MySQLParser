@@ -15,7 +15,7 @@ import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLLexer;
 import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLParser;
 import net.yeah.zhouyou.mickey.mysql.tree.ColumnNamesNode;
 import net.yeah.zhouyou.mickey.mysql.tree.DeleteNode;
-import net.yeah.zhouyou.mickey.mysql.tree.ElementNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ElementTextNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionRelationalNode;
 import net.yeah.zhouyou.mickey.mysql.tree.InsertNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SQLSyntaxTreeNode;
@@ -143,7 +143,7 @@ public class MySQLParserUtils {
 		WhereConditionNode wc = delete.getWhereCondition();
 
 		String left = alias == null ? CULUMN_NAME : alias + '.' + CULUMN_NAME;
-		ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementNode(left), new ElementNode(version), "<=");
+		ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementTextNode(left), new ElementTextNode(version), "<=");
 		WhereConditionNode newWc = null;
 		if (wc == null) {
 			newWc = new WhereConditionOpNode(ern, null, null);
@@ -178,11 +178,11 @@ public class MySQLParserUtils {
 			String alias = update.getTableNameAndAlias().getAlias();
 			WhereConditionNode wc = update.getWhereCondition();
 			SetExprsNode setExprs = update.getSetExprs().getLastNode();
-			SetExprNode addSetNode = new SetExprNode(new ElementNode(CULUMN_NAME), new ElementNode(version));
+			SetExprNode addSetNode = new SetExprNode(new ElementTextNode(CULUMN_NAME), new ElementTextNode(version));
 			setExprs.setSuffix(new SetExprsNode(addSetNode, null));
 
-			ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementNode(alias == null ? CULUMN_NAME : alias + '.' + CULUMN_NAME),
-					new ElementNode(version), "<=");
+			ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementTextNode(alias == null ? CULUMN_NAME : alias + '.' + CULUMN_NAME),
+					new ElementTextNode(version), "<=");
 			WhereConditionNode newWc = null;
 			if (wc == null) {
 				newWc = new WhereConditionOpNode(ern, null, null);
@@ -206,11 +206,11 @@ public class MySQLParserUtils {
 				String cn = (alias == null ? tabName : alias) + '.' + CULUMN_NAME;
 
 				// process where
-				ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementNode(cn), new ElementNode(version), "<=");
+				ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementTextNode(cn), new ElementTextNode(version), "<=");
 				versionCond = new WhereConditionOpNode(ern, "and", versionCond);
 
 				// process set
-				SetExprNode addSetNode = new SetExprNode(new ElementNode(cn), new ElementNode(version));
+				SetExprNode addSetNode = new SetExprNode(new ElementTextNode(cn), new ElementTextNode(version));
 				lastSetExprs.setSuffix(new SetExprsNode(addSetNode, null));
 				lastSetExprs = lastSetExprs.getSuffix();
 			}
@@ -228,6 +228,11 @@ public class MySQLParserUtils {
 		SelectNode select = (SelectNode) node;
 
 		TablesNode tables = select.getTables();
+		
+		if (tables == null) {
+			return node;
+		}
+		
 		List<TableNameAndAliasNode> tabs = tables.getRealTables();
 		WhereConditionNode wc = select.getWhere();
 
@@ -238,7 +243,7 @@ public class MySQLParserUtils {
 			String tabName = tab.getName();
 			String alias = tab.getAlias();
 			String cn = alias == null ? tabName : alias;
-			ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementNode(cn + '.' + CULUMN_NAME), new ElementNode(version), "<=");
+			ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementTextNode(cn + '.' + CULUMN_NAME), new ElementTextNode(version), "<=");
 			versionCond = new WhereConditionOpNode(ern, "and", versionCond);
 		}
 

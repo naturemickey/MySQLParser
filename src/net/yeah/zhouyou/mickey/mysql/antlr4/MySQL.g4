@@ -114,10 +114,15 @@ exprExists        : (not=NOT)? EXISTS '(' selectStat ')';
 exprNot           : (NOT | '!') expression ;
 
 element
-	: txt=('*' | PLACEHOLDER | COLUMN_REL | DECIMAL | STRING | ID | TRUE | FALSE | INT | DECIMAL)
+	: elementText
 	| funCall
-	| '(' selectStat ')'
+	| elementSubQuery
+	| elementDate
 	;
+
+elementText     : ('*' | PLACEHOLDER | COLUMN_REL | DECIMAL | STRING | ID | TRUE | FALSE | INT | DECIMAL) ;
+elementSubQuery : '(' selectStat ')' ;
+elementDate     : DATE STRING ;
 
 funCall     : funName=ID '(' paramList? ')' ;
 paramList   : param=element paramSuffix? ;
@@ -167,6 +172,7 @@ ASC         : [Aa][Ss][Cc] ;
 DESC        : [Dd][Ee][Ss][Cc] ;
 CROSS       : [Cc][Rr][Oo][Ss][Ss] ;
 USING       : [Uu][Ss][Ii][Nn][Gg] ;
+DATE        : [Dd][Aa][Tt][Ee] ;
 
 INT         : '0' .. '9'+ ;
 DECIMAL     : ('+' | '-')? ((INT)|('.' INT)|(INT '.' INT)) ([Ee]('+' | '-')? INT)? ;

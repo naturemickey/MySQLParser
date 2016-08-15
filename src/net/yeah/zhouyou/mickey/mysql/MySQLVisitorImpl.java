@@ -6,7 +6,10 @@ import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLBaseVisitor;
 import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLParser;
 import net.yeah.zhouyou.mickey.mysql.tree.ColumnNamesNode;
 import net.yeah.zhouyou.mickey.mysql.tree.DeleteNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ElementDateNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ElementSubQueryNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ElementTextNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionBetweenAndNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionExistsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionInSelectNode;
@@ -173,19 +176,34 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 		return new ExpressionNotNode((ExpressionNode) this.visitExpression(ctx.expression()));
 	}
 
+//	@Override
+//	public SQLSyntaxTreeNode visitElement(MySQLParser.ElementContext ctx) {
+//		String txt = null;
+//		FunCallNode funCall = null;
+//		SelectNode select = null;
+//		if (ctx.txt != null) {
+//			txt = ctx.txt.getText();
+//		} else if (ctx.funCall() != null) {
+//			funCall = (FunCallNode) this.visitFunCall(ctx.funCall());
+//		} else {
+//			select = (SelectNode) this.visitSelectStat(ctx.selectStat());
+//		}
+//		return new ElementNode(txt, funCall, select);
+//	}
+
 	@Override
-	public SQLSyntaxTreeNode visitElement(MySQLParser.ElementContext ctx) {
-		String txt = null;
-		FunCallNode funCall = null;
-		SelectNode select = null;
-		if (ctx.txt != null) {
-			txt = ctx.txt.getText();
-		} else if (ctx.funCall() != null) {
-			funCall = (FunCallNode) this.visitFunCall(ctx.funCall());
-		} else {
-			select = (SelectNode) this.visitSelectStat(ctx.selectStat());
-		}
-		return new ElementNode(txt, funCall, select);
+	public SQLSyntaxTreeNode visitElementText(MySQLParser.ElementTextContext ctx) {
+		return new ElementTextNode(ctx.getText());
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitElementSubQuery(MySQLParser.ElementSubQueryContext ctx) {
+		return new ElementSubQueryNode((SelectNode) this.visitSelectStat(ctx.selectStat()));
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitElementDate(MySQLParser.ElementDateContext ctx) {
+		return new ElementDateNode(ctx.STRING().getText());
 	}
 
 	@Override
@@ -234,7 +252,7 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 	@Override
 	public SQLSyntaxTreeNode visitParamList(MySQLParser.ParamListContext ctx) {
 		ElementNode param = (ElementNode) this.visitElement(ctx.param);
-		ParamListNode suffix = ctx.paramSuffix() == null ? null :(ParamListNode) this.visitParamSuffix(ctx.paramSuffix());
+		ParamListNode suffix = ctx.paramSuffix() == null ? null : (ParamListNode) this.visitParamSuffix(ctx.paramSuffix());
 		return new ParamListNode(param, suffix);
 	}
 

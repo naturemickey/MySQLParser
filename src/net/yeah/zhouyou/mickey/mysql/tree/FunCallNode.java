@@ -1,6 +1,6 @@
 package net.yeah.zhouyou.mickey.mysql.tree;
 
-public class FunCallNode extends SQLSyntaxTreeNode {
+public class FunCallNode extends ElementNode {
 
 	private String name;
 	private ParamListNode paramList;

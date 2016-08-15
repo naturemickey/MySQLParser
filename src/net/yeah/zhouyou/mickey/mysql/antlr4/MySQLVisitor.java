@@ -269,6 +269,24 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitElement(MySQLParser.ElementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MySQLParser#elementText}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElementText(MySQLParser.ElementTextContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#elementSubQuery}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElementSubQuery(MySQLParser.ElementSubQueryContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#elementDate}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElementDate(MySQLParser.ElementDateContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MySQLParser#funCall}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
