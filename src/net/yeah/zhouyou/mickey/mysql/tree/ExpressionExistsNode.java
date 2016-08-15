@@ -12,7 +12,7 @@ public class ExpressionExistsNode extends ExpressionNode {
 
 	@Override
 	public String toString() {
-		return (not ? "not exists" : "exists") + '(' + select + ')';
+		return (not ? "not exists " : "exists ") + '(' + select + ')';
 	}
 
 }

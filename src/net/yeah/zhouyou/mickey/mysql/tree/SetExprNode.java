@@ -11,6 +11,6 @@ public class SetExprNode extends SQLSyntaxTreeNode {
 
 	@Override
 	public String toString() {
-		return left.toString() + '=' + (right == null ? "DEFAULT" : right);
+		return left.toString() + '=' + (right == null ? "default" : right);
 	}
 }

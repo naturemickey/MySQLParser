@@ -15,9 +15,7 @@ public class TableSubQueryNode extends TableRelNode {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append('(').append(select).append(") ").append(alias);
-		return sb.toString();
+		return "(" + select + ") " + alias;
 	}
 
 	@Override

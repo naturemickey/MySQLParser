@@ -11,7 +11,8 @@ public class TestSelect {
 				"select a, b from ta left outer join tb on x = y where n1=n2 and (n3=n4) and n5=n6", //
 				"select a, (select x from tab1 where id = t.y) as xx, b from tab2 t left outer join tab3 using(c,d), (select * from tab5) t5 where t.m = ? and exists (select 1 from tab4 t4 where t1.n  = t4.n)",
 				"select 1,2,3 from a limit 5, 10",
-				"select date '2016-08-08'",}) {
+				"select date '2016-08-08'",
+				"select a, count(1) from tab group by a order by b desc"}) {
 			fun(sql);
 		}
 

@@ -14,7 +14,7 @@ public class ValueListNode extends SQLSyntaxTreeNode {
 	public String toString() {
 		StringBuilder sb = new StringBuilder(name);
 		if (suffix != null) {
-			sb.append(',');
+			sb.append(", ");
 			sb.append(suffix.toString());
 		}
 		return sb.toString();

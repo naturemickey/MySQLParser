@@ -15,7 +15,7 @@ public class UpdateMultipleTableNode extends UpdateNode {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("update ").append(this.tableNameAndAliases).append(" SET ").append(this.setExprs.toString());
+		sb.append("update ").append(this.tableNameAndAliases).append(" set ").append(this.setExprs.toString());
 		if (this.whereCondition != null) {
 			sb.append(" where ").append(this.whereCondition.toString());
 		}
