@@ -3429,6 +3429,7 @@ public class MySQLParser extends Parser {
 		}
 		public TerminalNode DIV() { return getToken(MySQLParser.DIV, 0); }
 		public TerminalNode MOD() { return getToken(MySQLParser.MOD, 0); }
+		public TerminalNode AS() { return getToken(MySQLParser.AS, 0); }
 		public ElementOpEleSuffixContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -3463,7 +3464,7 @@ public class MySQLParser extends Parser {
 				setState(431);
 				((ElementOpEleSuffixContext)_localctx).op = _input.LT(1);
 				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << DIV) | (1L << MOD) | (1L << PLUS) | (1L << MINUS) | (1L << VERTBAR) | (1L << BITAND) | (1L << SHIFT_LEFT) | (1L << SHIFT_RIGHT) | (1L << ASTERISK) | (1L << POWER_OP))) != 0)) ) {
+				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AS) | (1L << DIV) | (1L << MOD) | (1L << PLUS) | (1L << MINUS) | (1L << VERTBAR) | (1L << BITAND) | (1L << SHIFT_LEFT) | (1L << SHIFT_RIGHT) | (1L << ASTERISK) | (1L << POWER_OP))) != 0)) ) {
 					((ElementOpEleSuffixContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 				} else {
 					consume();
@@ -3685,14 +3686,14 @@ public class MySQLParser extends Parser {
 		"\3\62\3\63\3\63\3\63\5\63\u01ba\n\63\3\63\3\63\3\64\3\64\5\64\u01c0\n"+
 		"\64\3\65\3\65\3\65\3\65\2\2\66\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36"+
 		" \"$&(*,.\60\62\64\668:<>@BDFHJLNPRTVXZ\\^`bdfh\2\n\5\2\4\4\r\r;<\3\2"+
-		"\'(\4\2\4\499\4\2\24\24,-\3\2JO\4\2\3\3..\7\2\4\4\r\r\22\23\67\679=\3"+
-		"\2/8\u01d6\2n\3\2\2\2\4p\3\2\2\2\6\u0083\3\2\2\2\b\u0087\3\2\2\2\n\u008a"+
-		"\3\2\2\2\f\u008e\3\2\2\2\16\u0091\3\2\2\2\20\u00bb\3\2\2\2\22\u00c5\3"+
-		"\2\2\2\24\u00c8\3\2\2\2\26\u00cc\3\2\2\2\30\u00d1\3\2\2\2\32\u00d6\3\2"+
-		"\2\2\34\u00d8\3\2\2\2\36\u00e0\3\2\2\2 \u00e4\3\2\2\2\"\u00e7\3\2\2\2"+
-		"$\u00f8\3\2\2\2&\u0101\3\2\2\2(\u0103\3\2\2\2*\u010a\3\2\2\2,\u010f\3"+
-		"\2\2\2.\u0111\3\2\2\2\60\u011d\3\2\2\2\62\u0125\3\2\2\2\64\u0129\3\2\2"+
-		"\2\66\u012c\3\2\2\28\u0132\3\2\2\2:\u013d\3\2\2\2<\u0144\3\2\2\2>\u0148"+
+		"\'(\4\2\4\499\4\2\24\24,-\3\2JO\4\2\3\3..\7\2\4\4\r\r\22\23\67\679=\4"+
+		"\2\36\36/8\u01d6\2n\3\2\2\2\4p\3\2\2\2\6\u0083\3\2\2\2\b\u0087\3\2\2\2"+
+		"\n\u008a\3\2\2\2\f\u008e\3\2\2\2\16\u0091\3\2\2\2\20\u00bb\3\2\2\2\22"+
+		"\u00c5\3\2\2\2\24\u00c8\3\2\2\2\26\u00cc\3\2\2\2\30\u00d1\3\2\2\2\32\u00d6"+
+		"\3\2\2\2\34\u00d8\3\2\2\2\36\u00e0\3\2\2\2 \u00e4\3\2\2\2\"\u00e7\3\2"+
+		"\2\2$\u00f8\3\2\2\2&\u0101\3\2\2\2(\u0103\3\2\2\2*\u010a\3\2\2\2,\u010f"+
+		"\3\2\2\2.\u0111\3\2\2\2\60\u011d\3\2\2\2\62\u0125\3\2\2\2\64\u0129\3\2"+
+		"\2\2\66\u012c\3\2\2\28\u0132\3\2\2\2:\u013d\3\2\2\2<\u0144\3\2\2\2>\u0148"+
 		"\3\2\2\2@\u014d\3\2\2\2B\u014f\3\2\2\2D\u0156\3\2\2\2F\u0163\3\2\2\2H"+
 		"\u0165\3\2\2\2J\u0169\3\2\2\2L\u0172\3\2\2\2N\u0179\3\2\2\2P\u0182\3\2"+
 		"\2\2R\u018c\3\2\2\2T\u0193\3\2\2\2V\u0196\3\2\2\2X\u01a2\3\2\2\2Z\u01a4"+

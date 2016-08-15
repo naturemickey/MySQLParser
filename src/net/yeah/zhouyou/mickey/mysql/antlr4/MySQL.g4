@@ -113,14 +113,16 @@ element
 	| funCall
 	| elementSubQuery
 	| elementDate
+//	| elementTypeConvert
 	| elementOpEle
 	;
 
 elementText        : ('*' | PLACEHOLDER | COLUMN_REL | DECIMAL | STRING | ID | TRUE | FALSE | INT | DECIMAL | NULL) ;
 elementSubQuery    : '(' selectStat ')' ;
 elementDate        : DATE STRING ;
+//elementTypeConvert : data=element AS type=element ;
 elementOpEle       : elementText elementOpEleSuffix? ;
-elementOpEleSuffix : op=('|' | '&' | '<<' | '>>' | '+' | '-' | '*' | DIV | MOD | '^')? elementOpEle ;
+elementOpEleSuffix : op=('|' | '&' | '<<' | '>>' | '+' | '-' | '*' | DIV | MOD | '^' | AS)? elementOpEle ;
 // 上面这一行中的op为可选的原因是加号和减号会被合并后面的数字中，这并不是我希望的，但贪婪匹配会有这样的效果，所以这里需要在visitor中做特殊处理。
 
 funCall     : funName=ID '(' paramList? ')' ;

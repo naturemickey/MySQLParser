@@ -13,7 +13,7 @@ public class TestTree {
 
 	public static void main(String[] args) throws Exception {
 
-		String sql = "UPDATE table SET c=b+1 mod 2 - 5 WHERE a=1";
+		String sql = "SELECT 38.8, CAST(38.8 AS CHAR)";
 		try (ByteArrayInputStream is = new ByteArrayInputStream(sql.getBytes());) {
 			ANTLRInputStream input = new ANTLRInputStream(is);
 			MySQLLexer lexer = new MySQLLexer(input);
