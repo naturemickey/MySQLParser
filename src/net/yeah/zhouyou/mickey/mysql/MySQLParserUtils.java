@@ -182,7 +182,7 @@ public class MySQLParserUtils {
 			String tabName = tab.getName();
 			String alias = tab.getAlias();
 			String cn = alias == null ? tabName : alias;
-			ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementNode(cn + +'.' + CULUMN_NAME), new ElementNode(version), "<=");
+			ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementNode(cn + '.' + CULUMN_NAME), new ElementNode(version), "<=");
 			versionCond = new WhereConditionOpNode(ern, "and", versionCond);
 		}
 

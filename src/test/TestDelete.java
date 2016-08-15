@@ -6,7 +6,7 @@ public class TestDelete {
 	public static void main(String[] args) throws Exception {
 
 		for (String sql : new String[] { "delete from tt_order_status where id = ?", "delete from tt_order_status t where t.id = ?",
-				"delete from tt_order_status t",
+				"delete from tt_order_status as t",
 				"delete from tt_order_status lImIt 9"}) {
 			fun(sql);
 		}
