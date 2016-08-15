@@ -36,13 +36,19 @@ public class MySQLParserUtils {
 
 	private static final String CULUMN_NAME = "data_env_version";
 	private static final Map<Key, String> addVersionCache = new ConcurrentHashMap<>();
+	private static final int cacheCountLimit = 1000000;
 
 	public static String addVersionToSql(String sql, String version) {
-		return addVersionCache.computeIfAbsent(new Key(sql, version), key ->{
-			return addVersionToSqlNoCache(key.sql, key.version);
-		});
+		if (addVersionCache.size() < cacheCountLimit) {
+			return addVersionCache.computeIfAbsent(new Key(sql, version), key -> {
+				return addVersionToSqlNoCache(key.sql, key.version);
+			});
+		} else {
+			String res = addVersionCache.get(new Key(sql, version));
+			return (res != null) ? res : addVersionToSqlNoCache(sql, version);
+		}
 	}
-	
+
 	public static String addVersionToSqlNoCache(String sql, String version) {
 		SQLSyntaxTreeNode node = parse(sql);
 		addColumn(node, version);
