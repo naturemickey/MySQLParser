@@ -18,6 +18,8 @@ import net.yeah.zhouyou.mickey.mysql.tree.ExpressionRelationalNode;
 import net.yeah.zhouyou.mickey.mysql.tree.InsertNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SQLSyntaxTreeNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SelectNode;
+import net.yeah.zhouyou.mickey.mysql.tree.SetExprNode;
+import net.yeah.zhouyou.mickey.mysql.tree.SetExprsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TableNameAndAliasNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TablesNode;
 import net.yeah.zhouyou.mickey.mysql.tree.UpdateMultipleTableNode;
@@ -117,13 +119,14 @@ public class MySQLParserUtils {
 		if (node instanceof UpdateSignleTableNode) {
 			UpdateSignleTableNode update = (UpdateSignleTableNode) node;
 
-			TableNameAndAliasNode tableNameAndAlias = update.getTableNameAndAlias();
-			String tabName = tableNameAndAlias.getName();
-			String alias = tableNameAndAlias.getAlias();
+			String alias = update.getTableNameAndAlias().getAlias();
 			WhereConditionNode wc = update.getWhereCondition();
+			SetExprsNode setExprs = update.getSetExprs().getLastNode();
+			SetExprNode addSetNode = new SetExprNode(new ElementNode(CULUMN_NAME), new ElementNode(version));
+			setExprs.setSuffix(new SetExprsNode(addSetNode, null));
 
-			ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementNode(alias == null ? "data_env_version" : alias + ".data_env_version"),
-					new ElementNode("'v1'"), "<=");
+			ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementNode(alias == null ? CULUMN_NAME : alias + '.' + CULUMN_NAME),
+					new ElementNode(version), "<=");
 			WhereConditionNode newWc = null;
 			if (wc == null) {
 				newWc = new WhereConditionOpNode(ern, null, null);
@@ -136,6 +139,7 @@ public class MySQLParserUtils {
 
 			List<TableNameAndAliasNode> tabs = update.getTableNameAndAliases().all();
 			WhereConditionNode wc = update.getWhereCondition();
+			SetExprsNode lastSetExprs = update.getSetExprs().getLastNode();
 
 			WhereConditionOpNode versionCond = null;
 
@@ -143,9 +147,16 @@ public class MySQLParserUtils {
 			for (TableNameAndAliasNode tab : tabs) {
 				String tabName = tab.getName();
 				String alias = tab.getAlias();
-				String cn = alias == null ? tabName : alias;
-				ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementNode(cn + ".data_env_version"), new ElementNode("'v1'"), "<=");
+				String cn = (alias == null ? tabName : alias) + '.' + CULUMN_NAME;
+
+				// process where
+				ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementNode(cn), new ElementNode(version), "<=");
 				versionCond = new WhereConditionOpNode(ern, "and", versionCond);
+
+				// process set
+				SetExprNode addSetNode = new SetExprNode(new ElementNode(cn), new ElementNode(version));
+				lastSetExprs.setSuffix(new SetExprsNode(addSetNode, null));
+				lastSetExprs = lastSetExprs.getSuffix();
 			}
 
 			if (wc != null) {
@@ -171,7 +182,7 @@ public class MySQLParserUtils {
 			String tabName = tab.getName();
 			String alias = tab.getAlias();
 			String cn = alias == null ? tabName : alias;
-			ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementNode(cn + ".data_env_version"), new ElementNode("'v1'"), "<=");
+			ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementNode(cn + +'.' + CULUMN_NAME), new ElementNode(version), "<=");
 			versionCond = new WhereConditionOpNode(ern, "and", versionCond);
 		}
 

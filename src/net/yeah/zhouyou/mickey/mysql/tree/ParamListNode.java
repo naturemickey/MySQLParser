@@ -12,7 +12,9 @@ public class ParamListNode extends SQLSyntaxTreeNode {
 
 	@Override
 	public String toString() {
+		if (suffix != null)
 		return param.toString() + ',' + suffix;
+		return param.toString();
 	}
 
 }

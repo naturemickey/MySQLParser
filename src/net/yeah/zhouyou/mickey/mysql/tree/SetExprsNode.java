@@ -19,4 +19,27 @@ public class SetExprsNode extends SQLSyntaxTreeNode {
 		}
 	}
 
+	public SetExprsNode getLastNode() {
+		if (suffix == null) {
+			return this;
+		}
+		return suffix.getLastNode();
+	}
+
+	public SetExprNode getSetExpr() {
+		return setExpr;
+	}
+
+	public void setSetExpr(SetExprNode setExpr) {
+		this.setExpr = setExpr;
+	}
+
+	public SetExprsNode getSuffix() {
+		return suffix;
+	}
+
+	public void setSuffix(SetExprsNode suffix) {
+		this.suffix = suffix;
+	}
+
 }
