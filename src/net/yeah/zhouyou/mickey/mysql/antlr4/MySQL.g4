@@ -97,8 +97,9 @@ expression
 	| exprExists
 	;
 
+// 忘了写like和not like
 exprRelational    : left=element relationalOp=(EQ | LTH | GTH | NOT_EQ | LET | GET) right=element ;
-exprBetweenAnd    : el=element BETWEEN left=element AND right=element ;
+exprBetweenAnd    : el=element (not=NOT)? BETWEEN left=element AND right=element ;
 exprIsOrIsNotNull : element IS (not=NOT)? NULL ;
 exprInSelect      : element (not=NOT)? IN '(' selectStat ')' ;
 exprInValues      : element (not=NOT)? IN '(' valueList ')' ;
@@ -110,11 +111,15 @@ element
 	| funCall
 	| elementSubQuery
 	| elementDate
+	| elementOpEle
 	;
 
-elementText     : ('*' | PLACEHOLDER | COLUMN_REL | DECIMAL | STRING | ID | TRUE | FALSE | INT | DECIMAL | NULL) ;
-elementSubQuery : '(' selectStat ')' ;
-elementDate     : DATE STRING ;
+elementText        : ('*' | PLACEHOLDER | COLUMN_REL | DECIMAL | STRING | ID | TRUE | FALSE | INT | DECIMAL | NULL) ;
+elementSubQuery    : '(' selectStat ')' ;
+elementDate        : DATE STRING ;
+elementOpEle       : elementText elementOpEleSuffix? ;
+elementOpEleSuffix : op=('|' | '&' | '<<' | '>>' | '+' | '-' | '*' | DIV | MOD | '^')? elementOpEle ;
+// 上面这一行中的op为可选的原因是加号和减号会被合并后面的数字中，这并不是我希望的，但贪婪匹配会有这样的效果，所以这里需要在visitor中做特殊处理。
 
 funCall     : funName=ID '(' paramList? ')' ;
 paramList   : param=element paramSuffix? ;
@@ -165,6 +170,16 @@ DESC        : [Dd][Ee][Ss][Cc] ;
 CROSS       : [Cc][Rr][Oo][Ss][Ss] ;
 USING       : [Uu][Ss][Ii][Nn][Gg] ;
 DATE        : [Dd][Aa][Tt][Ee] ;
+DIV         : [Dd][Ii][Vv] | '/' ;
+MOD         : [Mm][Oo][Dd] | '%' ;
+PLUS        : '+' ;
+MINUS       : '-' ;
+VERTBAR     : '|' ;
+BITAND      : '&' ;
+SHIFT_LEFT  : '<<' ;
+SHIFT_RIGHT : '>>' ;
+ASTERISK    : '*' ;
+POWER_OP    : '^' ;
 
 INT         : '0' .. '9'+ ;
 DECIMAL     : ('+' | '-')? ((INT)|('.' INT)|(INT '.' INT)) ([Ee]('+' | '-')? INT)? ;
@@ -175,20 +190,10 @@ COLUMN_REL  : ID '.' (ID | '*') ;
 
 ALL         : 'all' ;
 ANY         : 'any' ;
-DIVIDE      : 'div' | '/' ;
-MOD         : 'mod' | '%' ;
 REGEXP      : 'regexp' ;
-PLUS        : '+' ;
-MINUS       : '-' ;
 NEGATION    : '~' ;
-VERTBAR     : '|' ;
-BITAND      : '&' ;
-POWER_OP    : '^' ;
 BINARY      : 'binary' ;
-SHIFT_LEFT  : '<<' ;
-SHIFT_RIGHT : '>>' ;
 ESCAPE      : 'escape' ;
-ASTERISK    : '*' ;
 RPAREN      : ')' ;
 LPAREN      : '(' ;
 RBRACK      : ']' ;

@@ -8,6 +8,8 @@ import net.yeah.zhouyou.mickey.mysql.tree.ColumnNamesNode;
 import net.yeah.zhouyou.mickey.mysql.tree.DeleteNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementDateNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ElementOpEleNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ElementOpEleSuffixNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementSubQueryNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementTextNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionBetweenAndNode;
@@ -142,7 +144,8 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 		ElementNode element = (ElementNode) this.visitElement(ctx.el);
 		ElementNode left = (ElementNode) this.visitElement(ctx.left);
 		ElementNode right = (ElementNode) this.visitElement(ctx.right);
-		return new ExpressionBetweenAndNode(element, left, right);
+		boolean not = ctx.not != null;
+		return new ExpressionBetweenAndNode(element, not, left, right);
 	}
 
 	@Override
@@ -208,6 +211,26 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 	@Override
 	public SQLSyntaxTreeNode visitElementDate(MySQLParser.ElementDateContext ctx) {
 		return new ElementDateNode(ctx.STRING().getText());
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitElementOpEle(MySQLParser.ElementOpEleContext ctx) {
+		ElementTextNode elementText = (ElementTextNode) this.visitElementText(ctx.elementText());
+		ElementOpEleSuffixNode suffix = ctx.elementOpEleSuffix() == null ? null : (ElementOpEleSuffixNode) this.visitElementOpEleSuffix(ctx.elementOpEleSuffix());
+		return new ElementOpEleNode(elementText, suffix);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitElementOpEleSuffix(MySQLParser.ElementOpEleSuffixContext ctx) {
+		String op = ctx.op == null ? null : ctx.op.getText();
+		ElementOpEleNode element = (ElementOpEleNode) this.visitElementOpEle(ctx.elementOpEle());
+		if (op == null) {
+			// 加号和减号可能会被后面的数字合并解析，所以这里特殊处理。
+			String text = element.getElementText().getTxt();
+			op = String.valueOf(text.charAt(0));
+			element.getElementText().setTxt(text.substring(1));
+		}
+		return new ElementOpEleSuffixNode(op, element);
 	}
 
 	@Override

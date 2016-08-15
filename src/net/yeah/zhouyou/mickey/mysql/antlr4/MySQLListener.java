@@ -468,6 +468,26 @@ public interface MySQLListener extends ParseTreeListener {
 	 */
 	void exitElementDate(MySQLParser.ElementDateContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MySQLParser#elementOpEle}.
+	 * @param ctx the parse tree
+	 */
+	void enterElementOpEle(MySQLParser.ElementOpEleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#elementOpEle}.
+	 * @param ctx the parse tree
+	 */
+	void exitElementOpEle(MySQLParser.ElementOpEleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#elementOpEleSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void enterElementOpEleSuffix(MySQLParser.ElementOpEleSuffixContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#elementOpEleSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void exitElementOpEleSuffix(MySQLParser.ElementOpEleSuffixContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MySQLParser#funCall}.
 	 * @param ctx the parse tree
 	 */
