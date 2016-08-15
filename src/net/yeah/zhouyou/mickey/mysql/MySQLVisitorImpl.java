@@ -48,10 +48,14 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 	@Override
 	public SQLSyntaxTreeNode visitInsertStat(MySQLParser.InsertStatContext ctx) {
 		String tableName = ctx.tableName.getText();
-		ColumnNamesNode columnNames = (ColumnNamesNode) visitColumnNames(ctx.columnNames());
-		ValueListNode valueNames = (ValueListNode) visitValueList(ctx.valueList());
-
-		return new InsertNode(tableName, columnNames, valueNames);
+		ColumnNamesNode columnNames = ctx.columnNames() == null ? null : (ColumnNamesNode) visitColumnNames(ctx.columnNames());
+		ValueListNode valueNames = ctx.valueList() == null ? null : (ValueListNode) visitValueList(ctx.valueList());
+		SelectNode select = ctx.selectStat() == null ? null : (SelectNode) this.visitSelectStat(ctx.selectStat());
+		if (valueNames != null) {
+			return new InsertNode(tableName, columnNames, valueNames);
+		} else {
+			return new InsertNode(tableName, columnNames, select);
+		}
 	}
 
 	@Override
@@ -176,20 +180,20 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 		return new ExpressionNotNode((ExpressionNode) this.visitExpression(ctx.expression()));
 	}
 
-//	@Override
-//	public SQLSyntaxTreeNode visitElement(MySQLParser.ElementContext ctx) {
-//		String txt = null;
-//		FunCallNode funCall = null;
-//		SelectNode select = null;
-//		if (ctx.txt != null) {
-//			txt = ctx.txt.getText();
-//		} else if (ctx.funCall() != null) {
-//			funCall = (FunCallNode) this.visitFunCall(ctx.funCall());
-//		} else {
-//			select = (SelectNode) this.visitSelectStat(ctx.selectStat());
-//		}
-//		return new ElementNode(txt, funCall, select);
-//	}
+	// @Override
+	// public SQLSyntaxTreeNode visitElement(MySQLParser.ElementContext ctx) {
+	// String txt = null;
+	// FunCallNode funCall = null;
+	// SelectNode select = null;
+	// if (ctx.txt != null) {
+	// txt = ctx.txt.getText();
+	// } else if (ctx.funCall() != null) {
+	// funCall = (FunCallNode) this.visitFunCall(ctx.funCall());
+	// } else {
+	// select = (SelectNode) this.visitSelectStat(ctx.selectStat());
+	// }
+	// return new ElementNode(txt, funCall, select);
+	// }
 
 	@Override
 	public SQLSyntaxTreeNode visitElementText(MySQLParser.ElementTextContext ctx) {

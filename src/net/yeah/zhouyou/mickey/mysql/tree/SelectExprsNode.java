@@ -23,4 +23,17 @@ public class SelectExprsNode extends SQLSyntaxTreeNode {
 
 		return sb.toString();
 	}
+
+	public SelectExprsNode getLastNode() {
+		return suffix == null ? this : suffix.getLastNode();
+	}
+
+	public SelectExprsNode getSuffix() {
+		return suffix;
+	}
+
+	public void setSuffix(SelectExprsNode suffix) {
+		this.suffix = suffix;
+	}
+
 }

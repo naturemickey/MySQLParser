@@ -19,6 +19,12 @@ public class ValueListNode extends SQLSyntaxTreeNode {
 		}
 		return sb.toString();
 	}
+	
+	public ValueListNode getLastNode() {
+		if (suffix == null)
+			return this;
+		return suffix.getLastNode();
+	}
 
 	public String getName() {
 		return name;

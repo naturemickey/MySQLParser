@@ -12,7 +12,7 @@ stat
 	;
 
 insertStat
-	: INSERT INTO? tableName=ID '(' columnNames ')' VALUES '(' valueList ')'
+	: INSERT INTO? tableName=ID ('(' columnNames ')')? ((VALUES '(' valueList ')') | selectStat)
 	;
 
 columnNames       : name=ID columnNamesSuffix? ;

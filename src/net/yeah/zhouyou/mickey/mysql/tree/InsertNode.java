@@ -5,11 +5,19 @@ public class InsertNode extends SQLSyntaxTreeNode {
 	private String tableName;
 	private ColumnNamesNode columnNames;
 	private ValueListNode valueNames;
+	private SelectNode select;
 
 	public InsertNode(String tableName, ColumnNamesNode columnNames, ValueListNode valueNames) {
 		this.tableName = tableName;
 		this.columnNames = columnNames;
 		this.valueNames = valueNames;
+	}
+
+	public InsertNode(String tableName, ColumnNamesNode columnNames, SelectNode select) {
+		super();
+		this.tableName = tableName;
+		this.columnNames = columnNames;
+		this.select = select;
 	}
 
 	@Override
@@ -19,7 +27,12 @@ public class InsertNode extends SQLSyntaxTreeNode {
 		if (columnNames != null) {
 			sb.append(" (").append(columnNames.toString()).append(')');
 		}
-		sb.append("values (").append(valueNames.toString()).append(')');
+		if (valueNames != null) {
+			sb.append(" values (").append(valueNames.toString()).append(')');
+		}
+		if (select != null) {
+			sb.append(' ').append(select);
+		}
 		return sb.toString();
 	}
 
@@ -45,6 +58,14 @@ public class InsertNode extends SQLSyntaxTreeNode {
 
 	public void setValueNames(ValueListNode valueNames) {
 		this.valueNames = valueNames;
+	}
+
+	public SelectNode getSelect() {
+		return select;
+	}
+
+	public void setSelect(SelectNode select) {
+		this.select = select;
 	}
 
 }

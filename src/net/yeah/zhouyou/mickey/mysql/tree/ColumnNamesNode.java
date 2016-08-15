@@ -20,6 +20,10 @@ public class ColumnNamesNode extends SQLSyntaxTreeNode {
 		return sb.toString();
 	}
 
+	public ColumnNamesNode getLastNode() {
+		return suffix == null ? this : suffix.getLastNode();
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -35,7 +39,5 @@ public class ColumnNamesNode extends SQLSyntaxTreeNode {
 	public void setSuffix(ColumnNamesNode suffix) {
 		this.suffix = suffix;
 	}
-	
-	
-	
+
 }
