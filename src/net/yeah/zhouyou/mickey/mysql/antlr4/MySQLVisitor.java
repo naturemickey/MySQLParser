@@ -263,6 +263,12 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExprNot(MySQLParser.ExprNotContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MySQLParser#exprLike}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprLike(MySQLParser.ExprLikeContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MySQLParser#element}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

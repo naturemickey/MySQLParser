@@ -17,6 +17,7 @@ import net.yeah.zhouyou.mickey.mysql.tree.ExpressionExistsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionInSelectNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionInValuesNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionIsOrIsNotNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ExpressionLikeNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionNotNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionRelationalNode;
@@ -183,20 +184,13 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 		return new ExpressionNotNode((ExpressionNode) this.visitExpression(ctx.expression()));
 	}
 
-	// @Override
-	// public SQLSyntaxTreeNode visitElement(MySQLParser.ElementContext ctx) {
-	// String txt = null;
-	// FunCallNode funCall = null;
-	// SelectNode select = null;
-	// if (ctx.txt != null) {
-	// txt = ctx.txt.getText();
-	// } else if (ctx.funCall() != null) {
-	// funCall = (FunCallNode) this.visitFunCall(ctx.funCall());
-	// } else {
-	// select = (SelectNode) this.visitSelectStat(ctx.selectStat());
-	// }
-	// return new ElementNode(txt, funCall, select);
-	// }
+	@Override
+	public SQLSyntaxTreeNode visitExprLike(MySQLParser.ExprLikeContext ctx) {
+		boolean not = ctx.not != null;
+		ElementNode left = (ElementNode) this.visitElement(ctx.left);
+		ElementNode right = (ElementNode) this.visitElement(ctx.right);
+		return new ExpressionLikeNode(not, left, right);
+	}
 
 	@Override
 	public SQLSyntaxTreeNode visitElementText(MySQLParser.ElementTextContext ctx) {

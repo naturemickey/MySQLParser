@@ -95,9 +95,10 @@ expression
 	| exprInSelect
 	| exprInValues
 	| exprExists
+	| exprNot
+	| exprLike
 	;
 
-// 忘了写like和not like
 exprRelational    : left=element relationalOp=(EQ | LTH | GTH | NOT_EQ | LET | GET) right=element ;
 exprBetweenAnd    : el=element (not=NOT)? BETWEEN left=element AND right=element ;
 exprIsOrIsNotNull : element IS (not=NOT)? NULL ;
@@ -105,6 +106,7 @@ exprInSelect      : element (not=NOT)? IN '(' selectStat ')' ;
 exprInValues      : element (not=NOT)? IN '(' valueList ')' ;
 exprExists        : (not=NOT)? EXISTS '(' selectStat ')';
 exprNot           : (NOT | '!') expression ;
+exprLike          : left=element (not=NOT)? LIKE right=element ;
 
 element
 	: elementText
