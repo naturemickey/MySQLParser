@@ -17,9 +17,9 @@ public class InsertNode extends SQLSyntaxTreeNode {
 		StringBuilder sb = new StringBuilder("insert into ");
 		sb.append(tableName);
 		if (columnNames != null) {
-			sb.append('(').append(columnNames.toString()).append(')');
+			sb.append(" (").append(columnNames.toString()).append(')');
 		}
-		sb.append("values(").append(valueNames.toString()).append(')');
+		sb.append("values (").append(valueNames.toString()).append(')');
 		return sb.toString();
 	}
 
