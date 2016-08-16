@@ -1,7 +1,5 @@
 package test;
 
-import java.io.IOException;
-
 public class TestSelect {
 	public static void main(String[] args) throws Exception {
 
@@ -19,14 +17,11 @@ public class TestSelect {
 				"select distinct c1, c2 from t1 where (c1, c2) = (1, 2) lock in Share Mode", //
 				"select (select column1 from t1) + 5 from t2 FOR UPDATE", //
 				"select 1 as a union all select x from t left join t1 on t.a = t1.b union select 'x' from t2 where x is UNKNOWN", //
-				"select sum(a) from tab1 t1, tab2 t2 where t1.id = t2.id group by t1.a, t2.b having count(*) > 1 order by t1.id DESC, t2.id asc"}) {
-			fun(sql);
+				"select sum(a) from tab1 t1, tab2 t2 where t1.id = t2.id group by t1.a, t2.b having count(*) > 1 order by t1.id DESC, t2.id asc",
+				// "select 1 from t for updat",//
+		}) {
+			SqlTestUtils.test(sql);
 		}
 
 	}
-
-	private static void fun(String sql) throws IOException {
-		SqlTestUtils.test(sql);
-	}
 }
-		

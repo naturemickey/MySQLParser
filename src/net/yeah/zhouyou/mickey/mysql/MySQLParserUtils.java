@@ -103,6 +103,7 @@ public class MySQLParserUtils {
 			MySQLLexer lexer = new MySQLLexer(input);
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			MySQLParser parser = new MySQLParser(tokens);
+			parser.setErrorHandler(new MySQLParserErrorStrategy());
 			ParseTree tree = parser.stat();
 
 			return new MySQLVisitorImpl().visit(tree);
