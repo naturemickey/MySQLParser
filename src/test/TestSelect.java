@@ -13,7 +13,7 @@ public class TestSelect {
 				"select 1,2,38.8 from a limit 5, 10", //
 				"select date '2016-08-08', time '10:20:30'", //
 				"select a, count(1) from tab where create_tm = date '2016-08-08' group by a order by b desc", //
-				"SELECT 38.8, CAST(38.8 AS CHAR), x'0a0e', 0xabc, X'0a0e', 0Xabc", //
+				"SELECT 38.8, CAST(38.8 AS CHAR), x'0a0e', 0xabc, X'0a0e', 0Xabc, b'1010', 0B1010", //
 				"SELECT * FROM t1 WHERE (col1,col2) = (SELECT col3, col4 FROM t2 WHERE id = 10)", //
 				"SELECT * FROM t1 WHERE ROW(col1,col2) = ANY (SELECT col3, col4 FROM t2 WHERE id = 10)", //
 				"select distinct c1, c2 from t1 where (c1, c2) = (1, 2)", //
