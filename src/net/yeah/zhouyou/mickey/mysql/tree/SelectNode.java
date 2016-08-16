@@ -12,9 +12,10 @@ public class SelectNode extends SQLSyntaxTreeNode {
 	private String offset;
 	private String rowCount;
 	private boolean forUpdate;
+	private SelectUnionSuffix unionSuffix;
 
 	public SelectNode(boolean distinct, SelectExprsNode selectExprs, TablesNode tables, WhereConditionNode where, GbobExprsNode groupByExprs,
-			WhereConditionNode having, GbobExprsNode orderByExprs, String offset, String rowCount, boolean forUpdate) {
+			WhereConditionNode having, GbobExprsNode orderByExprs, String offset, String rowCount, boolean forUpdate, SelectUnionSuffix unionSuffix) {
 		this.distinct = distinct;
 		this.selectExprs = selectExprs;
 		this.tables = tables;
@@ -25,6 +26,7 @@ public class SelectNode extends SQLSyntaxTreeNode {
 		this.offset = offset;
 		this.rowCount = rowCount;
 		this.forUpdate = forUpdate;
+		this.unionSuffix = unionSuffix;
 	}
 
 	@Override
@@ -50,8 +52,12 @@ public class SelectNode extends SQLSyntaxTreeNode {
 			if (this.offset != null)
 				sb.append(" offset ").append(this.offset);
 		}
-		if (this.forUpdate)
+		if (this.forUpdate) {
 			sb.append(" for update");
+		}
+		if (this.unionSuffix != null) {
+			sb.append(' ').append(this.unionSuffix);
+		}
 
 		return sb.toString();
 	}

@@ -30,6 +30,11 @@ selectStat
 	  (ORDER BY orderByExprs=gbobExprs)?
 	  (LIMIT ((offset=INT ',')? rowCount=INT) | (rowCount=INT OFFSET offset=INT))?
 	    (FOR lock=UPDATE)?
+	  selectUnionSuffix?
+	;
+
+selectUnionSuffix
+	: UNION method=(ALL | DISTINCT)? selectStat
 	;
 
 selectExprs       : element (AS? alias=ID)? selectExprsSuffix? ;
@@ -179,6 +184,7 @@ DATE        : [Dd][Aa][Tt][Ee] ;
 ALL         : [Aa][Ll][Ll] ;
 ANY         : [Aa][Nn][Yy] ;
 SOME        : [Ss][Oo][Mm][Ee] ;
+UNION       : [Uu][Nn][Ii][Oo][Nn] ;
 AND         : [Aa][Nn][Dd] | '&&' ;
 OR          : [Oo][Rr]     | '||' ;
 NOT         : [Nn][Oo][Tt] | '!'  ;

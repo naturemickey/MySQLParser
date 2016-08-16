@@ -32,6 +32,7 @@ import net.yeah.zhouyou.mickey.mysql.tree.ParamListNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SQLSyntaxTreeNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SelectExprsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SelectNode;
+import net.yeah.zhouyou.mickey.mysql.tree.SelectUnionSuffix;
 import net.yeah.zhouyou.mickey.mysql.tree.SetExprNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SetExprsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TableJoinNode;
@@ -316,6 +317,7 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 		String offset = null;
 		String rowCount = null;
 		boolean forUpdate = ctx.lock != null;
+		SelectUnionSuffix unionSuffix = null;
 		if (ctx.tables() != null)
 			tables = (TablesNode) this.visitTables(ctx.tables());
 		if (ctx.where != null)
@@ -331,8 +333,18 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 			if (ctx.offset != null)
 				offset = ctx.offset.getText();
 		}
+		if (ctx.selectUnionSuffix() != null) {
+			unionSuffix = (SelectUnionSuffix) this.visitSelectUnionSuffix(ctx.selectUnionSuffix());
+		}
 
-		return new SelectNode(distinct, selectExprs, tables, where, groupByExprs, having, orderByExprs, offset, rowCount, forUpdate);
+		return new SelectNode(distinct, selectExprs, tables, where, groupByExprs, having, orderByExprs, offset, rowCount, forUpdate, unionSuffix);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitSelectUnionSuffix(MySQLParser.SelectUnionSuffixContext ctx) {
+		String method = ctx.method != null ? ctx.method.getText() : null;
+		SelectNode select = (SelectNode) this.visitSelectStat(ctx.selectStat());
+		return new SelectUnionSuffix(method, select);
 	}
 
 	@Override

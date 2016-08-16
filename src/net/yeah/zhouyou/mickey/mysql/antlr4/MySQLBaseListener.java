@@ -100,6 +100,18 @@ public class MySQLBaseListener implements MySQLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSelectUnionSuffix(MySQLParser.SelectUnionSuffixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSelectUnionSuffix(MySQLParser.SelectUnionSuffixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSelectExprs(MySQLParser.SelectExprsContext ctx) { }
 	/**
 	 * {@inheritDoc}

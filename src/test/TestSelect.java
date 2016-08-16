@@ -17,7 +17,8 @@ public class TestSelect {
 				"SELECT * FROM t1 WHERE (col1,col2) = (SELECT col3, col4 FROM t2 WHERE id = 10)", //
 				"SELECT * FROM t1 WHERE ROW(col1,col2) = ANY (SELECT col3, col4 FROM t2 WHERE id = 10)", //
 				"select distinct c1, c2 from t1 where (c1, c2) = (1, 2)", //
-				"select (select column1 from t1) + 5 from t2" }) {
+				"select (select column1 from t1) + 5 from t2", //
+				"select 1 as a union all select x from t union select 'x'"}) {
 			fun(sql);
 		}
 

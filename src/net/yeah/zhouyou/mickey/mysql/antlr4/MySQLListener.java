@@ -78,6 +78,16 @@ public interface MySQLListener extends ParseTreeListener {
 	 */
 	void exitSelectStat(MySQLParser.SelectStatContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MySQLParser#selectUnionSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void enterSelectUnionSuffix(MySQLParser.SelectUnionSuffixContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#selectUnionSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void exitSelectUnionSuffix(MySQLParser.SelectUnionSuffixContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MySQLParser#selectExprs}.
 	 * @param ctx the parse tree
 	 */
