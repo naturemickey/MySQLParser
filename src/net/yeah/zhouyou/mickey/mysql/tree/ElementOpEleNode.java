@@ -2,29 +2,29 @@ package net.yeah.zhouyou.mickey.mysql.tree;
 
 public class ElementOpEleNode extends ElementNode {
 
-	private ElementTextNode elementText;
+	private ElementOpFactoryNode factory;
 	private ElementOpEleSuffixNode suffix;
 
-	public ElementOpEleNode(ElementTextNode elementText, ElementOpEleSuffixNode suffix) {
-		this.elementText = elementText;
+	public ElementOpEleNode(ElementOpFactoryNode factory, ElementOpEleSuffixNode suffix) {
+		this.factory = factory;
 		this.suffix = suffix;
 	}
 
 	@Override
 	public String toString() {
 		if (suffix != null) {
-			return elementText.toString() + ' ' + suffix;
+			return factory.toString() + ' ' + suffix;
 		} else {
-			return elementText.toString();
+			return factory.toString();
 		}
 	}
 
-	public ElementTextNode getElementText() {
-		return elementText;
+	public ElementOpFactoryNode getFactory() {
+		return factory;
 	}
 
-	public void setElementText(ElementTextNode elementText) {
-		this.elementText = elementText;
+	public void setFactory(ElementOpFactoryNode factory) {
+		this.factory = factory;
 	}
 
 	public ElementOpEleSuffixNode getSuffix() {

@@ -1,6 +1,6 @@
 package net.yeah.zhouyou.mickey.mysql.tree;
 
-public class ElementDateNode extends ElementNode {
+public class ElementDateNode extends ElementOpFactoryNode {
 
 	private String str;
 

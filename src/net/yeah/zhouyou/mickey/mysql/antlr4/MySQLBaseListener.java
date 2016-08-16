@@ -544,6 +544,18 @@ public class MySQLBaseListener implements MySQLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterElementOpFactory(MySQLParser.ElementOpFactoryContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElementOpFactory(MySQLParser.ElementOpFactoryContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterElementText(MySQLParser.ElementTextContext ctx) { }
 	/**
 	 * {@inheritDoc}

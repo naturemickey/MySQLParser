@@ -1,6 +1,6 @@
 package net.yeah.zhouyou.mickey.mysql.tree;
 
-public class FunCallNode extends ElementNode {
+public class FunCallNode extends ElementOpFactoryNode {
 
 	private String name;
 	private ParamListNode paramList;

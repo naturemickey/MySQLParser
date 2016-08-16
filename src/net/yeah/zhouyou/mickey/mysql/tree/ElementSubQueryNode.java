@@ -1,6 +1,6 @@
 package net.yeah.zhouyou.mickey.mysql.tree;
 
-public class ElementSubQueryNode extends ElementNode {
+public class ElementSubQueryNode extends ElementOpFactoryNode {
 	private String with;
 	private SelectNode select;
 

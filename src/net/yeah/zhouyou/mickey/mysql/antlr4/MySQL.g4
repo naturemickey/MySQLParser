@@ -109,12 +109,15 @@ exprNot           : (NOT | '!') expression ;
 exprLike          : left=element (not=NOT)? LIKE right=element ;
 
 element
+	: elementOpFactory
+	| elementListFactor
+	| elementOpEle
+	;
+elementOpFactory
 	: elementText
 	| funCall
 	| elementSubQuery
 	| elementDate
-	| elementListFactor
-	| elementOpEle
 	;
 
 elementText        : ('*' | PLACEHOLDER | COLUMN_REL | DECIMAL | STRING | ID | TRUE | FALSE | INT | DECIMAL | NULL) ;
@@ -123,7 +126,7 @@ elementDate        : DATE STRING ;
 elementListFactor  : '(' elementList ')' ;
 elementList        : element elementListSuffix? ;
 elementListSuffix  : ',' elementList ;
-elementOpEle       : elementText elementOpEleSuffix? ;
+elementOpEle       : elementOpFactory elementOpEleSuffix? ;
 elementOpEleSuffix : op=('|' | '&' | '<<' | '>>' | '+' | '-' | '*' | DIV | MOD | '^' | AS)? elementOpEle ;
 // 上面这一行中的op为可选的原因是加号和减号会被合并后面的数字中，这并不是我希望的，但贪婪匹配会有这样的效果，所以这里需要在visitor中做特殊处理。
 
