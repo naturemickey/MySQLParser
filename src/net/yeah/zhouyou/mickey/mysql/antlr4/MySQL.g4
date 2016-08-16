@@ -127,7 +127,7 @@ elementOpFactory
 
 elementText        : ('*' | PLACEHOLDER | COLUMN_REL | DECIMAL | STRING | ID | TRUE | FALSE | INT | DECIMAL | NULL) ;
 elementSubQuery    : sqWith=(ANY | SOME | ALL)? '(' selectStat ')' ;
-elementDate        : DATE STRING ;
+elementDate        : dt=(DATE | TIME | TIMESTAMP) STRING ;
 elementListFactor  : '(' elementList ')' ;
 elementList        : element elementListSuffix? ;
 elementListSuffix  : ',' elementList ;
@@ -181,6 +181,8 @@ DESC        : [Dd][Ee][Ss][Cc] ;
 CROSS       : [Cc][Rr][Oo][Ss][Ss] ;
 USING       : [Uu][Ss][Ii][Nn][Gg] ;
 DATE        : [Dd][Aa][Tt][Ee] ;
+TIME        : [Tt][Ii][Mm][Ee] ;
+TIMESTAMP   : [Tt][Ii][Mm][Ee][Ss][Tt][Aa][Mm][Pp] ;
 ALL         : [Aa][Ll][Ll] ;
 ANY         : [Aa][Nn][Yy] ;
 SOME        : [Ss][Oo][Mm][Ee] ;

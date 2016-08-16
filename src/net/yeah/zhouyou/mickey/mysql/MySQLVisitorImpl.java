@@ -209,7 +209,7 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 
 	@Override
 	public SQLSyntaxTreeNode visitElementDate(MySQLParser.ElementDateContext ctx) {
-		return new ElementDateNode(ctx.STRING().getText());
+		return new ElementDateNode(ctx.dt.getText(), ctx.STRING().getText());
 	}
 
 	@Override
