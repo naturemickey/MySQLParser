@@ -11,7 +11,7 @@ public class Test2 {
 	public static void main(String[] args) throws Exception {
 		List<String> lines = Files.readAllLines(Paths.get("sqls.txt"));
 		int len = lines.size();
-		int c = 10000;
+		int c = 1000;
 		System.out.println(len);
 
 		for (String sql : lines) {
