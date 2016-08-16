@@ -80,10 +80,10 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 
 	@Override
 	public SQLSyntaxTreeNode visitValueList(MySQLParser.ValueListContext ctx) {
-		String name = ctx.name.getText();
+		ElementNode element = (ElementNode) this.visitElement(ctx.element());
 		ValueListNode suffix = ctx.valueListSuffix() != null ? (ValueListNode) visitValueListSuffix(ctx.valueListSuffix()) : null;
 
-		return new ValueListNode(name, suffix);
+		return new ValueListNode(element, suffix);
 	}
 
 	@Override

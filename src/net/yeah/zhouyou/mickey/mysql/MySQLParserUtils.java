@@ -170,7 +170,7 @@ public class MySQLParserUtils {
 			SelectNode select = insert.getSelect();
 			if (valueName != null) {
 				valueName = valueName.getLastNode();
-				valueName.setSuffix(new ValueListNode(version, null));
+				valueName.setSuffix(new ValueListNode(new ElementTextNode(version), null));
 			} else {
 				SelectExprsNode selectExprNode = select.getSelectExprs().getLastNode();
 				selectExprNode.setSuffix(new SelectExprsNode(new ElementTextNode(version), null, null));

@@ -18,7 +18,7 @@ insertStat
 columnNames       : name=ID columnNamesSuffix? ;
 columnNamesSuffix : ',' columnNames ;
 
-valueList       : name=(PLACEHOLDER | ID | STRING | NULL) valueListSuffix? ;
+valueList       : element valueListSuffix? ;
 valueListSuffix : ',' valueList ;
 
 selectStat
