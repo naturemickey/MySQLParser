@@ -1,14 +1,20 @@
 package net.yeah.zhouyou.mickey.mysql.tree;
 
 public class ElementSubQueryNode extends ElementNode {
+	private String with;
 	private SelectNode select;
 
-	public ElementSubQueryNode(SelectNode select) {
+	public ElementSubQueryNode(String with, SelectNode select) {
+		this.with = with;
 		this.select = select;
 	}
 
 	@Override
 	public String toString() {
-		return "(" + select + ")";
+		if (with != null) {
+			return with + " (" + select + ")";
+		} else {
+			return "(" + select + ")";
+		}
 	}
 }

@@ -7,6 +7,8 @@ import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLParser;
 import net.yeah.zhouyou.mickey.mysql.tree.ColumnNamesNode;
 import net.yeah.zhouyou.mickey.mysql.tree.DeleteNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementDateNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ElementListFactorNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ElementListNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementOpEleNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementOpEleSuffixNode;
@@ -199,12 +201,30 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 
 	@Override
 	public SQLSyntaxTreeNode visitElementSubQuery(MySQLParser.ElementSubQueryContext ctx) {
-		return new ElementSubQueryNode((SelectNode) this.visitSelectStat(ctx.selectStat()));
+		String with = ctx.sqWith == null ? null : ctx.sqWith.getText();
+		return new ElementSubQueryNode(with, (SelectNode) this.visitSelectStat(ctx.selectStat()));
 	}
 
 	@Override
 	public SQLSyntaxTreeNode visitElementDate(MySQLParser.ElementDateContext ctx) {
 		return new ElementDateNode(ctx.STRING().getText());
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitElementListFactor(MySQLParser.ElementListFactorContext ctx) {
+		return new ElementListFactorNode((ElementListNode) this.visitElementList(ctx.elementList()));
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitElementList(MySQLParser.ElementListContext ctx) {
+		ElementNode element = (ElementNode) this.visitElement(ctx.element());
+		ElementListNode suffix = ctx.elementListSuffix() == null ? null : (ElementListNode) this.visitElementListSuffix(ctx.elementListSuffix());
+		return new ElementListNode(element, suffix);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitElementListSuffix(MySQLParser.ElementListSuffixContext ctx) {
+		return this.visitElementList(ctx.elementList());
 	}
 
 	@Override

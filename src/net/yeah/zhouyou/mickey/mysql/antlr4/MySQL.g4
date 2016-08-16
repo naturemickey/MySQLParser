@@ -113,14 +113,16 @@ element
 	| funCall
 	| elementSubQuery
 	| elementDate
-//	| elementTypeConvert
+	| elementListFactor
 	| elementOpEle
 	;
 
 elementText        : ('*' | PLACEHOLDER | COLUMN_REL | DECIMAL | STRING | ID | TRUE | FALSE | INT | DECIMAL | NULL) ;
-elementSubQuery    : '(' selectStat ')' ;
+elementSubQuery    : sqWith=(ANY | SOME | ALL)? '(' selectStat ')' ;
 elementDate        : DATE STRING ;
-//elementTypeConvert : data=element AS type=element ;
+elementListFactor  : '(' elementList ')' ;
+elementList        : element elementListSuffix? ;
+elementListSuffix  : ',' elementList ;
 elementOpEle       : elementText elementOpEleSuffix? ;
 elementOpEleSuffix : op=('|' | '&' | '<<' | '>>' | '+' | '-' | '*' | DIV | MOD | '^' | AS)? elementOpEle ;
 // 上面这一行中的op为可选的原因是加号和减号会被合并后面的数字中，这并不是我希望的，但贪婪匹配会有这样的效果，所以这里需要在visitor中做特殊处理。
@@ -171,6 +173,9 @@ DESC        : [Dd][Ee][Ss][Cc] ;
 CROSS       : [Cc][Rr][Oo][Ss][Ss] ;
 USING       : [Uu][Ss][Ii][Nn][Gg] ;
 DATE        : [Dd][Aa][Tt][Ee] ;
+ALL         : [Aa][Ll][Ll] ;
+ANY         : [Aa][Nn][Yy] ;
+SOME        : [Ss][Oo][Mm][Ee] ;
 AND         : [Aa][Nn][Dd] | '&&' ;
 OR          : [Oo][Rr]     | '||' ;
 NOT         : [Nn][Oo][Tt] | '!'  ;
@@ -192,8 +197,6 @@ STRING      : (['] ((~[']) ([']['])?)* [']) | (["] ((~["]) (["]["])?)* ["]) ;
 ID          : ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) [a-zA-Z0-9_]*;
 COLUMN_REL  : ID '.' (ID | '*') ;
 
-ALL         : 'all' ;
-ANY         : 'any' ;
 REGEXP      : 'regexp' ;
 NEGATION    : '~' ;
 BINARY      : 'binary' ;

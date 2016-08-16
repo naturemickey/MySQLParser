@@ -12,8 +12,11 @@ public class TestSelect {
 				"select a, (select x from tab1 where id = t.y) as xx, b from tab2 t left outer join tab3 using(c,d), (select * from tab5) t5 where t.m = ? and exists (select 1 from tab4 t4 where t1.n  = t4.n)",
 				"select 1,2,38.8 from a limit 5, 10", //
 				"select date '2016-08-08'", //
-				"select a, count(1) from tab where create_tm = date '2016-08-08' group by a order by b desc",
-				"SELECT 38.8, CAST(38.8 AS CHAR)"}) {
+				"select a, count(1) from tab where create_tm = date '2016-08-08' group by a order by b desc",//
+				"SELECT 38.8, CAST(38.8 AS CHAR)",//
+				"SELECT * FROM t1 WHERE (col1,col2) = (SELECT col3, col4 FROM t2 WHERE id = 10)",//
+				"SELECT * FROM t1 WHERE ROW(col1,col2) = ANY (SELECT col3, col4 FROM t2 WHERE id = 10)",//
+				"select distinct c1, c2 from t1 where (c1, c2) = (1, 2)"}) {
 			fun(sql);
 		}
 
