@@ -11,11 +11,11 @@ public class SelectNode extends SQLSyntaxTreeNode {
 	private GbobExprsNode orderByExprs;
 	private String offset;
 	private String rowCount;
-	private boolean forUpdate;
+	private String lock;
 	private SelectUnionSuffix unionSuffix;
 
 	public SelectNode(boolean distinct, SelectExprsNode selectExprs, TablesNode tables, WhereConditionNode where, GbobExprsNode groupByExprs,
-			WhereConditionNode having, GbobExprsNode orderByExprs, String offset, String rowCount, boolean forUpdate, SelectUnionSuffix unionSuffix) {
+			WhereConditionNode having, GbobExprsNode orderByExprs, String offset, String rowCount, String lock, SelectUnionSuffix unionSuffix) {
 		this.distinct = distinct;
 		this.selectExprs = selectExprs;
 		this.tables = tables;
@@ -25,7 +25,7 @@ public class SelectNode extends SQLSyntaxTreeNode {
 		this.orderByExprs = orderByExprs;
 		this.offset = offset;
 		this.rowCount = rowCount;
-		this.forUpdate = forUpdate;
+		this.lock = lock;
 		this.unionSuffix = unionSuffix;
 	}
 
@@ -52,8 +52,8 @@ public class SelectNode extends SQLSyntaxTreeNode {
 			if (this.offset != null)
 				sb.append(" offset ").append(this.offset);
 		}
-		if (this.forUpdate) {
-			sb.append(" for update");
+		if (this.lock != null) {
+			sb.append(' ').append(this.lock);
 		}
 		if (this.unionSuffix != null) {
 			sb.append(' ').append(this.unionSuffix);
@@ -132,14 +132,6 @@ public class SelectNode extends SQLSyntaxTreeNode {
 
 	public void setRowCount(String rowCount) {
 		this.rowCount = rowCount;
-	}
-
-	public boolean isForUpdate() {
-		return forUpdate;
-	}
-
-	public void setForUpdate(boolean forUpdate) {
-		this.forUpdate = forUpdate;
 	}
 
 }

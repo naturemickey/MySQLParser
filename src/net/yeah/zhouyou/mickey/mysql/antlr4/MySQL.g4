@@ -29,7 +29,7 @@ selectStat
 	 (HAVING having=whereCondition)?
 	  (ORDER BY orderByExprs=gbobExprs)?
 	  (LIMIT ((offset=INT ',')? rowCount=INT) | (rowCount=INT OFFSET offset=INT))?
-	    (FOR lock=UPDATE)?
+	   ((FOR lock=UPDATE) | (lock=LOCK IN SHARE MODE))?
 	  selectUnionSuffix?
 	;
 
@@ -106,7 +106,7 @@ expression
 
 exprRelational    : left=element relationalOp=(EQ | LTH | GTH | NOT_EQ | LET | GET) right=element ;
 exprBetweenAnd    : el=element (not=NOT)? BETWEEN left=element AND right=element ;
-exprIsOrIsNotNull : element IS (not=NOT)? NULL ;
+exprIsOrIsNotNull : element IS (not=NOT)? what=(NULL | TRUE | FALSE | UNKNOWN) ; // 这里比较粗爆
 exprInSelect      : element (not=NOT)? IN '(' selectStat ')' ;
 exprInValues      : element (not=NOT)? IN '(' valueList ')' ;
 exprExists        : (not=NOT)? EXISTS '(' selectStat ')';
@@ -125,7 +125,7 @@ elementOpFactory
 	| elementDate
 	;
 
-elementText        : ('*' | PLACEHOLDER | COLUMN_REL | DECIMAL | STRING | ID | TRUE | FALSE | INT | DECIMAL | NULL) ;
+elementText        : ('*' | PLACEHOLDER | COLUMN_REL | DECIMAL | STRING | ID | TRUE | FALSE | INT | DECIMAL | NULL | UNKNOWN) ;
 elementSubQuery    : sqWith=(ANY | SOME | ALL)? '(' selectStat ')' ;
 elementDate        : dt=(DATE | TIME | TIMESTAMP) STRING ;
 elementListFactor  : '(' elementList ')' ;
@@ -187,19 +187,24 @@ ALL         : [Aa][Ll][Ll] ;
 ANY         : [Aa][Nn][Yy] ;
 SOME        : [Ss][Oo][Mm][Ee] ;
 UNION       : [Uu][Nn][Ii][Oo][Nn] ;
+UNKNOWN     : [Uu][Nn][Kk][Nn][Oo][Ww][Nn] ;
+LOCK        : [Ll][Oo][Cc][Kk] ;
+SHARE       : [Ss][Hh][Aa][Rr][Ee] ;
+MODE        : [Mm][Oo][Dd][Ee] ;
+
 AND         : [Aa][Nn][Dd] | '&&' ;
 OR          : [Oo][Rr]     | '||' ;
 NOT         : [Nn][Oo][Tt] | '!'  ;
 DIV         : [Dd][Ii][Vv] | '/'  ;
 MOD         : [Mm][Oo][Dd] | '%'  ;
-PLUS        : '+' ;
-MINUS       : '-' ;
-VERTBAR     : '|' ;
-BITAND      : '&' ;
+PLUS        : '+'  ;
+MINUS       : '-'  ;
+VERTBAR     : '|'  ;
+BITAND      : '&'  ;
 SHIFT_LEFT  : '<<' ;
 SHIFT_RIGHT : '>>' ;
-ASTERISK    : '*' ;
-POWER_OP    : '^' ;
+ASTERISK    : '*'  ;
+POWER_OP    : '^'  ;
 
 INT         : [0-9]+ | [Xx] '\'' [0-9a-fA-F]+ '\'' | '0' [Xx] [0-9a-fA-F]+ | [Bb] '\'' [01]+ '\'' | '0' [Bb] [01]+;
 DECIMAL     : ('+' | '-')? ((INT)|('.' INT)|(INT '.' INT)) ([Ee]('+' | '-')? INT)? ;

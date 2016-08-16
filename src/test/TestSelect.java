@@ -16,9 +16,10 @@ public class TestSelect {
 				"SELECT 38.8, CAST(38.8 AS CHAR), x'0a0e', 0xabc, X'0a0e', 0Xabc, b'1010', 0B1010", //
 				"SELECT * FROM t1 WHERE (col1,col2) = (SELECT col3, col4 FROM t2 WHERE id = 10)", //
 				"SELECT * FROM t1 WHERE ROW(col1,col2) = ANY (SELECT col3, col4 FROM t2 WHERE id = 10)", //
-				"select distinct c1, c2 from t1 where (c1, c2) = (1, 2)", //
-				"select (select column1 from t1) + 5 from t2", //
-				"select 1 as a union all select x from t left join t1 on t.a = t1.b union select 'x'"}) {
+				"select distinct c1, c2 from t1 where (c1, c2) = (1, 2) lock in Share Mode", //
+				"select (select column1 from t1) + 5 from t2 FOR UPDATE", //
+				"select 1 as a union all select x from t left join t1 on t.a = t1.b union select 'x' from t2 where x is UNKNOWN", //
+				"select sum(a) from tab1 t1, tab2 t2 where t1.id = t2.id group by t1.a, t2.b having count(*) > 1 order by t1.id DESC, t2.id asc"}) {
 			fun(sql);
 		}
 
@@ -28,8 +29,4 @@ public class TestSelect {
 		SqlTestUtils.test(sql);
 	}
 }
-/**
- * select a, (select x from tab1 where id = t.y) as xx, b from tab2 t left outer
- * join tab3 using(c,d), (select * from tab5) t5 where t.m = ? and exists
- * (select 1 from tab4 t4 where t1.n = t4.n)
- */
+		

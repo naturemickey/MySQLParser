@@ -7,7 +7,8 @@ public class GbobExprsNode extends SQLSyntaxTreeNode {
 
 	public GbobExprsNode(ElementNode element, String sc, GbobExprsNode suffix) {
 		this.element = element;
-		this.sc = sc;
+		if (sc != null)
+			this.sc = sc.toLowerCase();
 		this.suffix = suffix;
 	}
 

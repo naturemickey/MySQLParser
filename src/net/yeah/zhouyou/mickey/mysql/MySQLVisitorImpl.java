@@ -157,7 +157,8 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 	public SQLSyntaxTreeNode visitExprIsOrIsNotNull(MySQLParser.ExprIsOrIsNotNullContext ctx) {
 		ElementNode element = (ElementNode) this.visitElement(ctx.element());
 		boolean not = ctx.not != null;
-		return new ExpressionIsOrIsNotNode(element, not);
+		String what = ctx.what.getText();
+		return new ExpressionIsOrIsNotNode(element, not, what);
 	}
 
 	@Override
@@ -316,7 +317,7 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 		GbobExprsNode orderByExprs = null;
 		String offset = null;
 		String rowCount = null;
-		boolean forUpdate = ctx.lock != null;
+		String lock = ctx.lock == null ? null : (ctx.lock.getText().toLowerCase().equals("update") ? "for update" : "lock in share mode");
 		SelectUnionSuffix unionSuffix = null;
 		if (ctx.tables() != null)
 			tables = (TablesNode) this.visitTables(ctx.tables());
@@ -337,7 +338,7 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 			unionSuffix = (SelectUnionSuffix) this.visitSelectUnionSuffix(ctx.selectUnionSuffix());
 		}
 
-		return new SelectNode(distinct, selectExprs, tables, where, groupByExprs, having, orderByExprs, offset, rowCount, forUpdate, unionSuffix);
+		return new SelectNode(distinct, selectExprs, tables, where, groupByExprs, having, orderByExprs, offset, rowCount, lock, unionSuffix);
 	}
 
 	@Override
