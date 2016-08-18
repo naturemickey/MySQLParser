@@ -9,7 +9,16 @@ stat
 	| updateStat
 	| deleteStat
 	| selectStat
+	| transcationStat
 	;
+
+transcationStat
+	: commit
+	| rollback
+	;
+
+commit   : COMMIT ;
+rollback : ROLLBACK ;
 
 insertStat
 	: INSERT INTO? tableName=ID ('(' columnNames ')')? ((VALUES '(' valueList ')') | selectStat)
@@ -191,6 +200,8 @@ UNKNOWN     : [Uu][Nn][Kk][Nn][Oo][Ww][Nn] ;
 LOCK        : [Ll][Oo][Cc][Kk] ;
 SHARE       : [Ss][Hh][Aa][Rr][Ee] ;
 MODE        : [Mm][Oo][Dd][Ee] ;
+COMMIT      : [Cc][Oo][Mm][Mm][Ii][Tt] ;
+ROLLBACK    : [Rr][Oo][Ll][Ll][Bb][Aa][Cc][Kk] ;
 
 AND         : [Aa][Nn][Dd] | '&&' ;
 OR          : [Oo][Rr]     | '||' ;

@@ -18,6 +18,36 @@ public interface MySQLListener extends ParseTreeListener {
 	 */
 	void exitStat(MySQLParser.StatContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MySQLParser#transcationStat}.
+	 * @param ctx the parse tree
+	 */
+	void enterTranscationStat(MySQLParser.TranscationStatContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#transcationStat}.
+	 * @param ctx the parse tree
+	 */
+	void exitTranscationStat(MySQLParser.TranscationStatContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#commit}.
+	 * @param ctx the parse tree
+	 */
+	void enterCommit(MySQLParser.CommitContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#commit}.
+	 * @param ctx the parse tree
+	 */
+	void exitCommit(MySQLParser.CommitContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#rollback}.
+	 * @param ctx the parse tree
+	 */
+	void enterRollback(MySQLParser.RollbackContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#rollback}.
+	 * @param ctx the parse tree
+	 */
+	void exitRollback(MySQLParser.RollbackContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MySQLParser#insertStat}.
 	 * @param ctx the parse tree
 	 */

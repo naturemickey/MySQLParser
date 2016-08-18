@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLBaseVisitor;
 import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLParser;
 import net.yeah.zhouyou.mickey.mysql.tree.ColumnNamesNode;
+import net.yeah.zhouyou.mickey.mysql.tree.CommitNode;
 import net.yeah.zhouyou.mickey.mysql.tree.DeleteNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementDateNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementListFactorNode;
@@ -29,6 +30,7 @@ import net.yeah.zhouyou.mickey.mysql.tree.GbobExprsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.InsertNode;
 import net.yeah.zhouyou.mickey.mysql.tree.JoinConditionNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ParamListNode;
+import net.yeah.zhouyou.mickey.mysql.tree.RollbackNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SQLSyntaxTreeNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SelectExprsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SelectNode;
@@ -51,6 +53,15 @@ import net.yeah.zhouyou.mickey.mysql.tree.WhereConditionOpNode;
 import net.yeah.zhouyou.mickey.mysql.tree.WhereConditionSubNode;
 
 public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
+	@Override
+	public SQLSyntaxTreeNode visitCommit(MySQLParser.CommitContext ctx) {
+		return new CommitNode();
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitRollback(MySQLParser.RollbackContext ctx) {
+		return new RollbackNode();
+	}
 
 	@Override
 	public SQLSyntaxTreeNode visitInsertStat(MySQLParser.InsertStatContext ctx) {

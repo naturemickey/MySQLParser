@@ -17,6 +17,24 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStat(MySQLParser.StatContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MySQLParser#transcationStat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTranscationStat(MySQLParser.TranscationStatContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#commit}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCommit(MySQLParser.CommitContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#rollback}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRollback(MySQLParser.RollbackContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MySQLParser#insertStat}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -19,6 +19,8 @@ public class TestSelect {
 				"select 1 as a union all select x from t left join t1 on t.a = t1.b union select 'x' from t2 where x is UNKNOWN", //
 				"select sum(a) from tab1 t1, tab2 t2 where t1.id = t2.id group by t1.a, t2.b having count(*) > 1 order by t1.id DESC, t2.id asc",
 				// "select 1 from t for updat",//
+				"SELECT b+0, BIN(b+0), OCT(b+0), HEX(b+0) FROM t", //
+				"CommIt","RollbaCk"
 		}) {
 			SqlTestUtils.test(sql);
 		}
