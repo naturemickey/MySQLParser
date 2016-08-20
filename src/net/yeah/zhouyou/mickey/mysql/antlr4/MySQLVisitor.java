@@ -71,6 +71,24 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSelectStat(MySQLParser.SelectStatContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MySQLParser#selectInner}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSelectInner(MySQLParser.SelectInnerContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#selectPrefix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSelectPrefix(MySQLParser.SelectPrefixContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#selectSuffix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSelectSuffix(MySQLParser.SelectSuffixContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MySQLParser#selectUnionSuffix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -172,7 +172,7 @@ public class MySQLParserUtils {
 				valueName = valueName.getLastNode();
 				valueName.setSuffix(new ValueListNode(new ElementTextNode(version), null));
 			} else {
-				SelectExprsNode selectExprNode = select.getSelectExprs().getLastNode();
+				SelectExprsNode selectExprNode = select.getSelectInner().getPrefix().getSelectExprs().getLastNode();
 				selectExprNode.setSuffix(new SelectExprsNode(new ElementTextNode(version), null, null));
 			}
 		}
@@ -241,14 +241,14 @@ public class MySQLParserUtils {
 	private static SQLSyntaxTreeNode processSelect(SQLSyntaxTreeNode node, String version) {
 		SelectNode select = (SelectNode) node;
 
-		TablesNode tables = select.getTables();
+		TablesNode tables = select.getSelectInner().getPrefix().getTables();
 
 		if (tables == null) {
 			return node;
 		}
 
 		List<TableNameAndAliasNode> tabs = tables.getRealTables();
-		WhereConditionNode wc = select.getWhere();
+		WhereConditionNode wc = select.getSelectInner().getPrefix().getWhere();
 
 		WhereConditionOpNode versionCond = null;
 
@@ -268,7 +268,7 @@ public class MySQLParserUtils {
 				versionCond.appendCondition("and", new WhereConditionSubNode(wc));
 			}
 
-			select.setWhere(versionCond);
+			select.getSelectInner().getPrefix().setWhere(versionCond);
 		}
 		return select;
 	}

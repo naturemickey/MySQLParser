@@ -31,19 +31,25 @@ valueList       : element valueListSuffix? ;
 valueListSuffix : ',' valueList ;
 
 selectStat
+	: ('(' selectInner ')' | selectInner) selectUnionSuffix?
+	;
+selectInner
+	: selectPrefix selectSuffix
+	;
+selectPrefix
 	: SELECT (distinct=DISTINCT)? selectExprs 
 	   (FROM tables)?
 	  (WHERE where=whereCondition)?
 	  (GROUP BY groupByExprs=gbobExprs)?
 	 (HAVING having=whereCondition)?
-	  (ORDER BY orderByExprs=gbobExprs)?
+	;
+selectSuffix
+	: (ORDER BY orderByExprs=gbobExprs)?
 	  (LIMIT ((offset=INT ',')? rowCount=INT) | (rowCount=INT OFFSET offset=INT))?
 	   ((FOR lock=UPDATE) | (lock=LOCK IN SHARE MODE))?
-	  selectUnionSuffix?
 	;
-
 selectUnionSuffix
-	: UNION method=(ALL | DISTINCT)? selectStat
+	: UNION method=(ALL | DISTINCT)? ('(' selectStat ')' | selectStat) selectSuffix
 	;
 
 selectExprs       : element (AS? alias=ID)? selectExprsSuffix? ;
@@ -133,6 +139,7 @@ elementOpFactory
 	| elementSubQuery
 	| elementDate
 	;
+// 加上CASE ELEMENT 13.4
 
 elementText        : ('*' | PLACEHOLDER | COLUMN_REL | DECIMAL | STRING | ID | TRUE | FALSE | INT | DECIMAL | NULL | UNKNOWN) ;
 elementSubQuery    : sqWith=(ANY | SOME | ALL)? '(' selectStat ')' ;

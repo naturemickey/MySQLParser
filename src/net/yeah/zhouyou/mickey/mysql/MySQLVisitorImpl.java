@@ -33,7 +33,10 @@ import net.yeah.zhouyou.mickey.mysql.tree.ParamListNode;
 import net.yeah.zhouyou.mickey.mysql.tree.RollbackNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SQLSyntaxTreeNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SelectExprsNode;
+import net.yeah.zhouyou.mickey.mysql.tree.SelectInner;
 import net.yeah.zhouyou.mickey.mysql.tree.SelectNode;
+import net.yeah.zhouyou.mickey.mysql.tree.SelectPrefixNode;
+import net.yeah.zhouyou.mickey.mysql.tree.SelectSuffixNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SelectUnionSuffix;
 import net.yeah.zhouyou.mickey.mysql.tree.SetExprNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SetExprsNode;
@@ -307,7 +310,10 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 
 	@Override
 	public SQLSyntaxTreeNode visitParamList(MySQLParser.ParamListContext ctx) {
-		ElementNode param = (ElementNode) this.visitElement(ctx.param);
+		if (ctx == null) {
+			return new ParamListNode(null, null);
+		}
+		ElementNode param = ctx.param == null ? null : (ElementNode) this.visitElement(ctx.param);
 		ParamListNode suffix = ctx.paramSuffix() == null ? null : (ParamListNode) this.visitParamSuffix(ctx.paramSuffix());
 		return new ParamListNode(param, suffix);
 	}
@@ -319,17 +325,26 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 
 	@Override
 	public SQLSyntaxTreeNode visitSelectStat(MySQLParser.SelectStatContext ctx) {
+		SelectInner selectInner = ctx.selectInner() == null ? null : (SelectInner) this.visitSelectInner(ctx.selectInner());
+		SelectUnionSuffix suffix = ctx.selectUnionSuffix() == null ? null : (SelectUnionSuffix) this.visitSelectUnionSuffix(ctx.selectUnionSuffix());
+		return new SelectNode(selectInner, suffix);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitSelectInner(MySQLParser.SelectInnerContext ctx) {
+		SelectPrefixNode prefix = ctx.selectPrefix() == null ? null : (SelectPrefixNode) this.visitSelectPrefix(ctx.selectPrefix());
+		SelectSuffixNode suffix = ctx.selectSuffix() == null ? null : (SelectSuffixNode) this.visitSelectSuffix(ctx.selectSuffix());
+		return new SelectInner(prefix, suffix);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitSelectPrefix(MySQLParser.SelectPrefixContext ctx) {
 		boolean distinct = ctx.distinct != null;
 		SelectExprsNode selectExprs = (SelectExprsNode) this.visitSelectExprs(ctx.selectExprs());
 		TablesNode tables = null;
 		WhereConditionNode where = null;
 		GbobExprsNode groupByExprs = null;
 		WhereConditionNode having = null;
-		GbobExprsNode orderByExprs = null;
-		String offset = null;
-		String rowCount = null;
-		String lock = ctx.lock == null ? null : (ctx.lock.getText().toLowerCase().equals("update") ? "for update" : "lock in share mode");
-		SelectUnionSuffix unionSuffix = null;
 		if (ctx.tables() != null)
 			tables = (TablesNode) this.visitTables(ctx.tables());
 		if (ctx.where != null)
@@ -338,6 +353,16 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 			groupByExprs = (GbobExprsNode) this.visitGbobExprs(ctx.groupByExprs);
 		if (ctx.having != null)
 			having = (WhereConditionNode) this.visitWhereCondition(ctx.having);
+		return new SelectPrefixNode(distinct, selectExprs, tables, where, groupByExprs, having);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitSelectSuffix(MySQLParser.SelectSuffixContext ctx) {
+		GbobExprsNode orderByExprs = null;
+		String offset = null;
+		String rowCount = null;
+		String lock = ctx.lock == null ? null : (ctx.lock.getText().toLowerCase().equals("update") ? "for update" : "lock in share mode");
+
 		if (ctx.orderByExprs != null)
 			orderByExprs = (GbobExprsNode) this.visitGbobExprs(ctx.orderByExprs);
 		if (ctx.rowCount != null) {
@@ -345,18 +370,20 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 			if (ctx.offset != null)
 				offset = ctx.offset.getText();
 		}
-		if (ctx.selectUnionSuffix() != null) {
-			unionSuffix = (SelectUnionSuffix) this.visitSelectUnionSuffix(ctx.selectUnionSuffix());
-		}
 
-		return new SelectNode(distinct, selectExprs, tables, where, groupByExprs, having, orderByExprs, offset, rowCount, lock, unionSuffix);
+		return new SelectSuffixNode(orderByExprs, offset, rowCount, lock);
 	}
 
 	@Override
 	public SQLSyntaxTreeNode visitSelectUnionSuffix(MySQLParser.SelectUnionSuffixContext ctx) {
 		String method = ctx.method != null ? ctx.method.getText() : null;
 		SelectNode select = (SelectNode) this.visitSelectStat(ctx.selectStat());
-		return new SelectUnionSuffix(method, select);
+		SelectSuffixNode suffix = null;
+
+		if (ctx.selectSuffix() != null) {
+			suffix = (SelectSuffixNode) this.visitSelectSuffix(ctx.selectSuffix());
+		}
+		return new SelectUnionSuffix(method, select, suffix);
 	}
 
 	@Override
