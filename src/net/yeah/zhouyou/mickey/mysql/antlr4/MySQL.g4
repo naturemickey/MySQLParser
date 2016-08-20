@@ -152,7 +152,7 @@ elementOpEleSuffix : op=('|' | '&' | '<<' | '>>' | '+' | '-' | '*' | DIV | MOD |
 // 上面这一行中的op为可选的原因是加号和减号会被合并后面的数字中，这并不是我希望的，但贪婪匹配会有这样的效果，所以这里需要在visitor中做特殊处理。
 
 funCall     : funName=ID '(' paramList? ')' ;
-paramList   : param=element paramSuffix? ;
+paramList   : (element | exprRelational) paramSuffix? ;
 paramSuffix : ',' paramList ;
 
 // ******* Lexer *******

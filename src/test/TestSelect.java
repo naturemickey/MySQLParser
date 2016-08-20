@@ -34,9 +34,7 @@ public class TestSelect {
 				// "SELECT CASE WHEN 1>0 THEN 'true' ELSE 'false' END", //
 				
 //				"SELECT 102/(1-1)", //
-				"SELECT CONV(10+'10'+'10'+X'0a',10,10)", //
-				 "SELECT COS(PI() / 2)", //
-//				 "SELECT PI()",
+				"SELECT CONV(10+'10'+'10'+X'0a',10,10),IF(1>2,2,3),COS(PI() / 2)", //
 		}) {
 			SqlTestUtils.test(sql);
 		}

@@ -2,21 +2,28 @@ package net.yeah.zhouyou.mickey.mysql.tree;
 
 public class ParamListNode extends SQLSyntaxTreeNode {
 
-	private ElementNode param;
+	private ElementNode element;
+	ExpressionRelationalNode exprRelational;
 	private ParamListNode suffix;
 
-	public ParamListNode(ElementNode param, ParamListNode suffix) {
-		this.param = param;
+	public ParamListNode(ElementNode element, ExpressionRelationalNode exprRelational, ParamListNode suffix) {
+		this.element = element;
+		this.exprRelational = exprRelational;
 		this.suffix = suffix;
 	}
 
 	@Override
 	public String toString() {
-		if (param == null)
-			return "";
-		if (suffix != null)
-			return param + ", " + suffix;
-		return param.toString();
+		StringBuilder sb = new StringBuilder();
+		if (element != null) {
+			sb.append(element);
+		} else if (exprRelational != null) {
+			sb.append(exprRelational);
+		}
+		if (suffix != null) {
+			sb.append(", ").append(suffix);
+		}
+		return sb.toString();
 	}
 
 }
