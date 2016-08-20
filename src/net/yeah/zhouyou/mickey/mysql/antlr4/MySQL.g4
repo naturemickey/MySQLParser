@@ -254,6 +254,8 @@ NATURAL     : 'natural' ;
 OJ          : 'oj' ;
 NEWLINE     : '\r'? '\n' -> skip ;
 WS          : ( ' ' | '\t' | '\n' | '\r' )+ -> skip ;
+COMMENT1    : ('--' | '#') ( ~ '\n' )* ('\n' | EOF) -> skip ;
+COMMENT2    : '/*' (('*' ~ '/') | ( ~ '*'))* '*/' -> skip ;
 USER_VAR    : '@' ( USER_VAR_SUBFIX1 | USER_VAR_SUBFIX2 | USER_VAR_SUBFIX3 | USER_VAR_SUBFIX4 ) ;
 fragment USER_VAR_SUBFIX1 : ( '`' ( ~ '`' )+ '`' ) ;
 fragment USER_VAR_SUBFIX2 : ( '\'' ( ~ '\'' )+ '\'' ) ;

@@ -30,7 +30,7 @@ public class MySQLParser extends Parser {
 		RPAREN=76, LPAREN=77, RBRACK=78, LBRACK=79, COLON=80, ALL_FIELDS=81, EQ=82, 
 		LTH=83, GTH=84, NOT_EQ=85, LET=86, GET=87, SEMI=88, COMMA=89, DOT=90, 
 		COLLATE=91, INDEX=92, KEY=93, USE=94, IGNORE=95, PARTITION=96, STRAIGHT_JOIN=97, 
-		NATURAL=98, OJ=99, NEWLINE=100, WS=101, USER_VAR=102;
+		NATURAL=98, OJ=99, NEWLINE=100, WS=101, COMMENT1=102, COMMENT2=103, USER_VAR=104;
 	public static final int
 		RULE_stat = 0, RULE_transcationStat = 1, RULE_commit = 2, RULE_rollback = 3, 
 		RULE_insertStat = 4, RULE_columnNames = 5, RULE_columnNamesSuffix = 6, 
@@ -91,7 +91,8 @@ public class MySQLParser extends Parser {
 		"NEGATION", "BINARY", "ESCAPE", "RPAREN", "LPAREN", "RBRACK", "LBRACK", 
 		"COLON", "ALL_FIELDS", "EQ", "LTH", "GTH", "NOT_EQ", "LET", "GET", "SEMI", 
 		"COMMA", "DOT", "COLLATE", "INDEX", "KEY", "USE", "IGNORE", "PARTITION", 
-		"STRAIGHT_JOIN", "NATURAL", "OJ", "NEWLINE", "WS", "USER_VAR"
+		"STRAIGHT_JOIN", "NATURAL", "OJ", "NEWLINE", "WS", "COMMENT1", "COMMENT2", 
+		"USER_VAR"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -4172,7 +4173,7 @@ public class MySQLParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3h\u01fd\4\2\t\2\4"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3j\u01fd\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
