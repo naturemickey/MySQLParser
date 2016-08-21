@@ -16,9 +16,11 @@ import net.yeah.zhouyou.mickey.mysql.tree.ElementNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementOpEleNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementOpEleSuffixNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementOpFactoryNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ElementRowNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementSubQueryNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementTextNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementWapperBktNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ElementWithPrefixNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionBetweenAndNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionExistsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionInSelectNode;
@@ -324,6 +326,16 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 		SetExprsNode setExprs = (SetExprsNode) this.visitSetExprs(ctx.setExprs());
 		WhereConditionNode whereCondition = ctx.whereCondition() != null ? (WhereConditionNode) this.visitWhereCondition(ctx.whereCondition()) : null;
 		return new UpdateMultipleTableNode(tableNameAndAliases, setExprs, whereCondition);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitElementWithPrefix(MySQLParser.ElementWithPrefixContext ctx) {
+		return new ElementWithPrefixNode(ctx.prefix.getText(), (ElementOpFactoryNode) this.visitElementOpFactory(ctx.elementOpFactory()));
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitElementRow(MySQLParser.ElementRowContext ctx) {
+		return new ElementRowNode((ParamListNode) this.visitParamList(ctx.paramList()));
 	}
 
 	@Override

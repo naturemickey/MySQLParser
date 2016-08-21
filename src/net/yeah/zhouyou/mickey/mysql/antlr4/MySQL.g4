@@ -140,6 +140,8 @@ elementOpFactory
 	| elementDate
 	| elementCase
 	| elementWapperBkt
+	| elementWithPrefix
+	| elementRow
 	;
 
 elementText        : ('*' | PLACEHOLDER | COLUMN_REL | DECIMAL | STRING | ID | TRUE | FALSE | INT | DECIMAL | NULL | UNKNOWN) ;
@@ -154,6 +156,8 @@ elementOpEleSuffix : op=('|' | '&' | '<<' | '>>' | '+' | '-' | '*' | DIV | MOD |
 // 上面这一行中的op为可选的原因是加号和减号会被合并后面的数字中，这并不是我希望的，但贪婪匹配会有这样的效果，所以这里需要在visitor中做特殊处理。
 elementCase        : CASE (value=element)? caseWhenPart (ELSE elseEl=element)? END ;
 caseWhenPart       : WHEN (whenEl=element | whenRe=exprRelational) THEN then=element (suffix=caseWhenPart)?;
+elementWithPrefix  : prefix=BINARY elementOpFactory ;
+elementRow         : ROW '(' paramList ')' ;
 
 funCall     : funName=ID '(' paramList? ')' ;
 paramList   : (element | exprRelational) paramSuffix? ;
@@ -213,11 +217,13 @@ SHARE       : [Ss][Hh][Aa][Rr][Ee] ;
 MODE        : [Mm][Oo][Dd][Ee] ;
 COMMIT      : [Cc][Oo][Mm][Mm][Ii][Tt] ;
 ROLLBACK    : [Rr][Oo][Ll][Ll][Bb][Aa][Cc][Kk] ;
-CASE		: [Cc][Aa][Ss][Ee] ;
-WHEN		: [Ww][Hh][Ee][Nn] ;
-THEN		: [Tt][Hh][Ee][Nn] ;
-ELSE		: [Ee][Ll][Ss][Ee] ;
-END			: [Ee][Nn][Dd] ;
+CASE        : [Cc][Aa][Ss][Ee] ;
+WHEN        : [Ww][Hh][Ee][Nn] ;
+THEN        : [Tt][Hh][Ee][Nn] ;
+ELSE        : [Ee][Ll][Ss][Ee] ;
+END         : [Ee][Nn][Dd] ;
+ROW         : [Rr][Oo][Ww] ;
+BINARY      : [Bb][Ii][Nn][Aa][Rr][Yy] ;
 
 AND         : [Aa][Nn][Dd] | '&&' ;
 OR          : [Oo][Rr]     | '||' ;
@@ -242,7 +248,6 @@ COLUMN_REL  : ID '.' (ID | '*') ;
 
 REGEXP      : 'regexp' ;
 NEGATION    : '~' ;
-BINARY      : 'binary' ;
 ESCAPE      : 'escape' ;
 RPAREN      : ')' ;
 LPAREN      : '(' ;

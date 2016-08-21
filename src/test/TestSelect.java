@@ -21,21 +21,21 @@ public class TestSelect {
 				// "select 1 from t for updat",//
 				"SELECT b+0, BIN(b+0), OCT(b+0), HEX(b+0) FROM t", //
 				"CommIt", "RollbaCk", //
-				 "SELECT * FROM t1 LEFT JOIN (t2, t3, t4)ON (t2.a=t1.a AND t3.b=t1.b AND t4.c=t1.c)",
+				"SELECT * FROM t1 LEFT JOIN (t2, t3, t4)ON (t2.a=t1.a AND t3.b=t1.b AND t4.c=t1.c)",
 
 				// "SELECT * FROM t1 LEFT JOIN (t2 CROSS JOIN t3 CROSS JOIN t4)
 				// ON (t2.a=t1.a AND t3.b=t1.b AND t4.c=t1.c)",//
 				"SELECT t1.name, t2.salary FROM employee AS t1 INNER JOIN info AS t2 ON t1.name = t2.name", //
 				"SELECT REPEAT('a',1) UNION SELECT REPEAT('b',10)", //
-				 "(SELECT a FROM t1 WHERE a=10 AND B=1) UNION (SELECT a FROM t2 WHERE a=11 AND B=2) ORDER BY a LIMIT 10", //
+				"(SELECT a FROM t1 WHERE a=10 AND B=1) UNION (SELECT a FROM t2 WHERE a=11 AND B=2) ORDER BY a LIMIT 10", //
 				"SELECT 1 AS foo UNION SELECT 2 ORDER BY MAX(1)", //
 				"SELECT 1 /* this is an in-line comment */ + 1", //
-				
-				 "SELECT 102/(1-1)", //
+
+				"SELECT 102/(1-1)", //
 				"SELECT CONV(10+'10'+'10'+X'0a',10,10),IF(1>2,2,3),COS(PI() / 2)", //
-				 "SELECT CASE WHEN 1>0 THEN 'true' ELSE 'false' END", //
-				 "SELECT CASE 1 WHEN 1 THEN 'one' WHEN 2 THEN 'two' ELSE 'more' END", //
-//				"SELECT CASE BINARY 'B' WHEN 'a' THEN 1 WHEN 'b' THEN 2 END", //
+				"SELECT CASE WHEN 1>0 THEN 'true' ELSE 'false' END", //
+				"SELECT CASE 1 WHEN 1 THEN 'one' WHEN 2 THEN 'two' ELSE 'more' END", //
+				"SELECT CASE BINARY 'B' WHEN 'a' THEN 1 WHEN 'b' THEN 2 END", //
 		}) {
 			SqlTestUtils.test(sql);
 		}

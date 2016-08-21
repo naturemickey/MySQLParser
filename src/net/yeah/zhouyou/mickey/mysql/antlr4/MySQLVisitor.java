@@ -389,6 +389,18 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCaseWhenPart(MySQLParser.CaseWhenPartContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MySQLParser#elementWithPrefix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElementWithPrefix(MySQLParser.ElementWithPrefixContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#elementRow}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElementRow(MySQLParser.ElementRowContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MySQLParser#funCall}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

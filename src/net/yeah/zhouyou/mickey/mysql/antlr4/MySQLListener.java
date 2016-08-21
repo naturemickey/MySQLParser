@@ -638,6 +638,26 @@ public interface MySQLListener extends ParseTreeListener {
 	 */
 	void exitCaseWhenPart(MySQLParser.CaseWhenPartContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MySQLParser#elementWithPrefix}.
+	 * @param ctx the parse tree
+	 */
+	void enterElementWithPrefix(MySQLParser.ElementWithPrefixContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#elementWithPrefix}.
+	 * @param ctx the parse tree
+	 */
+	void exitElementWithPrefix(MySQLParser.ElementWithPrefixContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#elementRow}.
+	 * @param ctx the parse tree
+	 */
+	void enterElementRow(MySQLParser.ElementRowContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#elementRow}.
+	 * @param ctx the parse tree
+	 */
+	void exitElementRow(MySQLParser.ElementRowContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MySQLParser#funCall}.
 	 * @param ctx the parse tree
 	 */
