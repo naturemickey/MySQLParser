@@ -6,12 +6,15 @@ import java.util.List;
 public class TableJoinSuffixNode extends SQLSyntaxTreeNode {
 	private String tableJoinMod;
 	private TableNameAndAliasesNode tables;
+	private TableRecuNode tableRecu;
 	private JoinConditionNode condition;
 	private TableJoinSuffixNode suffix;
 
-	public TableJoinSuffixNode(String tableJoinMod, TableNameAndAliasesNode tables, JoinConditionNode condition, TableJoinSuffixNode suffix) {
-		this.tableJoinMod = tableJoinMod.toLowerCase();
+	public TableJoinSuffixNode(String tableJoinMod, TableNameAndAliasesNode tables, TableRecuNode tableRecu, JoinConditionNode condition,
+			TableJoinSuffixNode suffix) {
+		this.tableJoinMod = tableJoinMod;
 		this.tables = tables;
+		this.tableRecu = tableRecu;
 		this.condition = condition;
 		this.suffix = suffix;
 	}
@@ -19,22 +22,37 @@ public class TableJoinSuffixNode extends SQLSyntaxTreeNode {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(this.tableJoinMod);
-		sb.append(" join ");
-		int size = tables.all().size();
-		if (size == 1) {
-			sb.append(tables).append(' ');
-		} else {
-			sb.append('(').append(tables).append(") ");
+		if (this.tableJoinMod != null && this.tableJoinMod.length() > 0) {
+			sb.append(this.tableJoinMod).append(' ');
 		}
-		sb.append(condition);
+		sb.append("join ");
+		if (tables != null) {
+			int size = tables.all().size();
+			if (size == 1) {
+				sb.append(tables).append(' ');
+			} else {
+				sb.append('(').append(tables).append(") ");
+			}
+		}
+		if (tableRecu != null) {
+			sb.append(tableRecu).append(' ');
+		}
+		if (condition != null) {
+			sb.append(condition);
+		}
 		if (suffix != null)
 			sb.append(' ').append(suffix);
 		return sb.toString();
 	}
+
 	public List<TableNameAndAliasNode> getRealTables() {
 		List<TableNameAndAliasNode> res = new ArrayList<>();
-		res.addAll(tables.all());
+		if (tables != null) {
+			res.addAll(tables.all());
+		}
+		if (tableRecu != null) {
+			res.addAll(tableRecu.getRealTables());
+		}
 		if (suffix != null)
 			res.addAll(suffix.getRealTables());
 		return res;

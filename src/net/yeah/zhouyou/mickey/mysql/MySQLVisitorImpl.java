@@ -485,15 +485,21 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 	@Override
 	public SQLSyntaxTreeNode visitTableJoinSuffix(MySQLParser.TableJoinSuffixContext ctx) {
 		String tableJoinMod = ctx.tableJoinMod().children.stream().map(a -> a.getText()).collect(Collectors.joining(" "));
-		TableNameAndAliasesNode tables = (TableNameAndAliasesNode) this.visitTableNameAndAliases(ctx.tableNameAndAliases());
+		TableNameAndAliasesNode tables = ctx.tableNameAndAliases() == null ? null
+				: (TableNameAndAliasesNode) this.visitTableNameAndAliases(ctx.tableNameAndAliases());
+		TableRecuNode tableRecu = ctx.tableRecu() == null ? null : (TableRecuNode) this.visitTableRecu(ctx.tableRecu());
+
 		JoinConditionNode condition = (JoinConditionNode) this.visitJoinCondition(ctx.joinCondition());
 		TableJoinSuffixNode suffix = ctx.tableJoinSuffix() == null ? null : (TableJoinSuffixNode) this.visitTableJoinSuffix(ctx.tableJoinSuffix());
 
-		return new TableJoinSuffixNode(tableJoinMod, tables, condition, suffix);
+		return new TableJoinSuffixNode(tableJoinMod, tables, tableRecu, condition, suffix);
 	}
 
 	@Override
 	public SQLSyntaxTreeNode visitJoinCondition(MySQLParser.JoinConditionContext ctx) {
+		if (ctx == null) {
+			return new JoinConditionNode(null, null);
+		}
 		WhereConditionNode on = ctx.whereCondition() != null ? (WhereConditionNode) this.visitWhereCondition(ctx.whereCondition()) : null;
 		ColumnNamesNode columnNames = ctx.columnNames() != null ? (ColumnNamesNode) this.visitColumnNames(ctx.columnNames()) : null;
 		return new JoinConditionNode(on, columnNames);

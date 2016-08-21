@@ -23,8 +23,7 @@ public class TestSelect {
 				"CommIt", "RollbaCk", //
 				"SELECT * FROM t1 LEFT JOIN (t2, t3, t4)ON (t2.a=t1.a AND t3.b=t1.b AND t4.c=t1.c)",
 
-				// "SELECT * FROM t1 LEFT JOIN (t2 CROSS JOIN t3 CROSS JOIN t4)
-				// ON (t2.a=t1.a AND t3.b=t1.b AND t4.c=t1.c)",//
+				"SELECT * FROM t1 LEFT JOIN (t2 CROSS JOIN t3 CROSS JOIN t4) ON (t2.a=t1.a AND t3.b=t1.b AND t4.c=t1.c)", //
 				"SELECT t1.name, t2.salary FROM employee AS t1 INNER JOIN info AS t2 ON t1.name = t2.name", //
 				"SELECT REPEAT('a',1) UNION SELECT REPEAT('b',10)", //
 				"(SELECT a FROM t1 WHERE a=10 AND B=1) UNION (SELECT a FROM t2 WHERE a=11 AND B=2) ORDER BY a LIMIT 10", //

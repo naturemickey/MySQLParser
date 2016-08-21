@@ -12,6 +12,9 @@ public class JoinConditionNode extends SQLSyntaxTreeNode {
 
 	@Override
 	public String toString() {
+		if (on == null && columnNames == null) {
+			return "";
+		}
 		if (on != null)
 			return "on " + on;
 		return "using(" + columnNames + ')';
