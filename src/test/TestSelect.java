@@ -21,8 +21,7 @@ public class TestSelect {
 				// "select 1 from t for updat",//
 				"SELECT b+0, BIN(b+0), OCT(b+0), HEX(b+0) FROM t", //
 				"CommIt", "RollbaCk", //
-				// "SELECT * FROM t1 LEFT JOIN (t2, t3, t4)ON (t2.a=t1.a AND
-				// t3.b=t1.b AND t4.c=t1.c)",
+				 "SELECT * FROM t1 LEFT JOIN (t2, t3, t4)ON (t2.a=t1.a AND t3.b=t1.b AND t4.c=t1.c)",
 
 				// "SELECT * FROM t1 LEFT JOIN (t2 CROSS JOIN t3 CROSS JOIN t4)
 				// ON (t2.a=t1.a AND t3.b=t1.b AND t4.c=t1.c)",//

@@ -448,11 +448,11 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 	@Override
 	public SQLSyntaxTreeNode visitTableJoinSuffix(MySQLParser.TableJoinSuffixContext ctx) {
 		String tableJoinMod = ctx.tableJoinMod().children.stream().map(a -> a.getText()).collect(Collectors.joining(" "));
-		TableNameAndAliasNode table = (TableNameAndAliasNode) this.visitTableNameAndAlias(ctx.tableNameAndAlias());
+		TableNameAndAliasesNode tables = (TableNameAndAliasesNode) this.visitTableNameAndAliases(ctx.tableNameAndAliases());
 		JoinConditionNode condition = (JoinConditionNode) this.visitJoinCondition(ctx.joinCondition());
 		TableJoinSuffixNode suffix = ctx.tableJoinSuffix() == null ? null : (TableJoinSuffixNode) this.visitTableJoinSuffix(ctx.tableJoinSuffix());
 
-		return new TableJoinSuffixNode(tableJoinMod, table, condition, suffix);
+		return new TableJoinSuffixNode(tableJoinMod, tables, condition, suffix);
 	}
 
 	@Override
