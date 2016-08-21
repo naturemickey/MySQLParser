@@ -139,10 +139,12 @@ elementOpFactory
 	| elementSubQuery
 	| elementDate
 	| elementCase
+	| elementWapperBkt
 	;
 
 elementText        : ('*' | PLACEHOLDER | COLUMN_REL | DECIMAL | STRING | ID | TRUE | FALSE | INT | DECIMAL | NULL | UNKNOWN) ;
 elementSubQuery    : sqWith=(ANY | SOME | ALL)? '(' selectStat ')' ;
+elementWapperBkt   : '(' element ')' ;
 elementDate        : dt=(DATE | TIME | TIMESTAMP) STRING ;
 elementListFactor  : '(' elementList ')' ;
 elementList        : element elementListSuffix? ;

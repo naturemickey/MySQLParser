@@ -31,7 +31,7 @@ public class TestSelect {
 				"SELECT 1 AS foo UNION SELECT 2 ORDER BY MAX(1)", //
 				"SELECT 1 /* this is an in-line comment */ + 1", //
 				
-				// "SELECT 102/(1-1)", //
+				 "SELECT 102/(1-1)", //
 				"SELECT CONV(10+'10'+'10'+X'0a',10,10),IF(1>2,2,3),COS(PI() / 2)", //
 				 "SELECT CASE WHEN 1>0 THEN 'true' ELSE 'false' END", //
 				 "SELECT CASE 1 WHEN 1 THEN 'one' WHEN 2 THEN 'two' ELSE 'more' END", //

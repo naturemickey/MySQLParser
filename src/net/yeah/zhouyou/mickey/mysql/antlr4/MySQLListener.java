@@ -548,6 +548,16 @@ public interface MySQLListener extends ParseTreeListener {
 	 */
 	void exitElementSubQuery(MySQLParser.ElementSubQueryContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MySQLParser#elementWapperBkt}.
+	 * @param ctx the parse tree
+	 */
+	void enterElementWapperBkt(MySQLParser.ElementWapperBktContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#elementWapperBkt}.
+	 * @param ctx the parse tree
+	 */
+	void exitElementWapperBkt(MySQLParser.ElementWapperBktContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MySQLParser#elementDate}.
 	 * @param ctx the parse tree
 	 */

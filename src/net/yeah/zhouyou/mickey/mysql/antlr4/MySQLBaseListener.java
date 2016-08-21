@@ -664,6 +664,18 @@ public class MySQLBaseListener implements MySQLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterElementWapperBkt(MySQLParser.ElementWapperBktContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElementWapperBkt(MySQLParser.ElementWapperBktContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterElementDate(MySQLParser.ElementDateContext ctx) { }
 	/**
 	 * {@inheritDoc}

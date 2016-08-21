@@ -18,6 +18,7 @@ import net.yeah.zhouyou.mickey.mysql.tree.ElementOpEleSuffixNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementOpFactoryNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementSubQueryNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementTextNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ElementWapperBktNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionBetweenAndNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionExistsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionInSelectNode;
@@ -225,6 +226,11 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 	}
 
 	@Override
+	public SQLSyntaxTreeNode visitElementWapperBkt(MySQLParser.ElementWapperBktContext ctx) {
+		return new ElementWapperBktNode((ElementNode) this.visitElement(ctx.element()));
+	}
+
+	@Override
 	public SQLSyntaxTreeNode visitElementDate(MySQLParser.ElementDateContext ctx) {
 		return new ElementDateNode(ctx.dt.getText(), ctx.STRING().getText());
 	}
@@ -271,20 +277,16 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 	public SQLSyntaxTreeNode visitElementCase(MySQLParser.ElementCaseContext ctx) {
 		ElementNode value = ctx.value == null ? null : (ElementNode) this.visitElement(ctx.value);
 		CaseWhenPartNode caseWhenPart = (CaseWhenPartNode) this.visitCaseWhenPart(ctx.caseWhenPart());
-		ElementNode elseEl = ctx.elseEl == null ? null : (ElementNode)
-				this.visitElement(ctx.elseEl);
+		ElementNode elseEl = ctx.elseEl == null ? null : (ElementNode) this.visitElement(ctx.elseEl);
 		return new ElementCaseNode(value, caseWhenPart, elseEl);
 	}
 
 	@Override
 	public SQLSyntaxTreeNode visitCaseWhenPart(MySQLParser.CaseWhenPartContext ctx) {
-		 ElementNode whenEl = ctx.whenEl == null ? null :
-			 (ElementNode) this.visitElement(ctx.whenEl);
-		 ExpressionRelationalNode whenRe = ctx.whenRe == null ? null :
-			 (ExpressionRelationalNode) this.visitExprRelational(ctx.whenRe);
-		 ElementNode then = (ElementNode) this.visitElement(ctx.then);
-		 CaseWhenPartNode suffix = ctx.suffix == null ? null :
-			 (CaseWhenPartNode) this.visitCaseWhenPart(ctx.suffix);
+		ElementNode whenEl = ctx.whenEl == null ? null : (ElementNode) this.visitElement(ctx.whenEl);
+		ExpressionRelationalNode whenRe = ctx.whenRe == null ? null : (ExpressionRelationalNode) this.visitExprRelational(ctx.whenRe);
+		ElementNode then = (ElementNode) this.visitElement(ctx.then);
+		CaseWhenPartNode suffix = ctx.suffix == null ? null : (CaseWhenPartNode) this.visitCaseWhenPart(ctx.suffix);
 		return new CaseWhenPartNode(whenEl, whenRe, then, suffix);
 	}
 

@@ -335,6 +335,12 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitElementSubQuery(MySQLParser.ElementSubQueryContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MySQLParser#elementWapperBkt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElementWapperBkt(MySQLParser.ElementWapperBktContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MySQLParser#elementDate}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
