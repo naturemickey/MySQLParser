@@ -4,9 +4,11 @@ import java.util.stream.Collectors;
 
 import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLBaseVisitor;
 import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLParser;
+import net.yeah.zhouyou.mickey.mysql.tree.CaseWhenPartNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ColumnNamesNode;
 import net.yeah.zhouyou.mickey.mysql.tree.CommitNode;
 import net.yeah.zhouyou.mickey.mysql.tree.DeleteNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ElementCaseNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementDateNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementListFactorNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementListNode;
@@ -263,6 +265,27 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 			elementText.setTxt(text.substring(1));
 		}
 		return new ElementOpEleSuffixNode(op, element);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitElementCase(MySQLParser.ElementCaseContext ctx) {
+		ElementNode value = ctx.value == null ? null : (ElementNode) this.visitElement(ctx.value);
+		CaseWhenPartNode caseWhenPart = (CaseWhenPartNode) this.visitCaseWhenPart(ctx.caseWhenPart());
+		ElementNode elseEl = ctx.elseEl == null ? null : (ElementNode)
+				this.visitElement(ctx.elseEl);
+		return new ElementCaseNode(value, caseWhenPart, elseEl);
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitCaseWhenPart(MySQLParser.CaseWhenPartContext ctx) {
+		 ElementNode whenEl = ctx.whenEl == null ? null :
+			 (ElementNode) this.visitElement(ctx.whenEl);
+		 ExpressionRelationalNode whenRe = ctx.whenRe == null ? null :
+			 (ExpressionRelationalNode) this.visitExprRelational(ctx.whenRe);
+		 ElementNode then = (ElementNode) this.visitElement(ctx.then);
+		 CaseWhenPartNode suffix = ctx.suffix == null ? null :
+			 (CaseWhenPartNode) this.visitCaseWhenPart(ctx.suffix);
+		return new CaseWhenPartNode(whenEl, whenRe, then, suffix);
 	}
 
 	@Override

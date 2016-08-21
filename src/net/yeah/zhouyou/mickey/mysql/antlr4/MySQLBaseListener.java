@@ -736,6 +736,30 @@ public class MySQLBaseListener implements MySQLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterElementCase(MySQLParser.ElementCaseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElementCase(MySQLParser.ElementCaseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCaseWhenPart(MySQLParser.CaseWhenPartContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCaseWhenPart(MySQLParser.CaseWhenPartContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFunCall(MySQLParser.FunCallContext ctx) { }
 	/**
 	 * {@inheritDoc}

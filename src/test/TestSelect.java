@@ -30,10 +30,12 @@ public class TestSelect {
 				 "(SELECT a FROM t1 WHERE a=10 AND B=1) UNION (SELECT a FROM t2 WHERE a=11 AND B=2) ORDER BY a LIMIT 10", //
 				"SELECT 1 AS foo UNION SELECT 2 ORDER BY MAX(1)", //
 				"SELECT 1 /* this is an in-line comment */ + 1", //
-				// "SELECT CASE WHEN 1>0 THEN 'true' ELSE 'false' END", //
 				
-//				"SELECT 102/(1-1)", //
+				// "SELECT 102/(1-1)", //
 				"SELECT CONV(10+'10'+'10'+X'0a',10,10),IF(1>2,2,3),COS(PI() / 2)", //
+				 "SELECT CASE WHEN 1>0 THEN 'true' ELSE 'false' END", //
+				 "SELECT CASE 1 WHEN 1 THEN 'one' WHEN 2 THEN 'two' ELSE 'more' END", //
+//				"SELECT CASE BINARY 'B' WHEN 'a' THEN 1 WHEN 'b' THEN 2 END", //
 		}) {
 			SqlTestUtils.test(sql);
 		}
