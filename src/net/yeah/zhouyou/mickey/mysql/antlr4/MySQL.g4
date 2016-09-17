@@ -169,7 +169,7 @@ PLACEHOLDER : '?' | (':' [a-zA-Z0-9_]+) ;
 SELECT      : [Ss][Ee][Ll][Ee][Cc][Tt] ;
 INSERT      : [Ii][Nn][Ss][Ee][Rr][Tt];
 INTO        : [Ii][Nn][Tt][Oo] ;
-VALUES      : [Vv][Aa][Ll][Uu][Ee][Ss]? ;
+VALUES      : [Vv][Aa][Ll][Uu][Ee][Ss] ;
 DELETE      : [Dd][Ee][Ll][Ee][Tt][Ee] ;
 FROM        : [Ff][Rr][Oo][Mm] ;
 WHERE       : [Ww][Hh][Ee][Rr][Ee] ;
