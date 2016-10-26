@@ -2,8 +2,10 @@ package net.yeah.zhouyou.mickey.mysql;
 
 import java.io.ByteArrayInputStream;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -16,12 +18,15 @@ import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLLexer;
 import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLParser;
 import net.yeah.zhouyou.mickey.mysql.tree.ColumnNamesNode;
 import net.yeah.zhouyou.mickey.mysql.tree.DeleteNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ElementDateNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementTextNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ElementTextParamNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionRelationalNode;
 import net.yeah.zhouyou.mickey.mysql.tree.InsertNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SQLSyntaxTreeNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SelectExprsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SelectNode;
+import net.yeah.zhouyou.mickey.mysql.tree.SelectSuffixNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SetExprNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SetExprsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TableNameAndAliasNode;
@@ -54,6 +59,48 @@ public class MySQLParserUtils {
 		SQLSyntaxTreeNode node = parse(sql);
 		addColumn(node, version);
 		return node.toString();
+	}
+
+	public static String placeHoldering(String sql) {
+		SQLSyntaxTreeNode node = parse(sql);
+		List<Object> hardCode = new ArrayList<>();
+		placeHoldering(node, hardCode);
+		return node.toString();
+	}
+
+	public static String placeHolderingNoCache(String sql) {
+		SQLSyntaxTreeNode node = parse(sql);
+		List<Object> hardCode = new ArrayList<>();
+		placeHoldering(node, hardCode);
+		return node.toString();
+	}
+
+	private static void placeHoldering(SQLSyntaxTreeNode node, List<Object> hardCode) {
+		Map<Field, SQLSyntaxTreeNode> map = node.childrenNode();
+		map.forEach((field, n) -> {
+			if (n == null)
+				return;
+			if (n instanceof ElementTextParamNode || n instanceof ElementDateNode) {
+				hardCode.add(n);
+				try {
+					field.set(node, new ElementTextNode("?"));
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					throw new RuntimeException();
+				}
+			} else if (n instanceof SelectSuffixNode) {
+				SelectSuffixNode sn = (SelectSuffixNode) n;
+				if (sn.getRowCount() != null && !sn.getRowCount().equals("?")) {
+					hardCode.add(sn.getRowCount());
+					sn.setRowCount("?");
+					if (sn.getOffset() != null && !sn.getRowCount().equals("?")) {
+						hardCode.add(sn.getOffset());
+						sn.setOffset("?");
+					}
+				}
+			} else {
+				placeHoldering(n, hardCode);
+			}
+		});
 	}
 
 	private static class Key {

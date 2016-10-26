@@ -538,6 +538,26 @@ public interface MySQLListener extends ParseTreeListener {
 	 */
 	void exitElementText(MySQLParser.ElementTextContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MySQLParser#elementTextParam}.
+	 * @param ctx the parse tree
+	 */
+	void enterElementTextParam(MySQLParser.ElementTextParamContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#elementTextParam}.
+	 * @param ctx the parse tree
+	 */
+	void exitElementTextParam(MySQLParser.ElementTextParamContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MySQLParser#elementDate}.
+	 * @param ctx the parse tree
+	 */
+	void enterElementDate(MySQLParser.ElementDateContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MySQLParser#elementDate}.
+	 * @param ctx the parse tree
+	 */
+	void exitElementDate(MySQLParser.ElementDateContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MySQLParser#elementSubQuery}.
 	 * @param ctx the parse tree
 	 */
@@ -557,16 +577,6 @@ public interface MySQLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitElementWapperBkt(MySQLParser.ElementWapperBktContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MySQLParser#elementDate}.
-	 * @param ctx the parse tree
-	 */
-	void enterElementDate(MySQLParser.ElementDateContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MySQLParser#elementDate}.
-	 * @param ctx the parse tree
-	 */
-	void exitElementDate(MySQLParser.ElementDateContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MySQLParser#elementListFactor}.
 	 * @param ctx the parse tree

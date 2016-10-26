@@ -19,6 +19,7 @@ import net.yeah.zhouyou.mickey.mysql.tree.ElementOpFactoryNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementRowNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementSubQueryNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementTextNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ElementTextParamNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementWapperBktNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementWithPrefixNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionBetweenAndNode;
@@ -222,6 +223,16 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 	}
 
 	@Override
+	public SQLSyntaxTreeNode visitElementTextParam(MySQLParser.ElementTextParamContext ctx) {
+		return new ElementTextParamNode(ctx.getText());
+	}
+
+	@Override
+	public SQLSyntaxTreeNode visitElementDate(MySQLParser.ElementDateContext ctx) {
+		return new ElementDateNode(ctx.dt.getText(), ctx.STRING().getText());
+	}
+
+	@Override
 	public SQLSyntaxTreeNode visitElementSubQuery(MySQLParser.ElementSubQueryContext ctx) {
 		String with = ctx.sqWith == null ? null : ctx.sqWith.getText();
 		return new ElementSubQueryNode(with, (SelectNode) this.visitSelectStat(ctx.selectStat()));
@@ -230,11 +241,6 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 	@Override
 	public SQLSyntaxTreeNode visitElementWapperBkt(MySQLParser.ElementWapperBktContext ctx) {
 		return new ElementWapperBktNode((ElementNode) this.visitElement(ctx.element()));
-	}
-
-	@Override
-	public SQLSyntaxTreeNode visitElementDate(MySQLParser.ElementDateContext ctx) {
-		return new ElementDateNode(ctx.dt.getText(), ctx.STRING().getText());
 	}
 
 	@Override

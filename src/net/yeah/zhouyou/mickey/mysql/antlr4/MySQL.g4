@@ -45,7 +45,7 @@ selectPrefix
 	;
 selectSuffix
 	: (ORDER BY orderByExprs=gbobExprs)?
-	  (LIMIT ((offset=INT ',')? rowCount=INT) | (rowCount=INT OFFSET offset=INT))?
+	  (LIMIT ((offset=(INT | PLACEHOLDER) ',')? rowCount=(INT | PLACEHOLDER)) | (rowCount=(INT | PLACEHOLDER) OFFSET offset=(INT | PLACEHOLDER)))?
 	   ((FOR lock=UPDATE) | (lock=LOCK IN SHARE MODE))?
 	;
 selectUnionSuffix
@@ -135,19 +135,21 @@ element
 	;
 elementOpFactory
 	: elementText
+	| elementTextParam
+	| elementDate
 	| funCall
 	| elementSubQuery
-	| elementDate
 	| elementCase
 	| elementWapperBkt
 	| elementWithPrefix
 	| elementRow
 	;
 
-elementText        : ('*' | PLACEHOLDER | COLUMN_REL | DECIMAL | STRING | ID | TRUE | FALSE | INT | DECIMAL | NULL | UNKNOWN) ;
+elementText        : ('*' | PLACEHOLDER | COLUMN_REL | ID | NULL | UNKNOWN) ;
+elementTextParam   : DECIMAL | STRING | INT | DECIMAL | TRUE | FALSE ;
+elementDate        : dt=(DATE | TIME | TIMESTAMP) STRING ;
 elementSubQuery    : sqWith=(ANY | SOME | ALL)? '(' selectStat ')' ;
 elementWapperBkt   : '(' element ')' ;
-elementDate        : dt=(DATE | TIME | TIMESTAMP) STRING ;
 elementListFactor  : '(' elementList ')' ;
 elementList        : element elementListSuffix? ;
 elementListSuffix  : ',' elementList ;

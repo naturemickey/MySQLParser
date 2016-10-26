@@ -329,6 +329,18 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitElementText(MySQLParser.ElementTextContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MySQLParser#elementTextParam}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElementTextParam(MySQLParser.ElementTextParamContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MySQLParser#elementDate}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElementDate(MySQLParser.ElementDateContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MySQLParser#elementSubQuery}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -340,12 +352,6 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitElementWapperBkt(MySQLParser.ElementWapperBktContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MySQLParser#elementDate}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitElementDate(MySQLParser.ElementDateContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MySQLParser#elementListFactor}.
 	 * @param ctx the parse tree

@@ -32,4 +32,20 @@ public class SelectSuffixNode extends SQLSyntaxTreeNode {
 		return sb.toString();
 	}
 
+	public String getOffset() {
+		return offset;
+	}
+
+	public String getRowCount() {
+		return rowCount;
+	}
+
+	public void setOffset(String offset) {
+		this.offset = offset;
+	}
+
+	public void setRowCount(String rowCount) {
+		this.rowCount = rowCount;
+	}
+
 }
