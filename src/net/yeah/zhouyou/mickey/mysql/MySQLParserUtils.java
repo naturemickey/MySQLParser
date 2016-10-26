@@ -67,11 +67,15 @@ public class MySQLParserUtils {
 		placeHoldering(node, hardCode);
 		return node.toString();
 	}
+	
+	private class HardCodeCache {
+		String sql;
+		List<List<Object>> hardCodeList;
+	}
 
 	public static String placeHolderingNoCache(String sql) {
 		SQLSyntaxTreeNode node = parse(sql);
-		List<Object> hardCode = new ArrayList<>();
-		placeHoldering(node, hardCode);
+		placeHoldering(node, new ArrayList<>());
 		return node.toString();
 	}
 
