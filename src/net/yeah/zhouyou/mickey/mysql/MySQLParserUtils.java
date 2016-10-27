@@ -43,7 +43,7 @@ public class MySQLParserUtils {
 
 	private static final String CULUMN_NAME = "data_env_version";
 	private static final Cache<Key, String> addVersionCache = CacheBuilder.newBuilder().maximumSize(100000).build();
-
+	
 	public static String addVersionToSql(String sql, String version) {
 		try {
 			Key key = new Key(sql, version);
@@ -66,11 +66,6 @@ public class MySQLParserUtils {
 		List<Object> hardCode = new ArrayList<>();
 		placeHoldering(node, hardCode);
 		return node.toString();
-	}
-	
-	private class HardCodeCache {
-		String sql;
-		List<List<Object>> hardCodeList;
 	}
 
 	public static String placeHolderingNoCache(String sql) {
