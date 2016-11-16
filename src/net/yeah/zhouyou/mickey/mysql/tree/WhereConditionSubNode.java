@@ -25,4 +25,5 @@ public class WhereConditionSubNode extends WhereConditionNode {
 		}
 		return sb.toString();
 	}
+
 }

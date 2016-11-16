@@ -24,7 +24,7 @@ public class TableRecuNode extends TableRelNode {
 	}
 
 	@Override
-	public List<TableNameAndAliasNode> getRealTables() {
+	public List<TableRelNode.TableAndJoinMod> getRealTables() {
 		return this.tableRel.getRealTables();
 	}
 

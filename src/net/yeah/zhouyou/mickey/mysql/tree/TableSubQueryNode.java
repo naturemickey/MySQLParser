@@ -19,7 +19,7 @@ public class TableSubQueryNode extends TableRelNode {
 	}
 
 	@Override
-	public List<TableNameAndAliasNode> getRealTables() {
+	public List<TableRelNode.TableAndJoinMod> getRealTables() {
 		return new ArrayList<>();
 	}
 }

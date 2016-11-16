@@ -22,14 +22,14 @@ public class WhereConditionOpNode extends WhereConditionNode {
 		return sb.toString();
 	}
 
-	public void appendCondition(String expressionOperator, WhereConditionNode whereCondition) {
-		if (this.whereCondition == null) {
-			this.expressionOperator = expressionOperator;
-			this.whereCondition = whereCondition;
-		} else {
-			// 这里不要乱用
-			((WhereConditionOpNode) this.whereCondition).appendCondition(expressionOperator, whereCondition);
-		}
-	}
+//	public void appendCondition(String expressionOperator, WhereConditionNode whereCondition) {
+//		if (this.whereCondition == null) {
+//			this.expressionOperator = expressionOperator;
+//			this.whereCondition = whereCondition;
+//		} else {
+//			// 这里不要乱用
+//			((WhereConditionOpNode) this.whereCondition).appendCondition(expressionOperator, whereCondition);
+//		}
+//	}
 
 }

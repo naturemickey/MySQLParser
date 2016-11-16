@@ -19,9 +19,9 @@ public class TableJoinNode extends TableRelNode {
 	}
 
 	@Override
-	public List<TableNameAndAliasNode> getRealTables() {
-		List<TableNameAndAliasNode> res = new ArrayList<>();
-		res.add(table);
+	public List<TableAndJoinMod> getRealTables() {
+		List<TableAndJoinMod> res = new ArrayList<>();
+		res.add(new TableAndJoinMod(table));
 		res.addAll(suffix.getRealTables());
 		return res;
 	}

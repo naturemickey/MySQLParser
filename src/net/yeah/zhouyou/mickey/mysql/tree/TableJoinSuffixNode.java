@@ -2,6 +2,7 @@ package net.yeah.zhouyou.mickey.mysql.tree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TableJoinSuffixNode extends SQLSyntaxTreeNode {
 	private String tableJoinMod;
@@ -45,10 +46,10 @@ public class TableJoinSuffixNode extends SQLSyntaxTreeNode {
 		return sb.toString();
 	}
 
-	public List<TableNameAndAliasNode> getRealTables() {
-		List<TableNameAndAliasNode> res = new ArrayList<>();
+	public List<TableRelNode.TableAndJoinMod> getRealTables() {
+		List<TableRelNode.TableAndJoinMod> res = new ArrayList<>();
 		if (tables != null) {
-			res.addAll(tables.all());
+			res.addAll(tables.all().stream().map(tn -> new TableRelNode.TableAndJoinMod(tn, tableJoinMod)).collect(Collectors.toList()));
 		}
 		if (tableRecu != null) {
 			res.addAll(tableRecu.getRealTables());

@@ -38,9 +38,9 @@ public class TableNameAndAliasNode extends TableRelNode {
 	}
 
 	@Override
-	public List<TableNameAndAliasNode> getRealTables() {
-		List<TableNameAndAliasNode> res = new ArrayList<>();
-		res.add(this);
+	public List<TableRelNode.TableAndJoinMod> getRealTables() {
+		List<TableRelNode.TableAndJoinMod> res = new ArrayList<>();
+		res.add(new TableRelNode.TableAndJoinMod(this));
 		return res;
 	}
 

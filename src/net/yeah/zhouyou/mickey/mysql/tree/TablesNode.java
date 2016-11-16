@@ -19,8 +19,8 @@ public class TablesNode extends SQLSyntaxTreeNode {
 		return tableRel + ", " + suffix;
 	}
 
-	public List<TableNameAndAliasNode> getRealTables() {
-		List<TableNameAndAliasNode> tables = tableRel.getRealTables();
+	public List<TableRelNode.TableAndJoinMod> getRealTables() {
+		List<TableRelNode.TableAndJoinMod> tables = tableRel.getRealTables();
 		if (suffix != null)
 			tables.addAll(suffix.getRealTables());
 		return tables;

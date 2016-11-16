@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -21,6 +22,8 @@ import net.yeah.zhouyou.mickey.mysql.tree.DeleteNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementDateNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementTextNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementTextParamNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ExpressionIsOrIsNotNode;
+import net.yeah.zhouyou.mickey.mysql.tree.ExpressionNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ExpressionRelationalNode;
 import net.yeah.zhouyou.mickey.mysql.tree.InsertNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SQLSyntaxTreeNode;
@@ -30,6 +33,7 @@ import net.yeah.zhouyou.mickey.mysql.tree.SelectSuffixNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SetExprNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SetExprsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TableNameAndAliasNode;
+import net.yeah.zhouyou.mickey.mysql.tree.TableRelNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TablesNode;
 import net.yeah.zhouyou.mickey.mysql.tree.UpdateMultipleTableNode;
 import net.yeah.zhouyou.mickey.mysql.tree.UpdateNode;
@@ -43,7 +47,9 @@ public class MySQLParserUtils {
 
 	private static final String CULUMN_NAME = "data_env_version";
 	private static final Cache<Key, String> addVersionCache = CacheBuilder.newBuilder().maximumSize(100000).build();
-	
+	private static final Map<String, String> placeHolderingCache = new ConcurrentHashMap<>();
+	private static final Map<String, List<List<Object>>> hardCodeCache = new ConcurrentHashMap<>();
+
 	public static String addVersionToSql(String sql, String version) {
 		try {
 			Key key = new Key(sql, version);
@@ -253,7 +259,7 @@ public class MySQLParserUtils {
 			WhereConditionNode wc = update.getWhereCondition();
 			SetExprsNode lastSetExprs = update.getSetExprs().getLastNode();
 
-			WhereConditionOpNode versionCond = null;
+			WhereConditionNode versionCond = null;
 
 			Collections.reverse(tabs);
 			for (TableNameAndAliasNode tab : tabs) {
@@ -275,7 +281,8 @@ public class MySQLParserUtils {
 
 			if (versionCond != null) {
 				if (wc != null) {
-					versionCond.appendCondition("and", new WhereConditionSubNode(wc));
+//					versionCond.appendCondition("and", new WhereConditionSubNode(wc));
+					versionCond = new WhereConditionSubNode(versionCond, "and", new WhereConditionSubNode(wc));
 				}
 
 				update.setWhereCondition(versionCond);
@@ -293,25 +300,50 @@ public class MySQLParserUtils {
 			return node;
 		}
 
-		List<TableNameAndAliasNode> tabs = tables.getRealTables();
+		List<TableRelNode.TableAndJoinMod> tabs = tables.getRealTables();
 		WhereConditionNode wc = select.getSelectInner().getPrefix().getWhere();
 
-		WhereConditionOpNode versionCond = null;
+		WhereConditionNode versionCond = null;
+		String preTableJoinMod = null;
 
 		Collections.reverse(tabs);
-		for (TableNameAndAliasNode tab : tabs) {
+		for (TableRelNode.TableAndJoinMod tabAndJoinMod : tabs) {
+			TableNameAndAliasNode tab = tabAndJoinMod.getTableNameAndAliasNode();
+			String curTableJoinMod = tabAndJoinMod.getTableJoinMod();
+			// tableA left outer join tableB right outer join tableC left outer
+			// join table D
 			String tabName = tab.getName();
 			if (TableConfig.isVersionTable(tabName)) {
 				String alias = tab.getAlias();
 				String cn = alias == null ? tabName : alias;
-				ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementTextNode(cn + '.' + CULUMN_NAME), new ElementTextNode(version), "<=");
-				versionCond = new WhereConditionOpNode(ern, "and", versionCond);
+				ExpressionNode ern = new ExpressionRelationalNode(new ElementTextNode(cn + '.' + CULUMN_NAME), new ElementTextNode(version), "<=");
+				ExpressionIsOrIsNotNode nullNode = null;
+				if (curTableJoinMod != null && curTableJoinMod.length() > 0) {
+					if (curTableJoinMod.startsWith("left")) {
+						nullNode = new ExpressionIsOrIsNotNode(new ElementTextNode(cn + '.' + CULUMN_NAME), false, "null");
+					}
+				} else if (preTableJoinMod != null && preTableJoinMod.length() > 0) {
+					if (preTableJoinMod.startsWith("right")) {
+						nullNode = new ExpressionIsOrIsNotNode(new ElementTextNode(cn + '.' + CULUMN_NAME), false, "null");
+					}
+				}
+				if (nullNode != null) {
+					versionCond = new WhereConditionSubNode(new WhereConditionOpNode(ern, "or", new WhereConditionOpNode(nullNode, null, null)), "and", versionCond);
+				} else {
+					versionCond = new WhereConditionOpNode(ern, "and", versionCond);
+				}
 			}
+
+			preTableJoinMod = curTableJoinMod;
 		}
 
 		if (versionCond != null) {
 			if (wc != null) {
-				versionCond.appendCondition("and", new WhereConditionSubNode(wc));
+//				if (versionCond instanceof WhereConditionOpNode) {
+//					((WhereConditionOpNode) versionCond).appendCondition("and", new WhereConditionSubNode(wc));
+//				} else {
+					versionCond = new WhereConditionSubNode(versionCond, "and", new WhereConditionSubNode(wc));
+//				}
 			}
 
 			select.getSelectInner().getPrefix().setWhere(versionCond);
