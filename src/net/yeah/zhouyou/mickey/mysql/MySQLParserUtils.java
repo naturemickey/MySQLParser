@@ -310,8 +310,7 @@ public class MySQLParserUtils {
 		for (TableRelNode.TableAndJoinMod tabAndJoinMod : tabs) {
 			TableNameAndAliasNode tab = tabAndJoinMod.getTableNameAndAliasNode();
 			String curTableJoinMod = tabAndJoinMod.getTableJoinMod();
-			// tableA left outer join tableB right outer join tableC left outer
-			// join table D
+			// tableA left outer join tableB right outer join tableC left outer join tableD
 			String tabName = tab.getName();
 			if (TableConfig.isVersionTable(tabName)) {
 				String alias = tab.getAlias();
