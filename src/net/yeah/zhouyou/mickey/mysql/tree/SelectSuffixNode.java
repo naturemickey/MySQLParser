@@ -6,12 +6,15 @@ public class SelectSuffixNode extends SQLSyntaxTreeNode {
 	private String offset;
 	private String rowCount;
 	private String lock;
+	private boolean hasOffsetWord;
 
-	public SelectSuffixNode(GbobExprsNode orderByExprs, String offset, String rowCount, String lock) {
+	public SelectSuffixNode(GbobExprsNode orderByExprs, String offset, String rowCount, String lock,
+			boolean hasOffsetWord) {
 		this.orderByExprs = orderByExprs;
 		this.offset = offset;
 		this.rowCount = rowCount;
 		this.lock = lock;
+		this.hasOffsetWord = hasOffsetWord;
 	}
 
 	@Override
@@ -21,9 +24,13 @@ public class SelectSuffixNode extends SQLSyntaxTreeNode {
 			sb.append(" order by ").append(this.orderByExprs);
 		if (this.rowCount != null) {
 			sb.append(" limit ");
-			sb.append(this.rowCount);
-			if (this.offset != null)
-				sb.append(" offset ").append(this.offset);
+			if (this.hasOffsetWord) {
+				sb.append(this.rowCount).append(" offset ").append(this.offset);
+			} else {
+				if (this.offset != null)
+					sb.append(this.offset).append(", ");
+				sb.append(this.rowCount);
+			}
 		}
 		if (this.lock != null) {
 			sb.append(' ').append(this.lock);

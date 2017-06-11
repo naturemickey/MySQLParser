@@ -414,8 +414,10 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 			if (ctx.offset != null)
 				offset = ctx.offset.getText();
 		}
+		
+		boolean hasOffsetWord = (ctx.OFFSET() != null);
 
-		return new SelectSuffixNode(orderByExprs, offset, rowCount, lock);
+		return new SelectSuffixNode(orderByExprs, offset, rowCount, lock, hasOffsetWord);
 	}
 
 	@Override
