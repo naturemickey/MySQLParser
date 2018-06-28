@@ -1,45 +1,23 @@
 package net.yeah.zhouyou.mickey.mysql.tree;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class SetExprsNode extends SQLSyntaxTreeNode {
 
-	private SetExprNode setExpr;
-	private SetExprsNode suffix;
+	private List<SetExprNode> setExprs;
 
-	public SetExprsNode(SetExprNode setExpr, SetExprsNode suffix) {
-		this.setExpr = setExpr;
-		this.suffix = suffix;
+	public SetExprsNode(List<SetExprNode> setExprs) {
+		this.setExprs = setExprs;
 	}
 
 	@Override
 	public String toString() {
-		if (suffix == null) {
-			return setExpr.toString();
-		} else {
-			return setExpr.toString() + ", " + suffix.toString();
-		}
+		return setExprs.stream().map(se -> se.toString()).collect(Collectors.joining(", "));
 	}
 
-	public SetExprsNode getLastNode() {
-		if (suffix == null) {
-			return this;
-		}
-		return suffix.getLastNode();
-	}
-
-	public SetExprNode getSetExpr() {
-		return setExpr;
-	}
-
-	public void setSetExpr(SetExprNode setExpr) {
-		this.setExpr = setExpr;
-	}
-
-	public SetExprsNode getSuffix() {
-		return suffix;
-	}
-
-	public void setSuffix(SetExprsNode suffix) {
-		this.suffix = suffix;
+	public void addSetExpr(SetExprNode se) {
+		this.setExprs.add(se);
 	}
 
 }

@@ -185,12 +185,6 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSetExprs(MySQLParser.SetExprsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MySQLParser#setExprSuffix}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSetExprSuffix(MySQLParser.SetExprSuffixContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MySQLParser#setExpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

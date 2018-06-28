@@ -364,18 +364,6 @@ public class MySQLBaseListener implements MySQLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSetExprSuffix(MySQLParser.SetExprSuffixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSetExprSuffix(MySQLParser.SetExprSuffixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterSetExpr(MySQLParser.SetExprContext ctx) { }
 	/**
 	 * {@inheritDoc}

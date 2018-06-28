@@ -84,8 +84,7 @@ updateStat
 updateSingleTable   : UPDATE tableNameAndAlias   SET setExprs (WHERE whereCondition)? (LIMIT rowCount=(INT|PLACEHOLDER))? ;
 updateMultipleTable	: UPDATE tableNameAndAliases SET setExprs (WHERE whereCondition)? ;
 
-setExprs      : setExpr setExprSuffix? ;
-setExprSuffix : ',' setExprs ;
+setExprs      : setExpr (',' setExpr)* ;
 setExpr       : left=element '=' (right=element | rightDefault=DEFAULT) ;
 
 deleteStat

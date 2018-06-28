@@ -284,14 +284,7 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 
 	@Override
 	public SQLSyntaxTreeNode visitSetExprs(MySQLParser.SetExprsContext ctx) {
-		SetExprNode setExpr = (SetExprNode) this.visitSetExpr(ctx.setExpr());
-		SetExprsNode suffix = ctx.setExprSuffix() != null ? (SetExprsNode) this.visitSetExprSuffix(ctx.setExprSuffix()) : null;
-		return new SetExprsNode(setExpr, suffix);
-	}
-
-	@Override
-	public SQLSyntaxTreeNode visitSetExprSuffix(MySQLParser.SetExprSuffixContext ctx) {
-		return this.visitSetExprs(ctx.setExprs());
+		return new SetExprsNode(ctx.setExpr().stream().map(cse -> (SetExprNode) this.visitSetExpr(cse)).collect(Collectors.toList()));
 	}
 
 	@Override

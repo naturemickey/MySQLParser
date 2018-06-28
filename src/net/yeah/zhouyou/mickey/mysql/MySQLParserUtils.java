@@ -30,7 +30,6 @@ import net.yeah.zhouyou.mickey.mysql.tree.SelectExprsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SelectNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SelectSuffixNode;
 import net.yeah.zhouyou.mickey.mysql.tree.SetExprNode;
-import net.yeah.zhouyou.mickey.mysql.tree.SetExprsNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TableNameAndAliasNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TableRelNode;
 import net.yeah.zhouyou.mickey.mysql.tree.TablesNode;
@@ -234,9 +233,8 @@ public class MySQLParserUtils {
 			if (TableConfig.isVersionTable(update.getTableNameAndAlias().getName())) {
 				String alias = update.getTableNameAndAlias().getAlias();
 				WhereConditionNode wc = update.getWhereCondition();
-				SetExprsNode setExprs = update.getSetExprs().getLastNode();
 				SetExprNode addSetNode = new SetExprNode(new ElementTextNode(CULUMN_NAME), new ElementTextNode(version));
-				setExprs.setSuffix(new SetExprsNode(addSetNode, null));
+				update.getSetExprs().addSetExpr(addSetNode);
 
 				ExpressionRelationalNode ern = new ExpressionRelationalNode(new ElementTextNode(alias == null ? CULUMN_NAME : alias + '.' + CULUMN_NAME),
 						new ElementTextNode(version), "<=");
@@ -253,7 +251,6 @@ public class MySQLParserUtils {
 
 			List<TableNameAndAliasNode> tabs = update.getTableNameAndAliases().all();
 			WhereConditionNode wc = update.getWhereCondition();
-			SetExprsNode lastSetExprs = update.getSetExprs().getLastNode();
 
 			WhereConditionNode versionCond = null;
 
@@ -270,8 +267,7 @@ public class MySQLParserUtils {
 
 					// process set
 					SetExprNode addSetNode = new SetExprNode(new ElementTextNode(cn), new ElementTextNode(version));
-					lastSetExprs.setSuffix(new SetExprsNode(addSetNode, null));
-					lastSetExprs = lastSetExprs.getSuffix();
+					update.getSetExprs().addSetExpr(addSetNode);
 				}
 			}
 
