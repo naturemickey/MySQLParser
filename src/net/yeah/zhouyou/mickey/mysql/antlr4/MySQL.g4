@@ -73,8 +73,7 @@ tableJoinSuffix : tableJoinMod JOIN (tableNameAndAliases | '(' tableNameAndAlias
 tableJoinMod    : INNER | CROSS | LEFT OUTER? | RIGHT OUTER? ;
 joinCondition   : ON whereCondition | USING '(' columnNames ')' ;
 
-gbobExprs      : element sc=(ASC | DESC)? gbobExprSuffix? ;
-gbobExprSuffix : ',' gbobExprs ;
+gbobExprs : element sc=(ASC | DESC)? (',' gbobExprs)? ;
 
 updateStat
 	: updateSingleTable

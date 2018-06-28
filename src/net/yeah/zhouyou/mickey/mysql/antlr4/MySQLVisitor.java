@@ -155,12 +155,6 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitGbobExprs(MySQLParser.GbobExprsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MySQLParser#gbobExprSuffix}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitGbobExprSuffix(MySQLParser.GbobExprSuffixContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MySQLParser#updateStat}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

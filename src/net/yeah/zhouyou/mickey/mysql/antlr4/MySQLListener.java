@@ -248,16 +248,6 @@ public interface MySQLListener extends ParseTreeListener {
 	 */
 	void exitGbobExprs(MySQLParser.GbobExprsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MySQLParser#gbobExprSuffix}.
-	 * @param ctx the parse tree
-	 */
-	void enterGbobExprSuffix(MySQLParser.GbobExprSuffixContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MySQLParser#gbobExprSuffix}.
-	 * @param ctx the parse tree
-	 */
-	void exitGbobExprSuffix(MySQLParser.GbobExprSuffixContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MySQLParser#updateStat}.
 	 * @param ctx the parse tree
 	 */

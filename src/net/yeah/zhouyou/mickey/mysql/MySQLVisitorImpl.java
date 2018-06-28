@@ -411,13 +411,8 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 	public SQLSyntaxTreeNode visitGbobExprs(MySQLParser.GbobExprsContext ctx) {
 		ElementNode element = (ElementNode) this.visitElement(ctx.element());
 		String sc = ctx.sc == null ? null : ctx.sc.getText();
-		GbobExprsNode suffix = (ctx.gbobExprSuffix() != null) ? (GbobExprsNode) this.visitGbobExprSuffix(ctx.gbobExprSuffix()) : null;
+		GbobExprsNode suffix = (ctx.gbobExprs() != null) ? (GbobExprsNode) this.visitGbobExprs(ctx.gbobExprs()) : null;
 		return new GbobExprsNode(element, sc, suffix);
-	}
-
-	@Override
-	public SQLSyntaxTreeNode visitGbobExprSuffix(MySQLParser.GbobExprSuffixContext ctx) {
-		return this.visitGbobExprs(ctx.gbobExprs());
 	}
 
 	@Override
