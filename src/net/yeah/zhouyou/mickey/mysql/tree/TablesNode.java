@@ -1,28 +1,22 @@
 package net.yeah.zhouyou.mickey.mysql.tree;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TablesNode extends SQLSyntaxTreeNode {
 
-	private TableRelNode tableRel;
-	private TablesNode suffix;
+	private List<TableRelNode> tableRels;
 
-	public TablesNode(TableRelNode tableRel, TablesNode suffix) {
-		this.tableRel = tableRel;
-		this.suffix = suffix;
+	public TablesNode(List<TableRelNode> tableRels) {
+		this.tableRels = tableRels;
 	}
 
 	@Override
 	public String toString() {
-		if (suffix == null)
-			return tableRel.toString();
-		return tableRel + ", " + suffix;
+		return tableRels.stream().map(tr -> tr.toString()).collect(Collectors.joining(", "));
 	}
 
 	public List<TableRelNode.TableAndJoinMod> getRealTables() {
-		List<TableRelNode.TableAndJoinMod> tables = tableRel.getRealTables();
-		if (suffix != null)
-			tables.addAll(suffix.getRealTables());
-		return tables;
+		return tableRels.stream().flatMap(tr -> tr.getRealTables().stream()).collect(Collectors.toList());
 	}
 }

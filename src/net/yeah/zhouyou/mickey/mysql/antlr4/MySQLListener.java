@@ -158,16 +158,6 @@ public interface MySQLListener extends ParseTreeListener {
 	 */
 	void exitTables(MySQLParser.TablesContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MySQLParser#tableSuffix}.
-	 * @param ctx the parse tree
-	 */
-	void enterTableSuffix(MySQLParser.TableSuffixContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MySQLParser#tableSuffix}.
-	 * @param ctx the parse tree
-	 */
-	void exitTableSuffix(MySQLParser.TableSuffixContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MySQLParser#tableRel}.
 	 * @param ctx the parse tree
 	 */

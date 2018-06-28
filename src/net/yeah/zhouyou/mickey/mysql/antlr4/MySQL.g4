@@ -52,8 +52,7 @@ selectUnionSuffix
 selectExprs       : element (AS? alias=ID)? selectExprsSuffix? ;
 selectExprsSuffix : ',' selectExprs ;
 
-tables      : tableRel tableSuffix? ;
-tableSuffix : ',' tables ;
+tables : tableRel (',' tableRel)* ;
 
 tableRel
 	: tableFactor

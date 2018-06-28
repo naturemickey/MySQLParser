@@ -444,14 +444,7 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 
 	@Override
 	public SQLSyntaxTreeNode visitTables(MySQLParser.TablesContext ctx) {
-		TableRelNode tableRel = (TableRelNode) this.visitTableRel(ctx.tableRel());
-		TablesNode suffix = ctx.tableSuffix() != null ? (TablesNode) this.visitTableSuffix(ctx.tableSuffix()) : null;
-		return new TablesNode(tableRel, suffix);
-	}
-
-	@Override
-	public SQLSyntaxTreeNode visitTableSuffix(MySQLParser.TableSuffixContext ctx) {
-		return this.visitTables(ctx.tables());
+		return new TablesNode(ctx.tableRel().stream().map(trx -> (TableRelNode) this.visitTableRel(trx)).collect(Collectors.toList()));
 	}
 
 	@Override
