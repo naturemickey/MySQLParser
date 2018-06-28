@@ -154,8 +154,7 @@ elementWithPrefix  : prefix=BINARY elementOpFactory ;
 elementRow         : ROW '(' paramList ')' ;
 
 funCall     : funName=ID '(' paramList? ')' ;
-paramList   : (element | exprRelational) paramSuffix? ;
-paramSuffix : ',' paramList ;
+paramList   : (element | exprRelational) (',' paramList)? ;
 
 // ******* Lexer *******
 

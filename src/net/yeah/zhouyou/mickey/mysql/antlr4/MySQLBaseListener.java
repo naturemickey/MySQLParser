@@ -743,18 +743,6 @@ public class MySQLBaseListener implements MySQLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitParamList(MySQLParser.ParamListContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterParamSuffix(MySQLParser.ParamSuffixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitParamSuffix(MySQLParser.ParamSuffixContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

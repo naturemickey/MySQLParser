@@ -617,14 +617,4 @@ public interface MySQLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitParamList(MySQLParser.ParamListContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MySQLParser#paramSuffix}.
-	 * @param ctx the parse tree
-	 */
-	void enterParamSuffix(MySQLParser.ParamSuffixContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MySQLParser#paramSuffix}.
-	 * @param ctx the parse tree
-	 */
-	void exitParamSuffix(MySQLParser.ParamSuffixContext ctx);
 }

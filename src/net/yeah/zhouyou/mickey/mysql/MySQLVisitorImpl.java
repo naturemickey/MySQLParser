@@ -320,13 +320,8 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 		}
 		ElementNode element = ctx.element() == null ? null : (ElementNode) this.visitElement(ctx.element());
 		ExpressionRelationalNode exprRelational = ctx.exprRelational() == null ? null : (ExpressionRelationalNode) this.visitExprRelational(ctx.exprRelational());
-		ParamListNode suffix = ctx.paramSuffix() == null ? null : (ParamListNode) this.visitParamSuffix(ctx.paramSuffix());
+		ParamListNode suffix = ctx.paramList() == null ? null : (ParamListNode) this.visitParamList(ctx.paramList());
 		return new ParamListNode(element, exprRelational, suffix);
-	}
-
-	@Override
-	public SQLSyntaxTreeNode visitParamSuffix(MySQLParser.ParamSuffixContext ctx) {
-		return visitParamList(ctx.paramList());
 	}
 
 	@Override
