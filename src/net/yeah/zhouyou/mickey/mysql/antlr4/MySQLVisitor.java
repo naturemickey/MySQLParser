@@ -53,12 +53,6 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitValueList(MySQLParser.ValueListContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MySQLParser#valueListSuffix}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitValueListSuffix(MySQLParser.ValueListSuffixContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MySQLParser#selectStat}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -78,16 +78,6 @@ public interface MySQLListener extends ParseTreeListener {
 	 */
 	void exitValueList(MySQLParser.ValueListContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MySQLParser#valueListSuffix}.
-	 * @param ctx the parse tree
-	 */
-	void enterValueListSuffix(MySQLParser.ValueListSuffixContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MySQLParser#valueListSuffix}.
-	 * @param ctx the parse tree
-	 */
-	void exitValueListSuffix(MySQLParser.ValueListSuffixContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MySQLParser#selectStat}.
 	 * @param ctx the parse tree
 	 */

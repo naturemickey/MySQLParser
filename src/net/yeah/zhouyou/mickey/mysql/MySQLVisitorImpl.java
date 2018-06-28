@@ -1,9 +1,6 @@
 package net.yeah.zhouyou.mickey.mysql;
 
-import java.util.List;
 import java.util.stream.Collectors;
-
-import org.antlr.v4.runtime.tree.TerminalNode;
 
 import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLBaseVisitor;
 import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLParser;
@@ -95,15 +92,7 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 
 	@Override
 	public SQLSyntaxTreeNode visitValueList(MySQLParser.ValueListContext ctx) {
-		ElementNode element = (ElementNode) this.visitElement(ctx.element());
-		ValueListNode suffix = ctx.valueListSuffix() != null ? (ValueListNode) visitValueListSuffix(ctx.valueListSuffix()) : null;
-
-		return new ValueListNode(element, suffix);
-	}
-
-	@Override
-	public SQLSyntaxTreeNode visitValueListSuffix(MySQLParser.ValueListSuffixContext ctx) {
-		return visitValueList(ctx.valueList());
+		return new ValueListNode(ctx.element().stream().map(ec -> (ElementNode) this.visitElement(ec)).collect(Collectors.toList()));
 	}
 
 	@Override

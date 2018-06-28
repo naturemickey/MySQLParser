@@ -24,10 +24,8 @@ insertStat
 	: INSERT INTO? tableName=ID ('(' columnNames ')')? ((VALUES '(' valueList ')') | selectStat)
 	;
 
-columnNames     : (ID ',')* ID ;
-
-valueList       : element valueListSuffix? ;
-valueListSuffix : ',' valueList ;
+columnNames : (ID ',')* ID ;
+valueList   : (element ',')* element ;
 
 selectStat
 	: ('(' selectInner ')' | selectInner) selectUnionSuffix?

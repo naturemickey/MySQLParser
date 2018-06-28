@@ -17,7 +17,6 @@ import com.google.common.cache.CacheBuilder;
 
 import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLLexer;
 import net.yeah.zhouyou.mickey.mysql.antlr4.MySQLParser;
-import net.yeah.zhouyou.mickey.mysql.tree.ColumnNamesNode;
 import net.yeah.zhouyou.mickey.mysql.tree.DeleteNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementDateNode;
 import net.yeah.zhouyou.mickey.mysql.tree.ElementTextNode;
@@ -219,8 +218,7 @@ public class MySQLParserUtils {
 			ValueListNode valueName = insert.getValueNames();
 			SelectNode select = insert.getSelect();
 			if (valueName != null) {
-				valueName = valueName.getLastNode();
-				valueName.setSuffix(new ValueListNode(new ElementTextNode(version), null));
+				valueName.addElementNode(new ElementTextNode(version));
 			} else {
 				SelectExprsNode selectExprNode = select.getSelectInner().getPrefix().getSelectExprs().getLastNode();
 				selectExprNode.setSuffix(new SelectExprsNode(new ElementTextNode(version), null, null));

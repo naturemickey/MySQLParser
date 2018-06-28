@@ -1,36 +1,23 @@
 package net.yeah.zhouyou.mickey.mysql.tree;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ValueListNode extends SQLSyntaxTreeNode {
 
-	private ElementNode element;
-	private ValueListNode suffix;
-
-	public ValueListNode(ElementNode element, ValueListNode suffix) {
-		this.element = element;
-		this.suffix = suffix;
+	private List<ElementNode> elements;
+	
+	public ValueListNode(List<ElementNode> elements) {
+		this.elements = elements;
 	}
 
 	@Override
 	public String toString() {
-		if (suffix == null) {
-			return element.toString();
-		} else {
-			return element + ", " + suffix;
-		}
+		return this.elements.stream().map(e -> e.toString()).collect(Collectors.joining(", "));
 	}
-
-	public ValueListNode getLastNode() {
-		if (suffix == null)
-			return this;
-		return suffix.getLastNode();
-	}
-
-	public ValueListNode getSuffix() {
-		return suffix;
-	}
-
-	public void setSuffix(ValueListNode suffix) {
-		this.suffix = suffix;
+	
+	public void addElementNode(ElementNode node) {
+		this.elements.add(node);
 	}
 
 }
