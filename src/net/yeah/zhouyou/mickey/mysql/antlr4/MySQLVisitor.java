@@ -209,12 +209,6 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTableNameAndAliases(MySQLParser.TableNameAndAliasesContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MySQLParser#tableNameAndAliasSuffix}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTableNameAndAliasSuffix(MySQLParser.TableNameAndAliasSuffixContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MySQLParser#whereCondition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

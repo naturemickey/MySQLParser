@@ -338,16 +338,6 @@ public interface MySQLListener extends ParseTreeListener {
 	 */
 	void exitTableNameAndAliases(MySQLParser.TableNameAndAliasesContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MySQLParser#tableNameAndAliasSuffix}.
-	 * @param ctx the parse tree
-	 */
-	void enterTableNameAndAliasSuffix(MySQLParser.TableNameAndAliasSuffixContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MySQLParser#tableNameAndAliasSuffix}.
-	 * @param ctx the parse tree
-	 */
-	void exitTableNameAndAliasSuffix(MySQLParser.TableNameAndAliasSuffixContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MySQLParser#whereCondition}.
 	 * @param ctx the parse tree
 	 */

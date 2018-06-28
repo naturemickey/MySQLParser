@@ -111,16 +111,8 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 
 	@Override
 	public SQLSyntaxTreeNode visitTableNameAndAliases(MySQLParser.TableNameAndAliasesContext ctx) {
-		TableNameAndAliasNode tableNameAndAlias = (TableNameAndAliasNode) this.visitTableNameAndAlias(ctx.tableNameAndAlias());
-		TableNameAndAliasesNode suffix = ctx.tableNameAndAliasSuffix() != null
-				? (TableNameAndAliasesNode) this.visitTableNameAndAliasSuffix(ctx.tableNameAndAliasSuffix()) : null;
-
-		return new TableNameAndAliasesNode(tableNameAndAlias, suffix);
-	}
-
-	@Override
-	public SQLSyntaxTreeNode visitTableNameAndAliasSuffix(MySQLParser.TableNameAndAliasSuffixContext ctx) {
-		return this.visitTableNameAndAliases(ctx.tableNameAndAliases());
+		return new TableNameAndAliasesNode(ctx.tableNameAndAlias().stream()
+				.map(n -> (TableNameAndAliasNode) this.visitTableNameAndAlias(n)).collect(Collectors.toList()));
 	}
 
 	@Override

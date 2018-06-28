@@ -91,9 +91,8 @@ deleteStat
 	: DELETE FROM tableNameAndAlias (WHERE whereCondition)? (LIMIT rowCount=(INT|PLACEHOLDER))?
 	;
 
-tableNameAndAlias       : name=ID (AS? alias=ID)? ;
-tableNameAndAliases     : tableNameAndAlias tableNameAndAliasSuffix? ;
-tableNameAndAliasSuffix : ',' tableNameAndAliases ;
+tableNameAndAlias   : name=ID (AS? alias=ID)? ;
+tableNameAndAliases : tableNameAndAlias (',' tableNameAndAlias)* ;
 
 whereCondition
 	: whereCondSub

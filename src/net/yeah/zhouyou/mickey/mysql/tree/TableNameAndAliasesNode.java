@@ -1,34 +1,23 @@
 package net.yeah.zhouyou.mickey.mysql.tree;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TableNameAndAliasesNode extends SQLSyntaxTreeNode {
 
-	private TableNameAndAliasNode tableNameAndAlias;
-	private TableNameAndAliasesNode suffix;
+	private List<TableNameAndAliasNode> tableNameAndAlias;
 
-	public TableNameAndAliasesNode(TableNameAndAliasNode tableNameAndAlias, TableNameAndAliasesNode suffix) {
+	public TableNameAndAliasesNode(List<TableNameAndAliasNode> tableNameAndAlias) {
 		this.tableNameAndAlias = tableNameAndAlias;
-		this.suffix = suffix;
 	}
 
 	@Override
 	public String toString() {
-		if (suffix == null) {
-			return this.tableNameAndAlias.toString();
-		} else {
-			return this.tableNameAndAlias.toString() + ", " + suffix;
-		}
+		return tableNameAndAlias.stream().map(n -> n.toString()).collect(Collectors.joining(", "));
 	}
 
 	public List<TableNameAndAliasNode> all() {
-		List<TableNameAndAliasNode> res = new ArrayList<>();
-		res.add(this.tableNameAndAlias);
-		if (this.suffix != null) {
-			res.addAll(this.suffix.all());
-		}
-		return res;
+		return tableNameAndAlias;
 	}
 
 }

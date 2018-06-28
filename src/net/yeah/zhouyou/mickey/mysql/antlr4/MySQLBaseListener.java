@@ -412,18 +412,6 @@ public class MySQLBaseListener implements MySQLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTableNameAndAliasSuffix(MySQLParser.TableNameAndAliasSuffixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTableNameAndAliasSuffix(MySQLParser.TableNameAndAliasSuffixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterWhereCondition(MySQLParser.WhereConditionContext ctx) { }
 	/**
 	 * {@inheritDoc}
