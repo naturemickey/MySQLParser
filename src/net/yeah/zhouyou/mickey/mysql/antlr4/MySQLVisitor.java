@@ -1,4 +1,4 @@
-// Generated from /Users/mickey/github/MySQLParser/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.g4 by ANTLR 4.5.3
+// Generated from src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.g4 by ANTLR 4.5.3
 package net.yeah.zhouyou.mickey.mysql.antlr4;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -46,12 +46,6 @@ public interface MySQLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitColumnNames(MySQLParser.ColumnNamesContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MySQLParser#columnNamesSuffix}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitColumnNamesSuffix(MySQLParser.ColumnNamesSuffixContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MySQLParser#valueList}.
 	 * @param ctx the parse tree

@@ -214,9 +214,7 @@ public class MySQLParserUtils {
 	private static SQLSyntaxTreeNode processInsert(SQLSyntaxTreeNode node, String version) {
 		InsertNode insert = (InsertNode) node;
 		if (TableConfig.isVersionTable(insert.getTableName())) {
-			// 如果columnNames为空则后无法添加属性，所以这里不对空做判断，直接报错。
-			ColumnNamesNode columnNames = insert.getColumnNames().getLastNode();
-			columnNames.setSuffix(new ColumnNamesNode(CULUMN_NAME, null));
+			insert.getColumnNames().addColumn(CULUMN_NAME);
 
 			ValueListNode valueName = insert.getValueNames();
 			SelectNode select = insert.getSelect();

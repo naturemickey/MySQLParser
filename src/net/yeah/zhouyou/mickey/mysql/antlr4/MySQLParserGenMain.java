@@ -4,7 +4,7 @@ public class MySQLParserGenMain {
 
 	public static void main(String[] args) {
 		
-		org.antlr.v4.Tool.main(new String[]{"-visitor","/Users/mickey/github/MySQLParser/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.g4"});
+		org.antlr.v4.Tool.main(new String[]{"-visitor","src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.g4"});
 
 	}
 

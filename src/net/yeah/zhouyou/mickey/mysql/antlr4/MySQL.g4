@@ -24,8 +24,7 @@ insertStat
 	: INSERT INTO? tableName=ID ('(' columnNames ')')? ((VALUES '(' valueList ')') | selectStat)
 	;
 
-columnNames       : name=ID columnNamesSuffix? ;
-columnNamesSuffix : ',' columnNames ;
+columnNames     : (ID ',')* ID ;
 
 valueList       : element valueListSuffix? ;
 valueListSuffix : ',' valueList ;

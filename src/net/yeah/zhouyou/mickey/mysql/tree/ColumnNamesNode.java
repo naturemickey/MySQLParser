@@ -1,43 +1,23 @@
 package net.yeah.zhouyou.mickey.mysql.tree;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ColumnNamesNode extends SQLSyntaxTreeNode {
 
-	private String name;
-	private ColumnNamesNode suffix;
+	private List<String> names = new ArrayList<>();
 
-	public ColumnNamesNode(String name, ColumnNamesNode suffix) {
-		this.name = name;
-		this.suffix = suffix;
+	public ColumnNamesNode(List<String> names) {
+		this.names = names;
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder(name);
-		if (suffix != null) {
-			sb.append(", ");
-			sb.append(suffix.toString());
-		}
-		return sb.toString();
+		return names.stream().collect(Collectors.joining(", "));
 	}
 
-	public ColumnNamesNode getLastNode() {
-		return suffix == null ? this : suffix.getLastNode();
+	public void addColumn(String name) {
+		this.names.add(name);
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public ColumnNamesNode getSuffix() {
-		return suffix;
-	}
-
-	public void setSuffix(ColumnNamesNode suffix) {
-		this.suffix = suffix;
-	}
-
 }

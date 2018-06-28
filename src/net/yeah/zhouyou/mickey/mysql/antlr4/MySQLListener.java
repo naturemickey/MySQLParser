@@ -1,4 +1,4 @@
-// Generated from /Users/mickey/github/MySQLParser/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.g4 by ANTLR 4.5.3
+// Generated from src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.g4 by ANTLR 4.5.3
 package net.yeah.zhouyou.mickey.mysql.antlr4;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -67,16 +67,6 @@ public interface MySQLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitColumnNames(MySQLParser.ColumnNamesContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MySQLParser#columnNamesSuffix}.
-	 * @param ctx the parse tree
-	 */
-	void enterColumnNamesSuffix(MySQLParser.ColumnNamesSuffixContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MySQLParser#columnNamesSuffix}.
-	 * @param ctx the parse tree
-	 */
-	void exitColumnNamesSuffix(MySQLParser.ColumnNamesSuffixContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MySQLParser#valueList}.
 	 * @param ctx the parse tree
