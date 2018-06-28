@@ -393,13 +393,8 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 	public SQLSyntaxTreeNode visitSelectExprs(MySQLParser.SelectExprsContext ctx) {
 		ElementNode element = (ElementNode) this.visitElement(ctx.element());
 		String alias = ctx.alias == null ? null : ctx.alias.getText();
-		SelectExprsNode suffix = ctx.selectExprsSuffix() != null ? (SelectExprsNode) this.visitSelectExprsSuffix(ctx.selectExprsSuffix()) : null;
+		SelectExprsNode suffix = ctx.selectExprs() != null ? (SelectExprsNode) this.visitSelectExprs(ctx.selectExprs()) : null;
 		return new SelectExprsNode(element, alias, suffix);
-	}
-
-	@Override
-	public SQLSyntaxTreeNode visitSelectExprsSuffix(MySQLParser.SelectExprsSuffixContext ctx) {
-		return this.visitSelectExprs(ctx.selectExprs());
 	}
 
 	@Override

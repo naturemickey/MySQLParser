@@ -49,10 +49,8 @@ selectUnionSuffix
 	: UNION method=(ALL | DISTINCT)? ('(' selectStat ')' | selectStat) selectSuffix
 	;
 
-selectExprs       : element (AS? alias=ID)? selectExprsSuffix? ;
-selectExprsSuffix : ',' selectExprs ;
-
-tables : tableRel (',' tableRel)* ;
+selectExprs : element (AS? alias=ID)? (',' selectExprs)? ;
+tables      : tableRel (',' tableRel)* ;
 
 tableRel
 	: tableFactor
