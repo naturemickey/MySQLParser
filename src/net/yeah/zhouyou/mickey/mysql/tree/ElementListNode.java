@@ -1,22 +1,19 @@
 package net.yeah.zhouyou.mickey.mysql.tree;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ElementListNode extends SQLSyntaxTreeNode {
 
-	private ElementNode element;
-	private ElementListNode suffix;
+	private List<ElementNode> elements;
 
-	public ElementListNode(ElementNode element, ElementListNode suffix) {
-		this.element = element;
-		this.suffix = suffix;
+	public ElementListNode(List<ElementNode> elements) {
+		this.elements = elements;
 	}
 
 	@Override
 	public String toString() {
-		if (suffix == null) {
-			return element.toString();
-		} else {
-			return element + ", " + suffix;
-		}
+		return elements.stream().map(n -> n.toString()).collect(Collectors.joining(", "));
 	}
 
 }

@@ -226,14 +226,7 @@ public class MySQLVisitorImpl extends MySQLBaseVisitor<SQLSyntaxTreeNode> {
 
 	@Override
 	public SQLSyntaxTreeNode visitElementList(MySQLParser.ElementListContext ctx) {
-		ElementNode element = (ElementNode) this.visitElement(ctx.element());
-		ElementListNode suffix = ctx.elementListSuffix() == null ? null : (ElementListNode) this.visitElementListSuffix(ctx.elementListSuffix());
-		return new ElementListNode(element, suffix);
-	}
-
-	@Override
-	public SQLSyntaxTreeNode visitElementListSuffix(MySQLParser.ElementListSuffixContext ctx) {
-		return this.visitElementList(ctx.elementList());
+		return new ElementListNode(ctx.element().stream().map(e -> (ElementNode) this.visitElement(e)).collect(Collectors.toList()));
 	}
 
 	@Override
