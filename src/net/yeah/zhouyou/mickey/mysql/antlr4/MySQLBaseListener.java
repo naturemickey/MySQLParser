@@ -1,4 +1,5 @@
-// Generated from src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.g4 by ANTLR 4.5.3
+// Generated from D:/github/MySQLParser/src/net/yeah/zhouyou/mickey/mysql/antlr4\MySQL.g4 by ANTLR 4.7.2
+package net.yeah.zhouyou.mickey.mysql.antlr4;
 package net.yeah.zhouyou.mickey.mysql.antlr4;
 
 import org.antlr.v4.runtime.ParserRuleContext;

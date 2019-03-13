@@ -271,5 +271,5 @@ COMMENT2    : '/*' (('*' ~ '/') | ( ~ '*'))* '*/' -> skip ;
 USER_VAR    : '@' ( USER_VAR_SUBFIX1 | USER_VAR_SUBFIX2 | USER_VAR_SUBFIX3 | USER_VAR_SUBFIX4 ) ;
 fragment USER_VAR_SUBFIX1 : ( '`' ( ~ '`' )+ '`' ) ;
 fragment USER_VAR_SUBFIX2 : ( '\'' ( ~ '\'' )+ '\'' ) ;
-fragment USER_VAR_SUBFIX3 : ( '\"' ( ~ '\"' )+ '\"' ) ;
+fragment USER_VAR_SUBFIX3 : ( '"' ( ~ '"' )+ '"' ) ;
 fragment USER_VAR_SUBFIX4 : ( 'A' .. 'Z' | 'a' .. 'z' | '_' | '$' | '0' .. '9' | DOT )+ ;

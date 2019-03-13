@@ -1,4 +1,5 @@
-// Generated from src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.g4 by ANTLR 4.5.3
+// Generated from D:/github/MySQLParser/src/net/yeah/zhouyou/mickey/mysql/antlr4\MySQL.g4 by ANTLR 4.7.2
+package net.yeah.zhouyou.mickey.mysql.antlr4;
 package net.yeah.zhouyou.mickey.mysql.antlr4;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class MySQLParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.5.3", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.7.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -51,50 +52,60 @@ public class MySQLParser extends Parser {
 		RULE_elementOpEle = 52, RULE_elementOpEleSuffix = 53, RULE_elementCase = 54, 
 		RULE_caseWhenPart = 55, RULE_elementWithPrefix = 56, RULE_elementRow = 57, 
 		RULE_funCall = 58, RULE_paramList = 59;
-	public static final String[] ruleNames = {
-		"stat", "transcationStat", "commit", "rollback", "insertStat", "columnNames", 
-		"valueList", "selectStat", "selectInner", "selectPrefix", "selectSuffix", 
-		"selectUnionSuffix", "selectExprs", "tables", "tableRel", "tableFactor", 
-		"tableSubQuery", "tableRecu", "tableJoin", "tableJoinSuffix", "tableJoinMod", 
-		"joinCondition", "gbobExprs", "updateStat", "updateSingleTable", "updateMultipleTable", 
-		"setExprs", "setExpr", "deleteStat", "tableNameAndAlias", "tableNameAndAliases", 
-		"whereCondition", "whereCondSub", "whereCondOp", "expression", "exprRelational", 
-		"exprBetweenAnd", "exprIsOrIsNotNull", "exprInSelect", "exprInValues", 
-		"exprExists", "exprNot", "exprLike", "element", "elementOpFactory", "elementText", 
-		"elementTextParam", "elementDate", "elementSubQuery", "elementWapperBkt", 
-		"elementListFactor", "elementList", "elementOpEle", "elementOpEleSuffix", 
-		"elementCase", "caseWhenPart", "elementWithPrefix", "elementRow", "funCall", 
-		"paramList"
-	};
+	private static String[] makeRuleNames() {
+		return new String[] {
+			"stat", "transcationStat", "commit", "rollback", "insertStat", "columnNames", 
+			"valueList", "selectStat", "selectInner", "selectPrefix", "selectSuffix", 
+			"selectUnionSuffix", "selectExprs", "tables", "tableRel", "tableFactor", 
+			"tableSubQuery", "tableRecu", "tableJoin", "tableJoinSuffix", "tableJoinMod", 
+			"joinCondition", "gbobExprs", "updateStat", "updateSingleTable", "updateMultipleTable", 
+			"setExprs", "setExpr", "deleteStat", "tableNameAndAlias", "tableNameAndAliases", 
+			"whereCondition", "whereCondSub", "whereCondOp", "expression", "exprRelational", 
+			"exprBetweenAnd", "exprIsOrIsNotNull", "exprInSelect", "exprInValues", 
+			"exprExists", "exprNot", "exprLike", "element", "elementOpFactory", "elementText", 
+			"elementTextParam", "elementDate", "elementSubQuery", "elementWapperBkt", 
+			"elementListFactor", "elementList", "elementOpEle", "elementOpEleSuffix", 
+			"elementCase", "caseWhenPart", "elementWithPrefix", "elementRow", "funCall", 
+			"paramList"
+		};
+	}
+	public static final String[] ruleNames = makeRuleNames();
 
-	private static final String[] _LITERAL_NAMES = {
-		null, "'!'", null, null, null, null, null, null, null, null, null, null, 
-		null, null, null, null, null, null, null, null, null, null, null, null, 
-		null, null, null, null, null, null, null, null, null, null, null, null, 
-		null, null, null, null, null, null, null, null, null, null, null, null, 
-		null, null, null, null, null, null, null, null, null, null, null, null, 
-		null, null, null, null, null, null, "'+'", "'-'", "'|'", "'&'", "'<<'", 
-		"'>>'", "'*'", "'^'", null, null, null, null, null, "'regexp'", "'~'", 
-		"'escape'", "')'", "'('", "']'", "'['", "':'", "'.*'", "'='", "'<'", "'>'", 
-		"'!='", "'<='", "'>='", "';'", "','", "'.'", "'collate'", "'index'", "'key'", 
-		"'use'", "'ignore'", "'partition'", "'straight_join'", "'natural'", "'oj'"
-	};
-	private static final String[] _SYMBOLIC_NAMES = {
-		null, null, "PLACEHOLDER", "SELECT", "INSERT", "INTO", "VALUES", "DELETE", 
-		"FROM", "WHERE", "LIMIT", "NULL", "IS", "IN", "BETWEEN", "EXISTS", "TRUE", 
-		"FALSE", "XOR", "DEFAULT", "UPDATE", "SET", "ORDER", "GROUP", "BY", "FOR", 
-		"LIKE", "HAVING", "AS", "INNER", "OUTER", "JOIN", "LEFT", "RIGHT", "ON", 
-		"DISTINCT", "OFFSET", "ASC", "DESC", "CROSS", "USING", "DATE", "TIME", 
-		"TIMESTAMP", "ALL", "ANY", "SOME", "UNION", "UNKNOWN", "LOCK", "SHARE", 
-		"MODE", "COMMIT", "ROLLBACK", "CASE", "WHEN", "THEN", "ELSE", "END", "ROW", 
-		"BINARY", "AND", "OR", "NOT", "DIV", "MOD", "PLUS", "MINUS", "VERTBAR", 
-		"BITAND", "SHIFT_LEFT", "SHIFT_RIGHT", "ASTERISK", "POWER_OP", "INT", 
-		"DECIMAL", "STRING", "ID", "COLUMN_REL", "REGEXP", "NEGATION", "ESCAPE", 
-		"RPAREN", "LPAREN", "RBRACK", "LBRACK", "COLON", "ALL_FIELDS", "EQ", "LTH", 
-		"GTH", "NOT_EQ", "LET", "GET", "SEMI", "COMMA", "DOT", "COLLATE", "INDEX", 
-		"KEY", "USE", "IGNORE", "PARTITION", "STRAIGHT_JOIN", "NATURAL", "OJ", 
-		"NEWLINE", "WS", "COMMENT1", "COMMENT2", "USER_VAR"
-	};
+	private static String[] makeLiteralNames() {
+		return new String[] {
+			null, "'!'", null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, "'+'", "'-'", "'|'", "'&'", "'<<'", 
+			"'>>'", "'*'", "'^'", null, null, null, null, null, "'regexp'", "'~'", 
+			"'escape'", "')'", "'('", "']'", "'['", "':'", "'.*'", "'='", "'<'", 
+			"'>'", "'!='", "'<='", "'>='", "';'", "','", "'.'", "'collate'", "'index'", 
+			"'key'", "'use'", "'ignore'", "'partition'", "'straight_join'", "'natural'", 
+			"'oj'"
+		};
+	}
+	private static final String[] _LITERAL_NAMES = makeLiteralNames();
+	private static String[] makeSymbolicNames() {
+		return new String[] {
+			null, null, "PLACEHOLDER", "SELECT", "INSERT", "INTO", "VALUES", "DELETE", 
+			"FROM", "WHERE", "LIMIT", "NULL", "IS", "IN", "BETWEEN", "EXISTS", "TRUE", 
+			"FALSE", "XOR", "DEFAULT", "UPDATE", "SET", "ORDER", "GROUP", "BY", "FOR", 
+			"LIKE", "HAVING", "AS", "INNER", "OUTER", "JOIN", "LEFT", "RIGHT", "ON", 
+			"DISTINCT", "OFFSET", "ASC", "DESC", "CROSS", "USING", "DATE", "TIME", 
+			"TIMESTAMP", "ALL", "ANY", "SOME", "UNION", "UNKNOWN", "LOCK", "SHARE", 
+			"MODE", "COMMIT", "ROLLBACK", "CASE", "WHEN", "THEN", "ELSE", "END", 
+			"ROW", "BINARY", "AND", "OR", "NOT", "DIV", "MOD", "PLUS", "MINUS", "VERTBAR", 
+			"BITAND", "SHIFT_LEFT", "SHIFT_RIGHT", "ASTERISK", "POWER_OP", "INT", 
+			"DECIMAL", "STRING", "ID", "COLUMN_REL", "REGEXP", "NEGATION", "ESCAPE", 
+			"RPAREN", "LPAREN", "RBRACK", "LBRACK", "COLON", "ALL_FIELDS", "EQ", 
+			"LTH", "GTH", "NOT_EQ", "LET", "GET", "SEMI", "COMMA", "DOT", "COLLATE", 
+			"INDEX", "KEY", "USE", "IGNORE", "PARTITION", "STRAIGHT_JOIN", "NATURAL", 
+			"OJ", "NEWLINE", "WS", "COMMENT1", "COMMENT2", "USER_VAR"
+		};
+	}
+	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
 	/**
@@ -144,6 +155,7 @@ public class MySQLParser extends Parser {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
+
 	public static class StatContext extends ParserRuleContext {
 		public InsertStatContext insertStat() {
 			return getRuleContext(InsertStatContext.class,0);
@@ -184,6 +196,7 @@ public class MySQLParser extends Parser {
 		enterRule(_localctx, 0, RULE_stat);
 		try {
 			setState(125);
+			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case INSERT:
 				enterOuterAlt(_localctx, 1);
@@ -268,6 +281,7 @@ public class MySQLParser extends Parser {
 		enterRule(_localctx, 2, RULE_transcationStat);
 		try {
 			setState(129);
+			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case COMMIT:
 				enterOuterAlt(_localctx, 1);
@@ -390,8 +404,16 @@ public class MySQLParser extends Parser {
 			return getRuleContext(SelectStatContext.class,0);
 		}
 		public TerminalNode INTO() { return getToken(MySQLParser.INTO, 0); }
+		public List<TerminalNode> LPAREN() { return getTokens(MySQLParser.LPAREN); }
+		public TerminalNode LPAREN(int i) {
+			return getToken(MySQLParser.LPAREN, i);
+		}
 		public ColumnNamesContext columnNames() {
 			return getRuleContext(ColumnNamesContext.class,0);
+		}
+		public List<TerminalNode> RPAREN() { return getTokens(MySQLParser.RPAREN); }
+		public TerminalNode RPAREN(int i) {
+			return getToken(MySQLParser.RPAREN, i);
 		}
 		public TerminalNode VALUES() { return getToken(MySQLParser.VALUES, 0); }
 		public ValueListContext valueList() {
@@ -426,6 +448,7 @@ public class MySQLParser extends Parser {
 			setState(135);
 			match(INSERT);
 			setState(137);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==INTO) {
 				{
@@ -451,6 +474,7 @@ public class MySQLParser extends Parser {
 				break;
 			}
 			setState(152);
+			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case VALUES:
 				{
@@ -493,6 +517,10 @@ public class MySQLParser extends Parser {
 		public List<TerminalNode> ID() { return getTokens(MySQLParser.ID); }
 		public TerminalNode ID(int i) {
 			return getToken(MySQLParser.ID, i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(MySQLParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(MySQLParser.COMMA, i);
 		}
 		public ColumnNamesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -560,6 +588,10 @@ public class MySQLParser extends Parser {
 		public ElementContext element(int i) {
 			return getRuleContext(ElementContext.class,i);
 		}
+		public List<TerminalNode> COMMA() { return getTokens(MySQLParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(MySQLParser.COMMA, i);
+		}
 		public ValueListContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -620,9 +652,11 @@ public class MySQLParser extends Parser {
 	}
 
 	public static class SelectStatContext extends ParserRuleContext {
+		public TerminalNode LPAREN() { return getToken(MySQLParser.LPAREN, 0); }
 		public SelectInnerContext selectInner() {
 			return getRuleContext(SelectInnerContext.class,0);
 		}
+		public TerminalNode RPAREN() { return getToken(MySQLParser.RPAREN, 0); }
 		public SelectUnionSuffixContext selectUnionSuffix() {
 			return getRuleContext(SelectUnionSuffixContext.class,0);
 		}
@@ -653,6 +687,7 @@ public class MySQLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(178);
+			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case LPAREN:
 				{
@@ -674,6 +709,7 @@ public class MySQLParser extends Parser {
 				throw new NoViableAltException(this);
 			}
 			setState(181);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==UNION) {
 				{
@@ -800,6 +836,7 @@ public class MySQLParser extends Parser {
 			setState(186);
 			match(SELECT);
 			setState(188);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==DISTINCT) {
 				{
@@ -811,6 +848,7 @@ public class MySQLParser extends Parser {
 			setState(190);
 			selectExprs();
 			setState(193);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==FROM) {
 				{
@@ -822,6 +860,7 @@ public class MySQLParser extends Parser {
 			}
 
 			setState(197);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==WHERE) {
 				{
@@ -833,6 +872,7 @@ public class MySQLParser extends Parser {
 			}
 
 			setState(202);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==GROUP) {
 				{
@@ -846,6 +886,7 @@ public class MySQLParser extends Parser {
 			}
 
 			setState(206);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==HAVING) {
 				{
@@ -895,6 +936,7 @@ public class MySQLParser extends Parser {
 		public TerminalNode PLACEHOLDER(int i) {
 			return getToken(MySQLParser.PLACEHOLDER, i);
 		}
+		public TerminalNode COMMA() { return getToken(MySQLParser.COMMA, 0); }
 		public SelectSuffixContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -958,7 +1000,10 @@ public class MySQLParser extends Parser {
 						_la = _input.LA(1);
 						if ( !(_la==PLACEHOLDER || _la==INT) ) {
 							((SelectSuffixContext)_localctx).offset = (Token)_errHandler.recoverInline(this);
-						} else {
+						}
+						else {
+							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+							_errHandler.reportMatch(this);
 							consume();
 						}
 						setState(215);
@@ -971,7 +1016,10 @@ public class MySQLParser extends Parser {
 					_la = _input.LA(1);
 					if ( !(_la==PLACEHOLDER || _la==INT) ) {
 						((SelectSuffixContext)_localctx).rowCount = (Token)_errHandler.recoverInline(this);
-					} else {
+					}
+					else {
+						if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+						_errHandler.reportMatch(this);
 						consume();
 					}
 					}
@@ -985,7 +1033,10 @@ public class MySQLParser extends Parser {
 					_la = _input.LA(1);
 					if ( !(_la==PLACEHOLDER || _la==INT) ) {
 						((SelectSuffixContext)_localctx).rowCount = (Token)_errHandler.recoverInline(this);
-					} else {
+					}
+					else {
+						if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+						_errHandler.reportMatch(this);
 						consume();
 					}
 					setState(220);
@@ -995,7 +1046,10 @@ public class MySQLParser extends Parser {
 					_la = _input.LA(1);
 					if ( !(_la==PLACEHOLDER || _la==INT) ) {
 						((SelectSuffixContext)_localctx).offset = (Token)_errHandler.recoverInline(this);
-					} else {
+					}
+					else {
+						if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+						_errHandler.reportMatch(this);
 						consume();
 					}
 					}
@@ -1052,9 +1106,11 @@ public class MySQLParser extends Parser {
 		public SelectSuffixContext selectSuffix() {
 			return getRuleContext(SelectSuffixContext.class,0);
 		}
+		public TerminalNode LPAREN() { return getToken(MySQLParser.LPAREN, 0); }
 		public SelectStatContext selectStat() {
 			return getRuleContext(SelectStatContext.class,0);
 		}
+		public TerminalNode RPAREN() { return getToken(MySQLParser.RPAREN, 0); }
 		public TerminalNode ALL() { return getToken(MySQLParser.ALL, 0); }
 		public TerminalNode DISTINCT() { return getToken(MySQLParser.DISTINCT, 0); }
 		public SelectUnionSuffixContext(ParserRuleContext parent, int invokingState) {
@@ -1086,6 +1142,7 @@ public class MySQLParser extends Parser {
 			setState(234);
 			match(UNION);
 			setState(236);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==DISTINCT || _la==ALL) {
 				{
@@ -1094,7 +1151,10 @@ public class MySQLParser extends Parser {
 				_la = _input.LA(1);
 				if ( !(_la==DISTINCT || _la==ALL) ) {
 					((SelectUnionSuffixContext)_localctx).method = (Token)_errHandler.recoverInline(this);
-				} else {
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
 					consume();
 				}
 				}
@@ -1140,6 +1200,7 @@ public class MySQLParser extends Parser {
 		public ElementContext element() {
 			return getRuleContext(ElementContext.class,0);
 		}
+		public TerminalNode COMMA() { return getToken(MySQLParser.COMMA, 0); }
 		public SelectExprsContext selectExprs() {
 			return getRuleContext(SelectExprsContext.class,0);
 		}
@@ -1174,10 +1235,12 @@ public class MySQLParser extends Parser {
 			setState(247);
 			element();
 			setState(252);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==AS || _la==ID) {
 				{
 				setState(249);
+				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==AS) {
 					{
@@ -1192,6 +1255,7 @@ public class MySQLParser extends Parser {
 			}
 
 			setState(256);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==COMMA) {
 				{
@@ -1221,6 +1285,10 @@ public class MySQLParser extends Parser {
 		}
 		public TableRelContext tableRel(int i) {
 			return getRuleContext(TableRelContext.class,i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(MySQLParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(MySQLParser.COMMA, i);
 		}
 		public TablesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1411,9 +1479,11 @@ public class MySQLParser extends Parser {
 
 	public static class TableSubQueryContext extends ParserRuleContext {
 		public Token alias;
+		public TerminalNode LPAREN() { return getToken(MySQLParser.LPAREN, 0); }
 		public SelectStatContext selectStat() {
 			return getRuleContext(SelectStatContext.class,0);
 		}
+		public TerminalNode RPAREN() { return getToken(MySQLParser.RPAREN, 0); }
 		public TerminalNode ID() { return getToken(MySQLParser.ID, 0); }
 		public TerminalNode AS() { return getToken(MySQLParser.AS, 0); }
 		public TableSubQueryContext(ParserRuleContext parent, int invokingState) {
@@ -1449,6 +1519,7 @@ public class MySQLParser extends Parser {
 			setState(277);
 			match(RPAREN);
 			setState(279);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==AS) {
 				{
@@ -1473,9 +1544,11 @@ public class MySQLParser extends Parser {
 	}
 
 	public static class TableRecuContext extends ParserRuleContext {
+		public TerminalNode LPAREN() { return getToken(MySQLParser.LPAREN, 0); }
 		public TableRelContext tableRel() {
 			return getRuleContext(TableRelContext.class,0);
 		}
+		public TerminalNode RPAREN() { return getToken(MySQLParser.RPAREN, 0); }
 		public TableRecuContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1577,6 +1650,8 @@ public class MySQLParser extends Parser {
 		public TableNameAndAliasesContext tableNameAndAliases() {
 			return getRuleContext(TableNameAndAliasesContext.class,0);
 		}
+		public TerminalNode LPAREN() { return getToken(MySQLParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(MySQLParser.RPAREN, 0); }
 		public TableRecuContext tableRecu() {
 			return getRuleContext(TableRecuContext.class,0);
 		}
@@ -1643,6 +1718,7 @@ public class MySQLParser extends Parser {
 				break;
 			}
 			setState(301);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==ON || _la==USING) {
 				{
@@ -1652,6 +1728,7 @@ public class MySQLParser extends Parser {
 			}
 
 			setState(304);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INNER) | (1L << LEFT) | (1L << RIGHT) | (1L << CROSS))) != 0)) {
 				{
@@ -1704,6 +1781,7 @@ public class MySQLParser extends Parser {
 		int _la;
 		try {
 			setState(316);
+			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case INNER:
 				enterOuterAlt(_localctx, 1);
@@ -1725,6 +1803,7 @@ public class MySQLParser extends Parser {
 				setState(308);
 				match(LEFT);
 				setState(310);
+				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==OUTER) {
 					{
@@ -1741,6 +1820,7 @@ public class MySQLParser extends Parser {
 				setState(312);
 				match(RIGHT);
 				setState(314);
+				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==OUTER) {
 					{
@@ -1772,9 +1852,11 @@ public class MySQLParser extends Parser {
 			return getRuleContext(WhereConditionContext.class,0);
 		}
 		public TerminalNode USING() { return getToken(MySQLParser.USING, 0); }
+		public TerminalNode LPAREN() { return getToken(MySQLParser.LPAREN, 0); }
 		public ColumnNamesContext columnNames() {
 			return getRuleContext(ColumnNamesContext.class,0);
 		}
+		public TerminalNode RPAREN() { return getToken(MySQLParser.RPAREN, 0); }
 		public JoinConditionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1799,6 +1881,7 @@ public class MySQLParser extends Parser {
 		enterRule(_localctx, 42, RULE_joinCondition);
 		try {
 			setState(325);
+			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case ON:
 				enterOuterAlt(_localctx, 1);
@@ -1842,6 +1925,7 @@ public class MySQLParser extends Parser {
 		public ElementContext element() {
 			return getRuleContext(ElementContext.class,0);
 		}
+		public TerminalNode COMMA() { return getToken(MySQLParser.COMMA, 0); }
 		public GbobExprsContext gbobExprs() {
 			return getRuleContext(GbobExprsContext.class,0);
 		}
@@ -1876,6 +1960,7 @@ public class MySQLParser extends Parser {
 			setState(327);
 			element();
 			setState(329);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==ASC || _la==DESC) {
 				{
@@ -1884,13 +1969,17 @@ public class MySQLParser extends Parser {
 				_la = _input.LA(1);
 				if ( !(_la==ASC || _la==DESC) ) {
 					((GbobExprsContext)_localctx).sc = (Token)_errHandler.recoverInline(this);
-				} else {
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
 					consume();
 				}
 				}
 			}
 
 			setState(333);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==COMMA) {
 				{
@@ -2026,6 +2115,7 @@ public class MySQLParser extends Parser {
 			setState(342);
 			setExprs();
 			setState(345);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==WHERE) {
 				{
@@ -2037,6 +2127,7 @@ public class MySQLParser extends Parser {
 			}
 
 			setState(349);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==LIMIT) {
 				{
@@ -2047,7 +2138,10 @@ public class MySQLParser extends Parser {
 				_la = _input.LA(1);
 				if ( !(_la==PLACEHOLDER || _la==INT) ) {
 					((UpdateSingleTableContext)_localctx).rowCount = (Token)_errHandler.recoverInline(this);
-				} else {
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
 					consume();
 				}
 				}
@@ -2114,6 +2208,7 @@ public class MySQLParser extends Parser {
 			setState(354);
 			setExprs();
 			setState(357);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==WHERE) {
 				{
@@ -2143,6 +2238,10 @@ public class MySQLParser extends Parser {
 		}
 		public SetExprContext setExpr(int i) {
 			return getRuleContext(SetExprContext.class,i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(MySQLParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(MySQLParser.COMMA, i);
 		}
 		public SetExprsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2205,6 +2304,7 @@ public class MySQLParser extends Parser {
 		public ElementContext left;
 		public ElementContext right;
 		public Token rightDefault;
+		public TerminalNode EQ() { return getToken(MySQLParser.EQ, 0); }
 		public List<ElementContext> element() {
 			return getRuleContexts(ElementContext.class);
 		}
@@ -2242,6 +2342,7 @@ public class MySQLParser extends Parser {
 			setState(368);
 			match(EQ);
 			setState(371);
+			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case PLACEHOLDER:
 			case NULL:
@@ -2338,6 +2439,7 @@ public class MySQLParser extends Parser {
 			setState(375);
 			tableNameAndAlias();
 			setState(378);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==WHERE) {
 				{
@@ -2349,6 +2451,7 @@ public class MySQLParser extends Parser {
 			}
 
 			setState(382);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==LIMIT) {
 				{
@@ -2359,7 +2462,10 @@ public class MySQLParser extends Parser {
 				_la = _input.LA(1);
 				if ( !(_la==PLACEHOLDER || _la==INT) ) {
 					((DeleteStatContext)_localctx).rowCount = (Token)_errHandler.recoverInline(this);
-				} else {
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
 					consume();
 				}
 				}
@@ -2415,10 +2521,12 @@ public class MySQLParser extends Parser {
 			setState(384);
 			((TableNameAndAliasContext)_localctx).name = match(ID);
 			setState(389);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==AS || _la==ID) {
 				{
 				setState(386);
+				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==AS) {
 					{
@@ -2451,6 +2559,10 @@ public class MySQLParser extends Parser {
 		}
 		public TableNameAndAliasContext tableNameAndAlias(int i) {
 			return getRuleContext(TableNameAndAliasContext.class,i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(MySQLParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(MySQLParser.COMMA, i);
 		}
 		public TableNameAndAliasesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2575,6 +2687,8 @@ public class MySQLParser extends Parser {
 		public WhereConditionContext wc1;
 		public Token expressionOperator;
 		public WhereConditionContext wc2;
+		public TerminalNode LPAREN() { return getToken(MySQLParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(MySQLParser.RPAREN, 0); }
 		public List<WhereConditionContext> whereCondition() {
 			return getRuleContexts(WhereConditionContext.class);
 		}
@@ -2617,6 +2731,7 @@ public class MySQLParser extends Parser {
 			setState(405);
 			match(RPAREN);
 			setState(408);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << XOR) | (1L << AND) | (1L << OR))) != 0)) {
 				{
@@ -2625,7 +2740,10 @@ public class MySQLParser extends Parser {
 				_la = _input.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << XOR) | (1L << AND) | (1L << OR))) != 0)) ) {
 					((WhereCondSubContext)_localctx).expressionOperator = (Token)_errHandler.recoverInline(this);
-				} else {
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
 					consume();
 				}
 				setState(407);
@@ -2686,6 +2804,7 @@ public class MySQLParser extends Parser {
 			setState(410);
 			expression();
 			setState(413);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << XOR) | (1L << AND) | (1L << OR))) != 0)) {
 				{
@@ -2694,7 +2813,10 @@ public class MySQLParser extends Parser {
 				_la = _input.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << XOR) | (1L << AND) | (1L << OR))) != 0)) ) {
 					((WhereCondOpContext)_localctx).expressionOperator = (Token)_errHandler.recoverInline(this);
-				} else {
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
 					consume();
 				}
 				setState(412);
@@ -2884,7 +3006,10 @@ public class MySQLParser extends Parser {
 			_la = _input.LA(1);
 			if ( !(((((_la - 88)) & ~0x3f) == 0 && ((1L << (_la - 88)) & ((1L << (EQ - 88)) | (1L << (LTH - 88)) | (1L << (GTH - 88)) | (1L << (NOT_EQ - 88)) | (1L << (LET - 88)) | (1L << (GET - 88)))) != 0)) ) {
 				((ExprRelationalContext)_localctx).relationalOp = (Token)_errHandler.recoverInline(this);
-			} else {
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
 				consume();
 			}
 			setState(427);
@@ -2945,6 +3070,7 @@ public class MySQLParser extends Parser {
 			setState(429);
 			((ExprBetweenAndContext)_localctx).el = element();
 			setState(431);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NOT) {
 				{
@@ -3017,6 +3143,7 @@ public class MySQLParser extends Parser {
 			setState(439);
 			match(IS);
 			setState(441);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NOT) {
 				{
@@ -3030,7 +3157,10 @@ public class MySQLParser extends Parser {
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << NULL) | (1L << TRUE) | (1L << FALSE) | (1L << UNKNOWN))) != 0)) ) {
 				((ExprIsOrIsNotNullContext)_localctx).what = (Token)_errHandler.recoverInline(this);
-			} else {
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
 				consume();
 			}
 			}
@@ -3052,9 +3182,11 @@ public class MySQLParser extends Parser {
 			return getRuleContext(ElementContext.class,0);
 		}
 		public TerminalNode IN() { return getToken(MySQLParser.IN, 0); }
+		public TerminalNode LPAREN() { return getToken(MySQLParser.LPAREN, 0); }
 		public SelectStatContext selectStat() {
 			return getRuleContext(SelectStatContext.class,0);
 		}
+		public TerminalNode RPAREN() { return getToken(MySQLParser.RPAREN, 0); }
 		public TerminalNode NOT() { return getToken(MySQLParser.NOT, 0); }
 		public ExprInSelectContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -3085,6 +3217,7 @@ public class MySQLParser extends Parser {
 			setState(445);
 			element();
 			setState(447);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NOT) {
 				{
@@ -3120,9 +3253,11 @@ public class MySQLParser extends Parser {
 			return getRuleContext(ElementContext.class,0);
 		}
 		public TerminalNode IN() { return getToken(MySQLParser.IN, 0); }
+		public TerminalNode LPAREN() { return getToken(MySQLParser.LPAREN, 0); }
 		public ValueListContext valueList() {
 			return getRuleContext(ValueListContext.class,0);
 		}
+		public TerminalNode RPAREN() { return getToken(MySQLParser.RPAREN, 0); }
 		public TerminalNode NOT() { return getToken(MySQLParser.NOT, 0); }
 		public ExprInValuesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -3153,6 +3288,7 @@ public class MySQLParser extends Parser {
 			setState(454);
 			element();
 			setState(456);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NOT) {
 				{
@@ -3185,9 +3321,11 @@ public class MySQLParser extends Parser {
 	public static class ExprExistsContext extends ParserRuleContext {
 		public Token not;
 		public TerminalNode EXISTS() { return getToken(MySQLParser.EXISTS, 0); }
+		public TerminalNode LPAREN() { return getToken(MySQLParser.LPAREN, 0); }
 		public SelectStatContext selectStat() {
 			return getRuleContext(SelectStatContext.class,0);
 		}
+		public TerminalNode RPAREN() { return getToken(MySQLParser.RPAREN, 0); }
 		public TerminalNode NOT() { return getToken(MySQLParser.NOT, 0); }
 		public ExprExistsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -3216,6 +3354,7 @@ public class MySQLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(464);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NOT) {
 				{
@@ -3280,7 +3419,10 @@ public class MySQLParser extends Parser {
 			_la = _input.LA(1);
 			if ( !(_la==T__0 || _la==NOT) ) {
 			_errHandler.recoverInline(this);
-			} else {
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
 				consume();
 			}
 			setState(472);
@@ -3339,6 +3481,7 @@ public class MySQLParser extends Parser {
 			setState(474);
 			((ExprLikeContext)_localctx).left = element();
 			setState(476);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NOT) {
 				{
@@ -3565,6 +3708,7 @@ public class MySQLParser extends Parser {
 	}
 
 	public static class ElementTextContext extends ParserRuleContext {
+		public TerminalNode ASTERISK() { return getToken(MySQLParser.ASTERISK, 0); }
 		public TerminalNode PLACEHOLDER() { return getToken(MySQLParser.PLACEHOLDER, 0); }
 		public TerminalNode COLUMN_REL() { return getToken(MySQLParser.COLUMN_REL, 0); }
 		public TerminalNode ID() { return getToken(MySQLParser.ID, 0); }
@@ -3600,7 +3744,10 @@ public class MySQLParser extends Parser {
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << PLACEHOLDER) | (1L << NULL) | (1L << UNKNOWN))) != 0) || ((((_la - 72)) & ~0x3f) == 0 && ((1L << (_la - 72)) & ((1L << (ASTERISK - 72)) | (1L << (ID - 72)) | (1L << (COLUMN_REL - 72)))) != 0)) ) {
 			_errHandler.recoverInline(this);
-			} else {
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
 				consume();
 			}
 			}
@@ -3617,10 +3764,7 @@ public class MySQLParser extends Parser {
 	}
 
 	public static class ElementTextParamContext extends ParserRuleContext {
-		public List<TerminalNode> DECIMAL() { return getTokens(MySQLParser.DECIMAL); }
-		public TerminalNode DECIMAL(int i) {
-			return getToken(MySQLParser.DECIMAL, i);
-		}
+		public TerminalNode DECIMAL() { return getToken(MySQLParser.DECIMAL, 0); }
 		public TerminalNode STRING() { return getToken(MySQLParser.STRING, 0); }
 		public TerminalNode INT() { return getToken(MySQLParser.INT, 0); }
 		public TerminalNode TRUE() { return getToken(MySQLParser.TRUE, 0); }
@@ -3655,7 +3799,10 @@ public class MySQLParser extends Parser {
 			_la = _input.LA(1);
 			if ( !(((((_la - 16)) & ~0x3f) == 0 && ((1L << (_la - 16)) & ((1L << (TRUE - 16)) | (1L << (FALSE - 16)) | (1L << (INT - 16)) | (1L << (DECIMAL - 16)) | (1L << (STRING - 16)))) != 0)) ) {
 			_errHandler.recoverInline(this);
-			} else {
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
 				consume();
 			}
 			}
@@ -3708,7 +3855,10 @@ public class MySQLParser extends Parser {
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << DATE) | (1L << TIME) | (1L << TIMESTAMP))) != 0)) ) {
 				((ElementDateContext)_localctx).dt = (Token)_errHandler.recoverInline(this);
-			} else {
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
 				consume();
 			}
 			setState(502);
@@ -3728,9 +3878,11 @@ public class MySQLParser extends Parser {
 
 	public static class ElementSubQueryContext extends ParserRuleContext {
 		public Token sqWith;
+		public TerminalNode LPAREN() { return getToken(MySQLParser.LPAREN, 0); }
 		public SelectStatContext selectStat() {
 			return getRuleContext(SelectStatContext.class,0);
 		}
+		public TerminalNode RPAREN() { return getToken(MySQLParser.RPAREN, 0); }
 		public TerminalNode ANY() { return getToken(MySQLParser.ANY, 0); }
 		public TerminalNode SOME() { return getToken(MySQLParser.SOME, 0); }
 		public TerminalNode ALL() { return getToken(MySQLParser.ALL, 0); }
@@ -3761,6 +3913,7 @@ public class MySQLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(505);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ALL) | (1L << ANY) | (1L << SOME))) != 0)) {
 				{
@@ -3769,7 +3922,10 @@ public class MySQLParser extends Parser {
 				_la = _input.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ALL) | (1L << ANY) | (1L << SOME))) != 0)) ) {
 					((ElementSubQueryContext)_localctx).sqWith = (Token)_errHandler.recoverInline(this);
-				} else {
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
 					consume();
 				}
 				}
@@ -3795,9 +3951,11 @@ public class MySQLParser extends Parser {
 	}
 
 	public static class ElementWapperBktContext extends ParserRuleContext {
+		public TerminalNode LPAREN() { return getToken(MySQLParser.LPAREN, 0); }
 		public ElementContext element() {
 			return getRuleContext(ElementContext.class,0);
 		}
+		public TerminalNode RPAREN() { return getToken(MySQLParser.RPAREN, 0); }
 		public ElementWapperBktContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -3843,9 +4001,11 @@ public class MySQLParser extends Parser {
 	}
 
 	public static class ElementListFactorContext extends ParserRuleContext {
+		public TerminalNode LPAREN() { return getToken(MySQLParser.LPAREN, 0); }
 		public ElementListContext elementList() {
 			return getRuleContext(ElementListContext.class,0);
 		}
+		public TerminalNode RPAREN() { return getToken(MySQLParser.RPAREN, 0); }
 		public ElementListFactorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -3896,6 +4056,10 @@ public class MySQLParser extends Parser {
 		}
 		public ElementContext element(int i) {
 			return getRuleContext(ElementContext.class,i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(MySQLParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(MySQLParser.COMMA, i);
 		}
 		public ElementListContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -4016,8 +4180,16 @@ public class MySQLParser extends Parser {
 		public ElementOpEleContext elementOpEle() {
 			return getRuleContext(ElementOpEleContext.class,0);
 		}
+		public TerminalNode VERTBAR() { return getToken(MySQLParser.VERTBAR, 0); }
+		public TerminalNode BITAND() { return getToken(MySQLParser.BITAND, 0); }
+		public TerminalNode SHIFT_LEFT() { return getToken(MySQLParser.SHIFT_LEFT, 0); }
+		public TerminalNode SHIFT_RIGHT() { return getToken(MySQLParser.SHIFT_RIGHT, 0); }
+		public TerminalNode PLUS() { return getToken(MySQLParser.PLUS, 0); }
+		public TerminalNode MINUS() { return getToken(MySQLParser.MINUS, 0); }
+		public TerminalNode ASTERISK() { return getToken(MySQLParser.ASTERISK, 0); }
 		public TerminalNode DIV() { return getToken(MySQLParser.DIV, 0); }
 		public TerminalNode MOD() { return getToken(MySQLParser.MOD, 0); }
+		public TerminalNode POWER_OP() { return getToken(MySQLParser.POWER_OP, 0); }
 		public TerminalNode AS() { return getToken(MySQLParser.AS, 0); }
 		public ElementOpEleSuffixContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -4055,7 +4227,10 @@ public class MySQLParser extends Parser {
 				_la = _input.LA(1);
 				if ( !(((((_la - 28)) & ~0x3f) == 0 && ((1L << (_la - 28)) & ((1L << (AS - 28)) | (1L << (DIV - 28)) | (1L << (MOD - 28)) | (1L << (PLUS - 28)) | (1L << (MINUS - 28)) | (1L << (VERTBAR - 28)) | (1L << (BITAND - 28)) | (1L << (SHIFT_LEFT - 28)) | (1L << (SHIFT_RIGHT - 28)) | (1L << (ASTERISK - 28)) | (1L << (POWER_OP - 28)))) != 0)) ) {
 					((ElementOpEleSuffixContext)_localctx).op = (Token)_errHandler.recoverInline(this);
-				} else {
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
 					consume();
 				}
 				}
@@ -4120,6 +4295,7 @@ public class MySQLParser extends Parser {
 			setState(536);
 			match(CASE);
 			setState(538);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << PLACEHOLDER) | (1L << NULL) | (1L << TRUE) | (1L << FALSE) | (1L << DATE) | (1L << TIME) | (1L << TIMESTAMP) | (1L << ALL) | (1L << ANY) | (1L << SOME) | (1L << UNKNOWN) | (1L << CASE) | (1L << ROW) | (1L << BINARY))) != 0) || ((((_la - 72)) & ~0x3f) == 0 && ((1L << (_la - 72)) & ((1L << (ASTERISK - 72)) | (1L << (INT - 72)) | (1L << (DECIMAL - 72)) | (1L << (STRING - 72)) | (1L << (ID - 72)) | (1L << (COLUMN_REL - 72)) | (1L << (LPAREN - 72)))) != 0)) {
 				{
@@ -4131,6 +4307,7 @@ public class MySQLParser extends Parser {
 			setState(540);
 			caseWhenPart();
 			setState(543);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==ELSE) {
 				{
@@ -4224,6 +4401,7 @@ public class MySQLParser extends Parser {
 			setState(553);
 			((CaseWhenPartContext)_localctx).then = element();
 			setState(555);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==WHEN) {
 				{
@@ -4295,9 +4473,11 @@ public class MySQLParser extends Parser {
 
 	public static class ElementRowContext extends ParserRuleContext {
 		public TerminalNode ROW() { return getToken(MySQLParser.ROW, 0); }
+		public TerminalNode LPAREN() { return getToken(MySQLParser.LPAREN, 0); }
 		public ParamListContext paramList() {
 			return getRuleContext(ParamListContext.class,0);
 		}
+		public TerminalNode RPAREN() { return getToken(MySQLParser.RPAREN, 0); }
 		public ElementRowContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -4346,6 +4526,8 @@ public class MySQLParser extends Parser {
 
 	public static class FunCallContext extends ParserRuleContext {
 		public Token funName;
+		public TerminalNode LPAREN() { return getToken(MySQLParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(MySQLParser.RPAREN, 0); }
 		public TerminalNode ID() { return getToken(MySQLParser.ID, 0); }
 		public ParamListContext paramList() {
 			return getRuleContext(ParamListContext.class,0);
@@ -4381,6 +4563,7 @@ public class MySQLParser extends Parser {
 			setState(566);
 			match(LPAREN);
 			setState(568);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << PLACEHOLDER) | (1L << NULL) | (1L << TRUE) | (1L << FALSE) | (1L << DATE) | (1L << TIME) | (1L << TIMESTAMP) | (1L << ALL) | (1L << ANY) | (1L << SOME) | (1L << UNKNOWN) | (1L << CASE) | (1L << ROW) | (1L << BINARY))) != 0) || ((((_la - 72)) & ~0x3f) == 0 && ((1L << (_la - 72)) & ((1L << (ASTERISK - 72)) | (1L << (INT - 72)) | (1L << (DECIMAL - 72)) | (1L << (STRING - 72)) | (1L << (ID - 72)) | (1L << (COLUMN_REL - 72)) | (1L << (LPAREN - 72)))) != 0)) {
 				{
@@ -4411,6 +4594,7 @@ public class MySQLParser extends Parser {
 		public ExprRelationalContext exprRelational() {
 			return getRuleContext(ExprRelationalContext.class,0);
 		}
+		public TerminalNode COMMA() { return getToken(MySQLParser.COMMA, 0); }
 		public ParamListContext paramList() {
 			return getRuleContext(ParamListContext.class,0);
 		}
@@ -4457,6 +4641,7 @@ public class MySQLParser extends Parser {
 				break;
 			}
 			setState(578);
+			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==COMMA) {
 				{
@@ -4481,7 +4666,7 @@ public class MySQLParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3p\u0247\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3p\u0247\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -4526,8 +4711,8 @@ public class MySQLParser extends Parser {
 		"\3=\2\2>\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668"+
 		":<>@BDFHJLNPRTVXZ\\^`bdfhjlnprtvx\2\16\4\2\4\4LL\4\2%%..\3\2\'(\4\2\24"+
 		"\24?@\3\2Z_\5\2\r\r\22\23\62\62\4\2\3\3AA\7\2\4\4\r\r\62\62JJOP\4\2\22"+
-		"\23LN\3\2+-\3\2.\60\4\2\36\36BK\u0267\2\177\3\2\2\2\4\u0083\3\2\2\2\6"+
-		"\u0085\3\2\2\2\b\u0087\3\2\2\2\n\u0089\3\2\2\2\f\u00a0\3\2\2\2\16\u00aa"+
+		"\23LN\3\2+-\3\2.\60\4\2\36\36BK\2\u0267\2\177\3\2\2\2\4\u0083\3\2\2\2"+
+		"\6\u0085\3\2\2\2\b\u0087\3\2\2\2\n\u0089\3\2\2\2\f\u00a0\3\2\2\2\16\u00aa"+
 		"\3\2\2\2\20\u00b4\3\2\2\2\22\u00b9\3\2\2\2\24\u00bc\3\2\2\2\26\u00d5\3"+
 		"\2\2\2\30\u00ec\3\2\2\2\32\u00f9\3\2\2\2\34\u0104\3\2\2\2\36\u010e\3\2"+
 		"\2\2 \u0113\3\2\2\2\"\u0115\3\2\2\2$\u011d\3\2\2\2&\u0121\3\2\2\2(\u0124"+
