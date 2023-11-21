@@ -1,5 +1,4 @@
-// Generated from D:/github/MySQLParser/src/net/yeah/zhouyou/mickey/mysql/antlr4\MySQL.g4 by ANTLR 4.7.2
-package net.yeah.zhouyou.mickey.mysql.antlr4;
+// Generated from /Users/michaelchow/git/MySQLParser/src/main/java/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.g4 by ANTLR 4.13.1
 package net.yeah.zhouyou.mickey.mysql.antlr4;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -11,6 +10,7 @@ import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
  * @param <T> The return type of the visit operation. Use {@link Void} for
  * operations with no return type.
  */
+@SuppressWarnings("CheckReturnValue")
 public class MySQLBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements MySQLVisitor<T> {
 	/**
 	 * {@inheritDoc}

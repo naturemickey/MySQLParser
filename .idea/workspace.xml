@@ -1,22 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="8daca5d9-bf2f-4e38-97a2-01508c1da8c8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.tokens" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLBaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLBaseListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLBaseVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLBaseVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLLexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLLexer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLLexer.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLLexer.tokens" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLVisitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MySQLParser.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MySQLParser.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/antlr-4.5.3-complete.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/guava-18.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/MySQLParserErrorStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/MySQLParserErrorStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/MySQLParserUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/MySQLParserUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/MySQLVisitorImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/MySQLVisitorImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/TableConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/TableConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.interp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.tokens" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLBaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLBaseListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLBaseVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLBaseVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLLexer.interp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLLexer.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLLexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLLexer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLLexer.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLLexer.tokens" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLParserGenMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLParserGenMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/antlr4/MySQLVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/CaseWhenPartNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/CaseWhenPartNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ColumnNamesNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ColumnNamesNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/CommitNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/CommitNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/DeleteNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/DeleteNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ElementCaseNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ElementCaseNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ElementDateNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ElementDateNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ElementListFactorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ElementListFactorNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ElementListNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ElementListNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ElementNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ElementNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ElementOpEleNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ElementOpEleNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ElementOpEleSuffixNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ElementOpEleSuffixNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ElementOpFactoryNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ElementOpFactoryNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ElementRowNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ElementRowNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ElementSubQueryNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ElementSubQueryNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ElementTextNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ElementTextNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ElementTextParamNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ElementTextParamNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ElementWapperBktNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ElementWapperBktNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ElementWithPrefixNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ElementWithPrefixNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ExpressionBetweenAndNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ExpressionBetweenAndNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ExpressionExistsNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ExpressionExistsNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ExpressionInSelectNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ExpressionInSelectNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ExpressionInValuesNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ExpressionInValuesNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ExpressionIsOrIsNotNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ExpressionIsOrIsNotNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ExpressionLikeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ExpressionLikeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ExpressionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ExpressionNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ExpressionNotNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ExpressionNotNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ExpressionRelationalNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ExpressionRelationalNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/FunCallNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/FunCallNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/GbobExprsNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/GbobExprsNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/InsertNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/InsertNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/JoinConditionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/JoinConditionNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ParamListNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ParamListNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/RollbackNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/RollbackNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/SQLSyntaxTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/SQLSyntaxTreeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/SelectExprsNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/SelectExprsNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/SelectInner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/SelectInner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/SelectNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/SelectNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/SelectPrefixNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/SelectPrefixNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/SelectSuffixNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/SelectSuffixNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/SelectUnionSuffix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/SelectUnionSuffix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/SetExprNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/SetExprNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/SetExprsNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/SetExprsNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/TableJoinNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/TableJoinNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/TableJoinSuffixNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/TableJoinSuffixNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/TableNameAndAliasNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/TableNameAndAliasNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/TableNameAndAliasesNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/TableNameAndAliasesNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/TableRecuNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/TableRecuNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/TableRelNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/TableRelNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/TableSubQueryNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/TableSubQueryNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/TablesNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/TablesNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/UpdateMultipleTableNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/UpdateMultipleTableNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/UpdateNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/UpdateNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/UpdateSignleTableNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/UpdateSignleTableNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/ValueListNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/ValueListNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/WhereConditionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/WhereConditionNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/WhereConditionOpNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/WhereConditionOpNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/tree/WhereConditionSubNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/yeah/zhouyou/mickey/mysql/tree/WhereConditionSubNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/SqlTestUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/SqlTestUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/Test2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/Test2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestAll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/TestAll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestDelete.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/TestDelete.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestInsert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/TestInsert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestOuterJoin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/TestOuterJoin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestSelect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/TestSelect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/TestTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/TestUpdate.java" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -76,12 +158,16 @@
       </list>
     </option>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="260" />
     <option name="y" value="20" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
+  <component name="ProjectId" id="2YU8Lvi5L01xOpW6NTc7mp0NwCb" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -123,31 +209,24 @@
       <pane id="Scope" />
     </panes>
   </component>
-  <component name="PropertiesComponent">
-    <property name="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.g4::/auto-gen" value="true" />
-    <property name="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.g4::/gen-listener" value="true" />
-    <property name="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.g4::/gen-visitor" value="true" />
-    <property name="$PROJECT_DIR$/src/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.g4::/output-dir" value="src" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552452624919" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Application.MySQLParserGenMain">
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/michaelchow/git/MySQLParser",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.TestSelect">
     <configuration name="MySQLParserGenMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="net.yeah.zhouyou.mickey.mysql.antlr4.MySQLParserGenMain" />
       <module name="MySQLParser" />
@@ -176,11 +255,12 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MySQLParserGenMain" />
         <item itemvalue="Application.TestSelect" />
+        <item itemvalue="Application.MySQLParserGenMain" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -191,6 +271,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1552438107375</updated>
+      <workItem from="1700568745864" duration="189000" />
     </task>
     <servers />
   </component>
@@ -227,6 +308,9 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/test/TestSelect.java">

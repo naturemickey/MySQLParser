@@ -1,5 +1,4 @@
-// Generated from D:/github/MySQLParser/src/net/yeah/zhouyou/mickey/mysql/antlr4\MySQL.g4 by ANTLR 4.7.2
-package net.yeah.zhouyou.mickey.mysql.antlr4;
+// Generated from /Users/michaelchow/git/MySQLParser/src/main/java/net/yeah/zhouyou/mickey/mysql/antlr4/MySQL.g4 by ANTLR 4.13.1
 package net.yeah.zhouyou.mickey.mysql.antlr4;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
